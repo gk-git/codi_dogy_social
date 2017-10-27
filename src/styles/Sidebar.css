@@ -1,0 +1,260 @@
+.container {
+    max-width: 1050px;
+}
+
+.page-contents {
+    padding: 30px 0px 50px;
+    background-color: #f6fafd;
+}
+
+section img {
+    margin: auto;
+}
+
+img.profile-photo {
+    height: 58px;
+    width: 58px;
+    border-radius: 50%;
+}
+
+ul {
+    padding-left: 15px;
+}
+
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.menu form .form-group i.icon {
+    position: absolute;
+    left: 15px;
+    top: 3px;
+    color: rgb(255, 255, 255);
+}
+
+.live-feed ul.online-users li {
+    margin: 0px;
+}
+
+.profile-card {
+    background-image: linear-gradient(262deg, rgb(252, 120, 90), rgb(249, 45, 127));
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    width: 100%;
+    min-height: 90px;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 40px;
+}
+
+.profile-card img.profile-photo {
+    border: 7px solid rgb(255, 255, 255);
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+
+.profile-card h5 a {
+    font-size: 15px;
+}
+
+.profile-card a {
+    font-size: 12px;
+}
+
+ul.nav-news-feed {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0px 0px 40px;
+}
+
+ul.nav-news-feed li {
+    list-style: none;
+    display: block;
+    padding: 15px 0px;
+}
+
+ul.nav-news-feed li div {
+    position: relative;
+    margin-left: 30px;
+}
+
+ul.nav-news-feed li div::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid rgb(241, 242, 242);
+    position: absolute;
+    bottom: -15px;
+    left: 0px;
+}
+
+ul.nav-news-feed li a {
+    color: rgb(109, 110, 113);
+}
+
+ul.nav-news-feed li i {
+    font-size: 18px;
+    margin-right: 15px;
+    float: left;
+}
+
+ul.nav-news-feed i.ion-ios-paper {
+    color: rgb(141, 198, 63);
+}
+
+ul.nav-news-feed i.ion-ios-people {
+    color: rgb(102, 45, 145);
+}
+
+ul.nav-news-feed i.ion-ios-people-outline {
+    color: rgb(238, 42, 123);
+}
+
+ul.nav-news-feed i.ion-chatboxes {
+    color: rgb(247, 148, 30);
+}
+
+ul.nav-news-feed i.ion-images {
+    color: rgb(28, 117, 188);
+}
+
+ul.nav-news-feed i.ion-ios-videocam {
+    color: rgb(158, 31, 99);
+}
+
+.sidebar-block {
+    margin: 30px 0 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: white;
+}
+
+.sidebar-block .title {
+    background: rgb(141, 198, 63);
+    padding: 2px 20px;
+    width: 70%;
+    height: 30px;
+    border-radius: 15px;
+    position: relative;
+    margin: 0px auto 20px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+ul.online-users {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    margin: 0px;
+}
+
+ul.online-users li {
+    list-style: none;
+    position: relative;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 3px auto !important;
+}
+
+ul.online-users li span.online-dot {
+    background: linear-gradient(rgb(141, 198, 63), rgb(0, 148, 68));
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -6px;
+    border: 2px solid rgb(255, 255, 255);
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.timeline-cover .timeline-nav-bar .profile-info img.profile-photo {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 10px solid rgb(255, 255, 255);
+}
+
+.timeline-cover .navbar-mobile .profile-info img.profile-photo {
+    border: 10px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    height: 200px;
+    margin: auto;
+    width: 200px;
+}
+
+ul.edit-menu li i.icon {
+    font-size: 16px;
+}
+
+ul.edit-menu li.active i.icon {
+    color: rgb(141, 198, 63);
+}
+
+.edit-block ul.interests li a i.icon {
+    font-size: 18px;
+}
+
+.footer {
+    background: rgb(255, 255, 255);
+    position: relative;
+}
+
+.footer::before {
+    content: "";
+
+    height: 5px;
+    width: 100%;
+    position: absolute;
+}
+
+.copyright {
+    background: rgb(35, 31, 32);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding: 12px 0px 4px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(39, 170, 225);
+    position: absolute;
+    top: 48%;
+    left: 48%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 8px;
+    animation: sk-rotateplane 1.2s ease-in-out infinite;
+}
+
+.spinner-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgb(255, 255, 255);
+    z-index: 9999999;
+}
+
+.sidebar-block ul.online-users {
+    display: none;
+}
