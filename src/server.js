@@ -4,7 +4,7 @@ import {StaticRouter} from 'react-router-dom';
 import express from 'express';
 import {renderToString} from 'react-dom/server';
 import api from './api';
-import { firebasePushData} from './api/firebaseData';
+import {firebasePushData} from './api/firebaseData';
 import {subscribe} from "./api/firebaseData";
 import {isEmpty} from "./utils/index";
 
@@ -62,15 +62,15 @@ server
          <!-- FontsOnline -->
         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Load jQuery(1.7+) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <!-- JavaScripts -->
         <script>
             var ___STATE___ = ${JSON.stringify(allData)}
             var ___allData___ = ${JSON.stringify(allData)}
         </script>
-        <script src="/assets/js/vendors/modernizr.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -91,38 +91,10 @@ server
 
 
         <!-- JavaScripts -->
-      <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous">
+     
 
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="/assets/js/vendors/own-menu.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/jquery.flexslider-min.js"></script>
-        <script src="/assets/js/vendors/jquery.countTo.js"></script>
-        <script src="/assets/js/vendors/jquery.isotope.min.js"></script>
-        <script src="/assets/js/vendors/jquery.bxslider.min.js"></script>
-        <script src="/assets/js/vendors/owl.carousel.min.js"></script>
-        <script src="/assets/js/vendors/jquery.sticky.js"></script>
-
-         <!--SLIDER REVOLUTION 4.x SCRIPTS  -->
-        <script src="/assets/js/zap.js"></script>
-
-        <script>
-       /*-----------------------------------------------------------------------------------*/
-       /*    Parallax
-       /*-----------------------------------------------------------------------------------*/
-
-       var makeSlider = () => $('.images-slider').flexslider({
-         animation: "fade",
-         controlNav: "thumbnails"
-       });
-
-       // setTimeout(makeSlider,1000)
-
-       </script>
+       <script src="https://use.typekit.net/ijo4joy.js"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
     </body>
 </html>`
             );

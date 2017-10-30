@@ -1,0 +1,148 @@
+body {
+    background: url("../images/whitebrick.png") fixed;
+}
+
+.header {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    display: block;
+    z-index: 9999;
+    box-shadow: rgba(100, 100, 100, 0.5) 0 1px 1px;
+    background: rgb(55, 124, 237);
+}
+
+nav.navbar {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.navbar .navbar-header a {
+    color: #fff;
+}
+
+nav.navbar .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar .navbar-collapse.collapse.in {
+
+    background: #eee;
+    box-shadow: rgba(182, 182, 182, 0.75) 0 1px 1px;
+
+}
+
+.navbar .navbar-collapse.collapse.in .navbar-nav > li > a {
+    color: black;
+}
+
+.content {
+    position: relative;
+    top: 100px;
+}
+
+.fixed-cont {
+    background: rgb(35, 39, 45);
+    box-shadow: rgb(136, 136, 136) 3px 0px 5px -2px;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    margin-top: 20px;
+}
+
+.fixed-cont span {
+    cursor: pointer;
+    color: rgb(238, 238, 238);
+    font-size: 13px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.fixed-cont span:hover {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+    .fixed-cont {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .fixed-cont {
+        display: none;
+    }
+}
+
+.full-column {
+    width: 100%;
+    float: left;
+}
+
+#wrapper {
+    margin-left: 270px;
+    margin-right: 20px;
+    z-index: 1;
+}
+
+.full-column {
+    width: 100%;
+    margin-top: 100px;
+    float: left;
+}
+
+@media screen and (max-width: 1024px) {
+    .full-column {
+        width: 100%;
+        float: left;
+    }
+}
+/*! CSS Used from: Embedded */
+.intro-alert {
+    background: #BDCBF9;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    margin: 20px 10px;
+    padding: 20px;
+    padding-left: 30px;
+    padding-bottom: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .full-column {
+        width: 100%;
+        float: left;
+    }
+}
+@media screen and (max-width: 1279px) {
+    #wrapper {
+        z-index: 1;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #wrapper {
+        z-index: 1;
+        margin-left: 20px;
+
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #wrapper {
+        z-index: 1;
+    }
+}
+
+.intro-alert .thumbnail {
+    width: 80px;
+    margin-left: -10px;
+    height: 80px;
+    float: left;
+}
+.circle.thumbnail {
+    border-radius: 50%;
+}
+

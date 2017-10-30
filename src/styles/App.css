@@ -7,12 +7,14 @@ body {
 }
 
 body {
-    font-family: Lato, sans-serif;
+    font-family: "mr-eaves-xl-modern", sans-serif;
     line-height: 26px;
     color: rgb(109, 110, 113);
-    font-size: 13px;
-}
 
+}
+h1,h2,h3,h4,h5,h6, p ,span {
+    font-family: "mr-eaves-xl-modern", sans-serif;
+}
 h1,
 h2,
 h3,
@@ -20,6 +22,7 @@ h4,
 h5,
 h6 {
     color: rgb(39, 170, 225);
+
 }
 
 .text-white {
@@ -43,16 +46,6 @@ a:active,
 a:focus {
     outline: none;
 }
-
-.content {
-    border-left: 1px solid #e5e9ec;
-
-}
-
-@media (min-width: 800px) {
-    .static {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-    }
+.clear-both {
+    clear: both;
 }

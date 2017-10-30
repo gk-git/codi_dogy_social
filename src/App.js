@@ -3,7 +3,9 @@ import {Switch, Route} from 'react-router-dom';
 
 import {PublicApp} from "./routes/PublicApp";
 import {mixProps} from "./utils/index";
+import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
+
 
 class App extends React.Component {
 
