@@ -24,9 +24,12 @@ const SideBar = props => {
             <ul className="nav-news-feed">
                 <li>
                     <i className="icon ion-ios-paper"/>
-                    <div>
-                        <a href="newsfeed.html">My Newsfeed</a>
+                    <div className="ffspan">
+                        <button  className={'menu-item menu-modal'} data-toggle="modal" data-target="#filterbox">
+                            <i className={'fa fa-filter'}/>
+                            <span>Filter your matches!</span></button>
                     </div>
+
                 </li>
                 <li>
                     <i className="icon ion-ios-people"/>

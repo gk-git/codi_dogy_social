@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
-import {HomePage} from "./HomePage";
 import {ProfilePage} from "./ProfilePage";
 
 const PublicApp = (props) => {

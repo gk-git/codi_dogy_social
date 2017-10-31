@@ -4,6 +4,7 @@ var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 module.exports = {
     modify( config, { target, dev }, webpack ) {
 
+        const newConfig = config;
         /**
          * Allow markdown loading
          */
@@ -20,18 +21,31 @@ module.exports = {
         };
 
         const additionalLoader = [
-
+            {
+                test: /\.styl$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                    loader: 'css-loader'
+                    },
+                    {
+                    loader: 'stylus-loader'
+                    }
+                ]
+            }
 
         ]
 
-        const fileLoaderIndex = config.module.rules.findIndex(
+        const fileLoaderIndex = newConfig.module.rules.findIndex(
             rule => rule.exclude
         );
 
-        config.module.rules[fileLoaderIndex].exclude.push(/\.md$/)
-        config.module.rules.push(markdownLoader)
+        newConfig.module.rules[fileLoaderIndex].exclude.push(/\.md$/)
+        newConfig.module.rules.push(markdownLoader)
         additionalLoader.map(loader => {
-            config.module.rules.push(loader)
+            newConfig.module.rules.push(loader)
 
         })
         /**/
@@ -50,15 +64,15 @@ module.exports = {
             }
         }
 
-        config.plugins.push(new ModernizrWebpackPlugin(modernizr_config))
+        newConfig.plugins.push(new ModernizrWebpackPlugin(modernizr_config))
 
-        config.context = __dirname
+        newConfig.context = __dirname
         const node_conf ={ __filename: true,
             __dirname: true
         }
 
-        config.node = {...config.node, ...node_conf}
+        newConfig.node = {...newConfig.node, ...node_conf}
 
-        return config;
+        return newConfig;
     },
 };

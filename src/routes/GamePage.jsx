@@ -1,7 +1,7 @@
 import React from 'react';
-import OwlCarousel from 'react-owl-carousel2';
-import '../styles/ProfilePage.css';
 import {DogCard} from "../components/DogCard";
+
+import '../styles/GamePage.css';
 
 const options = {
     items: 1,
@@ -12,13 +12,14 @@ const options = {
 
 const events = {};
 
-const ProfilePage = () => {
+const GamePage = () => {
 
     return (
-        <div>
-            <DogCard container={'col-md-8 col-md-offset-2'}/>
+        <div className={'game'}>
+            <DogCard container={'col-md-8 col-md-offset-2 '}/>
+            <div className={'clear-both'}/>
         </div>
     )
 };
 
-export {ProfilePage}
+export {GamePage}

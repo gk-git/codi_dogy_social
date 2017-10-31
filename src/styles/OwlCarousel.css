@@ -1,0 +1,33 @@
+.profile-gallery {
+    margin: 30px;
+    padding: 0;
+}
+
+.cover-image {
+    max-height: 400px;
+    text-align: center;
+    margin: 1em 0;
+    overflow-y: hidden;
+    line-height: 350px;
+}
+
+.cover-image img {
+    width: 95%;
+    margin: auto;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.slick-arrow::before {
+    color: rgb(55, 124, 237);
+}
+
+.slick-arrow.slick-prev {
+    top: 105%;
+    left: 45%;
+}
+
+.slick-arrow.slick-next {
+    top: 105%;
+    left: 50%;
+}
