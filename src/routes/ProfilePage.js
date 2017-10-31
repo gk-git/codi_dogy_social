@@ -14,6 +14,9 @@ const ProfilePage = () => {
             <div>
                 <span className={'profile-state'}>Profile is unconfirmed</span> <Button>Confirm ?</Button>
             </div>
+            <div>
+                <button className={'start-chat'}><i className={'fa fa-commenting'}/> Chat with Dog Owner</button>
+            </div>
             <div className={'location'}>
                 <h4><i className="fa fa-map-marker" aria-hidden="true"/>Location </h4>
                 <span>New York, USA</span>

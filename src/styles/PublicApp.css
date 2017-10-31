@@ -78,6 +78,8 @@ nav.navbar .navbar-nav > li > a {
 .full-column {
     width: 100%;
     float: left;
+    background: #fff;
+    padding: 20px;
 }
 
 #wrapper {

@@ -1,7 +1,3 @@
-.profile-page {
-    background-color: #fff;
-    padding: 20px;
-}
 
 .profile-page .status {
     margin-left: 10px;
@@ -56,7 +52,20 @@
 .likes .like {
     margin-left: 20px;
 }
-
+.start-chat {
+    background: rgb(141, 198, 63);
+    padding: 2px 20px;
+    width: 70%;
+    height: 30px;
+    border-radius: 15px;
+    position: relative;
+    margin: 10px 20px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    max-width: 200px;
+}
 .likes .dislike {
     margin-left: 20px;
 }
