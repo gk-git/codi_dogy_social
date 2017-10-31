@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
-import {ProfilePage} from "./ProfilePage";
+import {ChatPage} from "./ChatPage";
 
 const PublicApp = (props) => {
 
@@ -17,7 +17,7 @@ const PublicApp = (props) => {
             <div id="wrapper">
 
                 <div className="full-column">
-                   <ProfilePage/>
+                   <ChatPage/>
                 </div>
             </div>
 

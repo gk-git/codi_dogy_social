@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./App.css";
+import "../styles/ChatRoom.css";
 
 import Message from "./Message.js";
 
@@ -117,12 +117,68 @@ class ChatRoom extends React.Component {
         return (
             <div className="chatroom">
                 <h3>Chat Room</h3>
+                <div className=" chat-left">
+
+                    <button className="chat active">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>hellllweasadsaddsad</span>
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+                    <button className="chat">
+                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        <span>Chat name</span>
+
+                    </button>
+                </div>
                 <ul className="chats" ref="chats">
-                    {chats.map(chat => <Message chat={chat} user={username}/>)}
+
+
+                        {chats.map(chat => <Message chat={chat} user={username}/>)}
+
                 </ul>
                 <form className="input" onSubmit={e => this.submitMessage(e)}>
-                    <input type="text" ref="msg"/>
-                    <input type="submit" value="Submit"/>
+                    <div className="input-block">
+                        <input type="text" ref="msg"/>
+                        <input type="submit" value="Submit"/>
+                    </div>
                 </form>
             </div>
         );
