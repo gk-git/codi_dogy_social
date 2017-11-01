@@ -148,7 +148,7 @@
 
 @media (max-width: 991px) {
 
-    .chat-left .chat span {
+    .chat-left .chat .dog-name {
         display: none;
     }
 
@@ -157,8 +157,25 @@
     }
 }
 
-.chat-left .chat span {
+.chat-left .chat .dog-name {
     padding-left: 3px;
+}
+.chat-left .chat .img-block {
+    display: inline-block;
+    position: relative;
+}
+
+.chat-left .chat .message-count {
+    color: #fff;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    display: block;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    background-color: rgba(55, 124, 237, 0.8);
+    text-align: center;
 }
 
 .chat-left button.chat {

@@ -5,6 +5,7 @@ import {TopNavBar} from "../components/TopNavBar";
 import {ChatPage} from "./ChatPage";
 import {ProfilePage} from "./ProfilePage";
 import {EditProfilePage} from "./EditProfilePage";
+import {HomePage} from "./HomePage";
 
 const PublicApp = (props) => {
 
@@ -20,8 +21,6 @@ const PublicApp = (props) => {
 
                 <div className="full-column">
                    <EditProfilePage/>
-                    <ProfilePage/>
-
                 </div>
             </div>
 

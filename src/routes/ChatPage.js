@@ -7,7 +7,7 @@ const ChatPage = () => {
 
     return [
         <div className={'chat-page'}>
-            <h2>Hello world</h2>
+            <h2>Back</h2>
            <ChatRoom/>
             <div className="col-sm-9 col-xs-10">
 

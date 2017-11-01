@@ -1,3 +1,14 @@
 .edit-profile {
     max-width: 700px;
 }
+.date-of-birth div {
+    display: inline-block;
+    margin: 10px;
+}
+button.btn-save {
+    max-width: 150px;
+    float: right;
+    margin: 10px;
+    background: rgb(141, 198, 63);
+    border-radius: 15px
+}

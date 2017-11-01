@@ -120,53 +120,91 @@ class ChatRoom extends React.Component {
                 <div className=" chat-left">
 
                     <button className="chat active">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>hellllweasadsaddsad</span>
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
+                       <div className="img-block">
+                           <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                           <span className={'message-count'}>2</span>
+                       </div>
 
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
 
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
                     </button>
 
                     <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                            <span className={'message-count'}>2</span>
+                        </div>
 
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
 
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
                     </button>
 
                     <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        </div>
 
-                    </button>
-                    <button className="chat">
-                        <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        <span>Chat name</span>
 
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
                     </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                            <span className={'message-count'}>2</span>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                            <span className={'message-count'}>2</span>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                            <span className={'message-count'}>2</span>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
+                    <button className="chat">
+                        <div className="img-block">
+                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
+                        </div>
+
+
+                        <span className={'dog-name'}>hellllweasadsaddsad</span>
+                    </button>
+
                 </div>
                 <ul className="chats" ref="chats">
 
