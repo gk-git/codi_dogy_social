@@ -1,33 +1,162 @@
-.header-content {
-    background-image: url("/background.png");
-    min-height: 300px;
-    -webkit-background-size: cover;
-    background-size: cover;
-    position: relative;
-}
-.header-container {
-    background-image: linear-gradient(262deg, rgba(252, 120, 90, 0.2), rgba(103, 249, 75, 0.2));
-    position: absolute;
-    top:0;
-    bottom: 0;
+body {
+    background-image: url("http://packdog.com/static/images/homepage2/dogs/shorthair.jpg");
+    min-height: 100vh;
     width: 100%;
-    min-height: 90px;
-    border-radius: 4px;
-    padding: 10px 20px;
-    color: rgb(255, 255, 255);
-}
-.header .header-buttons {
-    position: absolute;
-    bottom: 20px;
-    right: 10%;
-}
-.header-title h1 {
-    color: black;
-    font-size: 50px;
+    overflow-x: hidden;
 
 }
-.header-title p {
-    font-size: 35px;
-    color: #6c70ff;
+
+.havedog {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.havedog h1 {
+    font-size: 5em;
+    font-weight: 200;
+    letter-spacing: -0.05em;
+    margin: 0;
+    line-height: 0.85em;
+    padding: 0.5em 0.25em 0;
+    color: #fff;
+}
+
+.button {
+    position: relative;
+}
+
+.button, .button:link, .button:visited {
+    display: block;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: .5em 0;
+    padding: .6em 1em;
+    font-size: 1.1em;
+    background-color: rgb(55, 124, 237);;
+    border: none;
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    border-radius: 1000px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-family: "proxima-nova", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 0 transparent;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
     line-height: 1em;
+}
+
+.button:hover, .button:focus {
+    background-color: rgb(141, 198, 63);;
+}
+
+.button:active {
+    background-color: rgba(141, 198, 63, .6);;
+}
+
+.button:disabled, .button:disabled:hover {
+    background-color: #C8C8C8;
+    cursor: default;
+}
+
+/*! CSS Used from: http://packdog.com/static/cache/homepage2.cfd655b6.css */
+.havedog ul.buttonfork {
+    display: inline-block;
+    margin: 1em 0;
+}
+
+.havedog ul.buttonfork li {
+    list-style: none;
+    display: inline-block;
+    margin: .5em;
+}
+
+.havedog ul.buttonfork li .button {
+    font-weight: 700;
+    background-color: #fff;
+    color: #404040;
+    width: 10em;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.havedog ul.buttonfork li .button:hover {
+    background-color: #fff;
+}
+
+@media screen and (max-width: 52em) {
+    .havedog ul.buttonfork, .havedog ul.buttonfork li, .havedog ul.buttonfork .button {
+        display: block;
+    }
+
+    .havedog ul.buttonfork li .button {
+        width: 60%;
+        margin: 0 auto;
+        min-width: 10em;
+    }
+}
+
+/*! http://packdog.com/static/images/homepage2/packlogo-animated.gif" CSS Used from: http://packdog.com/static/cache/icons.homepage2.svg.64529398.css */
+.iconpacklogo {
+    background: url("http://packdog.com/static/images/homepage2/packlogo-animated.gif") no-repeat;
+    background-size: contain;
+
+}
+
+.wrapper {
+    min-height: 34em;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -ms-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    border: 0;
+    height: 100%;
+    background: transparent;
+}
+
+.wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.stage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.stage .packlogo {
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 150px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    bottom: 20px;
+    margin: 0 -60px;
+    left: 50%;
+}
+
+.action-scene1 .packlogo {
+    -webkit-animation: packlogo-animation 1s 1 linear;
+    -moz-animation: packlogo-animation 1s 1 linear;
+    -ms-animation: packlogo-animation 1s 1 linear;
 }

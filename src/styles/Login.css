@@ -1,17 +1,14 @@
+.checkbox {
+    padding-left: 20px;
+}
 @media (min-width: 768px) {
     .omb_row-sm-offset-3 div:first-child[class*="col-"] {
         margin-left: 25%;
     }
 }
 
-.omb_login_cover {
-    max-width: 800px;
-    margin: auto;
-}
-
 .omb_login {
-    min-height: 100vh;
-    background-image: url("http://static3.businessinsider.com/image/5484d9d1eab8ea3017b17e29/9-science-backed-reasons-to-own-a-dog.jpg");
+    min-height: 70vh;
     background-size: cover;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Button} from "react-bootstrap";
 import {DogCard} from "../components/DogCard";
+import '../styles/HomePage.css'
 const HomePage = () => {
 
 
@@ -19,10 +20,9 @@ const HomePage = () => {
                     <div className={'clear-both'}/>
                 </div>
                 <div className="col-md-8">
-                    <p style={{marginRight: '20px'}}>209 people is already here. Meet new
-                        users
-                        by
-                        playing hot or not game.</p>
+                    <h3>The Number One website</h3>
+                    <p style={{marginRight: '20px', fontSize: '1.4em'}}>Find your perfect stud dog, bitch or puppy today, FREE to
+                        advertise, FREE to join and browse.</p>
 
 
                     <Button bsStyle="primary" style={{background: '#377CED'}}>

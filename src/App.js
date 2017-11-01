@@ -5,6 +5,7 @@ import {PublicApp} from "./routes/PublicApp";
 import {mixProps} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
+import {Header} from "./components/Header";
 
 
 class App extends React.Component {
@@ -30,7 +31,7 @@ class App extends React.Component {
             <div>
                 <Switch>
                     <Route path="/s" render={(props) => {
-                        return (<h2>jjj</h2>)
+                        return (<Header/>)
                     }
                     }/> <Route path="/" render={(props) => {
                         return (<PublicApp {...mix(props)}/>)

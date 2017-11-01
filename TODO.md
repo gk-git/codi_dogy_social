@@ -7,3 +7,4 @@ ___
 - [ x ] add chat message to the profile page.
 - [  ] Remove dogs after they are in system longer then 13 years
 - [  ] After 1 year user cant change dog birthday
+- [  ] remember me option is a future goal

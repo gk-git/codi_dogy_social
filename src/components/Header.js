@@ -4,26 +4,34 @@ import '../styles/Header.css';
 const Header = () => {
 
     return (
-        <div className={'header'}>
-            <header className=" header-content">
 
-            <div className="header-container">
-                <div className="container">
-                    <div className="row header-title">
-                        <div className="col-md-10 col-md-offset-1 ">
-                            <h1 className="text-center">The Number One website</h1>
-                            <p>Find your perfect stud dog, bitch or puppy today, FREE to advertise, FREE to join and
-                                browse. </p>
-                        </div>
-                    </div>
+        <div className="wrapper">
 
-                </div>
-                <div className=" header-buttons">
-                    <button className="btn btn-default" type="button">sobre nós</button>
-                </div>
+            <div className="stage">
+                <h1 className="packlogo iconpacklogo" title="Pack">Pack</h1>
+
+
+            </div>
+            <div className="havedog scene-question welcome-screen">
+                <h1 className="main">Do you have a&nbsp;dog?</h1>
+                <ul className="buttonfork">
+                    <li>
+                        <a href="#" className="button" data-hasdog="false">
+                            No
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" className="button" data-hasdog="true">
+                            Yes
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            </header>
-        </div>);
+
+        </div>
+
+
+    );
 };
 export {Header};

@@ -6,6 +6,7 @@ import {ChatPage} from "./ChatPage";
 import {ProfilePage} from "./ProfilePage";
 import {EditProfilePage} from "./EditProfilePage";
 import {HomePage} from "./HomePage";
+import {LoginPage} from "./LoginPage";
 
 const PublicApp = (props) => {
 
@@ -20,8 +21,9 @@ const PublicApp = (props) => {
             <div id="wrapper">
 
                 <div className="full-column">
-                   <EditProfilePage/>
+                   <HomePage/>
                 </div>
+                <div className={'clear-both'}/>
             </div>
 
 

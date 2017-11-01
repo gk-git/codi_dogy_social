@@ -80,6 +80,7 @@ nav.navbar .navbar-nav > li > a {
     float: left;
     background: #fff;
     padding: 20px;
+    margin: 40px auto;
 }
 
 #wrapper {

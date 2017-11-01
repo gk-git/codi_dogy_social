@@ -3,6 +3,16 @@
     margin-left: 10px;
 }
 
+
+.profile-page .add-image button {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.profile-page .add-image span {
+    display: inline-block;
+    margin-left: 10px;
+}
 .profile-page .profile-name {
     display: inline-block;
     font-size: 1.4em;
@@ -52,6 +62,7 @@
 .likes .like {
     margin-left: 20px;
 }
+
 .start-chat {
     background: rgb(141, 198, 63);
     padding: 2px 20px;
@@ -66,6 +77,7 @@
     border: none;
     max-width: 200px;
 }
+
 .likes .dislike {
     margin-left: 20px;
 }

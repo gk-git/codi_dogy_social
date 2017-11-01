@@ -10,6 +10,10 @@ const ProfilePage = () => {
             <Button bsStyle="info"> <span className={'fa fa-edit'}/></Button>
             <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
             <h2 className={'title profile-name'}>The Dog Name</h2>
+            <div className={'add-image'}>
+                <button className={'btn btn-info '} ><i className={'fa fa-camera'}/></button>
+               <span >Upload Image</span>
+            </div>
             <OwlCarouselComponent/>
             <div>
                 <span className={'profile-state'}>Profile is unconfirmed</span> <Button>Confirm ?</Button>

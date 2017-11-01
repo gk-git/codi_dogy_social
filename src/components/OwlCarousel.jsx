@@ -24,27 +24,53 @@ const OwlCarouselComponent = (props) => {
 
             <div>
                 <div className="cover-image">
-                    <img className={'img'} src='http://placekitten.com/g/400'/>
+                    <div className="img">
+                        <img className={'img'} src='http://placekitten.com/g/400'/>
+                        <div className={'img-action '}>
+                           <button><i className={'fa fa-trash'}/></button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div>
                 <div className="cover-image">
-                    <img className={'img'} src='http://placekitten.com/g/500'/>
+                    <div className="img">
+                        <img className={'img'} src='http://placekitten.com/g/500'/>
+                        <div className={'img-action '}>
+                            <button><i className={'fa fa-trash'}/></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
                 <div className="cover-image">
-                    <img className={'img'} src='http://placekitten.com/g/500'/>
+                    <div className="img">
+                        <img className={'img'} src='http://placekitten.com/g/550'/>
+                        <div className={'img-action '}>
+                            <button><i className={'fa fa-trash'}/></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
                 <div className="cover-image">
-                    <img className={'img'} src='http://placekitten.com/g/600/200'/>
+                    <div className="img">
+                        <img className={'img'} src='http://placekitten.com/g/600/300'/>
+                        <div className={'img-action '}>
+                            <button><i className={'fa fa-trash'}/></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
                 <div className="cover-image">
-                    <img className={'img'} src='http://placekitten.com/g/400/600'/>
+                    <div className="img">
+                        <img className={'img'} src='http://placekitten.com/g/400/600'/>
+                        <div className={'img-action '}>
+                            <button><i className={'fa fa-user'}/></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Slider>

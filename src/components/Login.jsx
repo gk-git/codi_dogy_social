@@ -1,37 +1,94 @@
-import React from 'react';
-import '../styles/Login.css';
-import BWestImage from '../images/logo.png';
+import React from "react";
 
-const logoStyle = {
-    maxWidth: '100px'
+import "../styles/Login.css";
 
-};
-const loginAction = (event, history) => {
-    event.preventDefault();
-    history.push('/new-location');
-    alert(123);
-
-};
-const Login = ({history}) => {
-
-
+const Login = () => {
     return (
+        <div className="omb_login">
+            <h3 className="omb_authTitle">
+                Login or <a className={'btn btn-info'} href="#">Sign up</a>
+            </h3>
+            <div className="row omb_row-sm-offset-3 omb_socialButtons">
+                <div className="col-xs-4 col-sm-2">
+                    <a href="#" className="btn btn-lg btn-block omb_btn-facebook">
+                        <i className="fa fa-facebook visible-xs"/>
+                        <span className="hidden-xs">Facebook</span>
+                    </a>
+                </div>
+                <div className="col-xs-4 col-sm-2">
+                    <a href="#" className="btn btn-lg btn-block omb_btn-twitter">
+                        <i className="fa fa-twitter visible-xs"/>
+                        <span className="hidden-xs">Twitter</span>
+                    </a>
+                </div>
+                <div className="col-xs-4 col-sm-2">
+                    <a href="#" className="btn btn-lg btn-block omb_btn-google">
+                        <i className="fa fa-google-plus visible-xs"/>
+                        <span className="hidden-xs">Google+</span>
+                    </a>
+                </div>
+            </div>
 
-        <div className="login-clean">
-            <form method="post" onSubmit={(event)=> {loginAction(event, history)}}>
-                <h2 className="sr-only">Login Form</h2>
-                <div className="illustration"><img src={BWestImage} alt={'B-West Logo'} style={logoStyle}/></div>
-                <div className="form-group">
-                    <input className="form-control" type="email" name="email" placeholder="Email"/>
+            <div className="row omb_row-sm-offset-3 omb_loginOr">
+                <div className="col-xs-12 col-sm-6">
+                    <hr className="omb_hrOr"/>
+                    <span className="omb_spanOr">or</span>
                 </div>
-                <div className="form-group">
-                    <input className="form-control" type="password" name="password" placeholder="Password"/>
+            </div>
+
+            <div className="row omb_row-sm-offset-3">
+                <div className="col-xs-12 col-sm-6">
+                    <form
+                        className="omb_loginForm"
+                        action=""
+                        autocomplete="off"
+                        method="POST"
+                    >
+                        <div className="input-group">
+              <span className="input-group-addon">
+                <i className="fa fa-user"/>
+              </span>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="username"
+                                placeholder="email address"
+                            />
+                        </div>
+                        <span className="help-block"/>
+
+                        <div className="input-group">
+              <span className="input-group-addon">
+                <i className="fa fa-lock"/>
+              </span>
+                            <input
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                placeholder="Password"
+                            />
+                        </div>
+                        <span className="help-block">Password error</span>
+
+                        <button className="btn btn-lg btn-primary btn-block" type="submit">
+                            Login
+                        </button>
+                    </form>
                 </div>
-                <div className="form-group">
-                    <button className="btn btn-primary btn-block" type="submit">Log In</button>
+            </div>
+            <div className="row omb_row-sm-offset-3">
+                <div className="col-xs-12 col-sm-3">
+                    <label className="checkbox">
+                        <input type="checkbox" value="remember-me"/>Remember Me
+                    </label>
                 </div>
-                <a className="forgot">Forgot your email or password?</a></form>
+                <div className="col-xs-12 col-sm-3">
+                    <p className="omb_forgotPwd">
+                        <a href="#">Forgot password?</a>
+                    </p>
+                </div>
+            </div>
         </div>
-    )
-}
-export {Login}
+    );
+};
+export {Login};
