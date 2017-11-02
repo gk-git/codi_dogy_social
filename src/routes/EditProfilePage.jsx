@@ -640,7 +640,7 @@ class EditProfilePage extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        const {children, name, general_description, origin} = props;
+        const {children, name, general_description} = props;
 
         this.state = {
             children,

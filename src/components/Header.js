@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/Header.css';
 
-const Header = () => {
-
+const Header = (props) => {
+    const {welcomeAction} = props;
     return (
 
         <div className="wrapper">
@@ -16,14 +16,20 @@ const Header = () => {
                 <h1 className="main">Do you have a&nbsp;dog?</h1>
                 <ul className="buttonfork">
                     <li>
-                        <a href="#" className="button" data-hasdog="false">
-                            No
-                        </a>
+                        <button className="button" data-hasdog="false" onClick={(event)=>{
+                            event.preventDefault();
+                            welcomeAction(true)
+                        }} >
+                            YES
+                        </button>
                     </li>
                     <li>
-                        <a href="#" className="button" data-hasdog="true">
-                            Yes
-                        </a>
+                        <button className="button" data-hasdog="true" onClick={(event) => {
+                            event.preventDefault();
+                            welcomeAction(false)
+                        }}>
+                            No
+                        </button>
                     </li>
                 </ul>
             </div>

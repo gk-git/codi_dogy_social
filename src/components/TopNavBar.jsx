@@ -1,7 +1,9 @@
 import React from 'react';
-import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import {MenuItem, Nav, Navbar, NavDropdown} from "react-bootstrap";
+
 
 import '../styles/TopNavBar.css'
+import {Link} from "react-router-dom";
 const TopNavBar = () => {
 
     return (
@@ -10,7 +12,7 @@ const TopNavBar = () => {
                 <Navbar.Toggle/>
 
                 <Navbar.Brand>
-                    <a href="#">Dogy</a>
+                    <Link to={'/'}>Dogy</Link>
                 </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>

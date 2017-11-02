@@ -57,3 +57,10 @@ img {
     -o-user-drag: none;
     user-drag: none;
 }
+.custom-row {
+    margin: auto -15px;
+}
+.custom-row::before {
+    display: table;
+    content: " ";
+}

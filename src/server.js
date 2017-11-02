@@ -6,7 +6,7 @@ import {renderToString} from 'react-dom/server';
 import api from './api';
 import {firebasePushData} from './api/firebaseData';
 import {subscribe} from "./api/firebaseData";
-import {isEmpty} from "./utils/index";
+import {isEmpty, parseCookies} from "./utils/index";
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
@@ -39,10 +39,13 @@ server
     })
     .get('/*', (req, res) => {
         const context = {};
+        // To Read a Cookie
+        const cookies = parseCookies(req);
+        const visited = cookies.visited ? cookies.visited : false;
 
         const markup = renderToString(
             <StaticRouter context={context} location={req.url}>
-                <App appData={allData} allData={allData}/>
+                <App appData={allData} allData={allData} visited={visited}/>
             </StaticRouter>
         );
 
@@ -70,6 +73,7 @@ server
         <script>
             var ___STATE___ = ${JSON.stringify(allData)}
             var ___allData___ = ${JSON.stringify(allData)}
+            var ___VISITED___ = ${visited}
         </script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

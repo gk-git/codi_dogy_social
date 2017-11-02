@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import '../styles/OwlCarousel.css'
 
 const OwlCarouselComponent = (props) => {
-    const {images,children} = props;
     let settings = {
         infinite: true,
         accessibility: true,
@@ -25,7 +24,7 @@ const OwlCarouselComponent = (props) => {
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/400'/>
+                        <img className={'img'} src='http://placekitten.com/g/400' alt={'dog pic'}/>
                         <div className={'img-action '}>
                            <button><i className={'fa fa-trash'}/></button>
                         </div>
