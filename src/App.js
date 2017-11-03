@@ -6,6 +6,9 @@ import {mixProps} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
 import {Header} from "./components/Header";
+import {EditProfilePage} from "./routes/EditProfilePage";
+import {ProfilePage} from "./routes/ProfilePage";
+import {HomePage} from "./routes/HomePage";
 
 
 class App extends React.Component {
@@ -22,9 +25,45 @@ class App extends React.Component {
             status: 2,
             counter: 0,
             visited: props.visited,
-            haveDog: true
+            haveDog: true,
+            alertIntro: {
+                title: '',
+                content: '',
+                actionShow: false,
+                actionText: '',
+                actionLink: '/',
+                images: []
+            }
         };
         this.welcomeAction = this.welcomeAction.bind(this);
+    }
+
+    componentDidMount() {
+        const oldState = this.state;
+        this.setState({
+            ...oldState
+            , alertIntro: {
+                title: 'The Number One websites',
+                content: 'F2ind your perfect stud dog, bitch or puppy today, FREE to advertise, FREE to join and browse.',
+                actionShow: true,
+                actionText: 'Play like-me game 2!',
+                actionLink: '/',
+                images: [
+                    {
+                        src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                        alt: 'user-x profile '
+                    },
+                    {
+                        src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                        alt: 'user-x profile '
+                    },
+                    {
+                        src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                        alt: 'user-x profile '
+                    }
+                ]
+            }
+        })
     }
 
     setBrowserCookie(cname, cvalue, exdays) {
@@ -56,9 +95,10 @@ class App extends React.Component {
 
         this.setState({...oldState, haveDog: status, visited: true});
     }
+
     render() {
-        const { welcomeAction} = this;
-        const passedProps = {...this.state,  welcomeAction};
+        const {welcomeAction} = this;
+        const passedProps = {...this.state, welcomeAction};
 
         const mix = mixProps(passedProps);
 
@@ -72,9 +112,24 @@ class App extends React.Component {
                         )
                     }
                     }/>
+                    <Route path="/u" render={(props) => {
+
+                        return (
+                            <PublicApp {...mix(props)} >
+                                <ProfilePage {...mix(props)} />
+                            </PublicApp>
+                        )
+
+
+                    }
+                    }/>
                     <Route path="/" render={(props) => {
 
-                        return (<PublicApp {...mix(props)} />)
+                        return (
+                            <PublicApp {...mix(props)} >
+                                <HomePage {...mix(props)} />
+                            </PublicApp>
+                        )
 
 
                     }

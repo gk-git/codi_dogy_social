@@ -3,9 +3,9 @@ import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../styles/OwlCarousel.css'
+import '../styles/Carousel.css'
 
-const OwlCarouselComponent = (props) => {
+const Carousel = (props) => {
     let settings = {
         infinite: true,
         accessibility: true,
@@ -15,7 +15,11 @@ const OwlCarouselComponent = (props) => {
         slidesToScroll: 1,
         initialSlide: 0,
         className: 'center profile-gallery',
-        adaptiveHeight: true
+        adaptiveHeight: true,
+        responsive: [
+            {breakpoint: 768, settings: {slidesToShow: 1}},
+            {breakpoint: 1200, settings: {slidesToShow: 2}},
+        ]
     };
 
     return (
@@ -75,4 +79,4 @@ const OwlCarouselComponent = (props) => {
         </Slider>
     )
 };
-export {OwlCarouselComponent}
+export {Carousel}

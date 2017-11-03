@@ -1,38 +1,38 @@
 import React from "react";
 import '../styles/DogCard.css';
+import {Link} from "react-router-dom";
 
 const DogCard = (props) => {
-    const {container} = props;
+    const {profileImg, name, dogName, location, id} = props;
 
     return (
-        <div className={`${container} dog-list`} >
+        <div className={`dog-list`}>
             <div className="dog-card">
                 <img
-                    src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
+                    src={profileImg || "https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
                     alt="profile-cover"
                     className="img-responsive cover"
                 />
                 <div className="card-info">
                     <img
-                        src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
+                        src={profileImg || "https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
                         alt="user"
                         className="profile-photo-lg"
                     />
                     <div className="dog-info">
                         <a href="newsfeed-dogs.html#" className="pull-right text-green">
-                            My dog
+                            {name || ''}
                         </a>
                         <h5>
                             <a href="timeline.html" className="profile-link">
-                                Sophia Lee
+                                {dogName || 'My Dog Name'}
                             </a>
                         </h5>
-                        <p>Student at Harvard</p>
+                        <p>{location || 'Mount Lebanon'}</p>
                     </div>
 
-                    <button type="button" className="btn btn-primary view buttontr">
-                        <i className="fa fa-eye" aria-hidden="true"/> View
-                    </button>
+                    <Link to={`/u/${id}`} className="btn btn-primary view buttontr"><i className="fa fa-eye"
+                                                                                       aria-hidden="true"/> View</Link>
                     <button type="button" name="love-button"
                             className="buttontr btn btn-love ">
                         <i className="fa fa-heart-o" aria-hidden="true"/> Love

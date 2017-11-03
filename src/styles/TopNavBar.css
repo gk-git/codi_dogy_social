@@ -1,4 +1,6 @@
-
+.profile-dropdown {
+    min-width: 155px;
+}
 .profile-dropdown a.dropdown-toggle {
     position: relative;
 }

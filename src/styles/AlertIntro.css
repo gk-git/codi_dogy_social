@@ -1,0 +1,14 @@
+.intro-alert {
+    padding: 20px;
+    min-height: 200px;
+}
+
+.intro-alert .profile-block {
+    max-width: 250px;
+    float: left;
+    margin: 25px;
+}
+
+.intro-alert .intro-content {
+
+}

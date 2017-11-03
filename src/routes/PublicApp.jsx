@@ -6,9 +6,9 @@ import {HomePage} from "./HomePage";
 import {Header} from "../components/Header";
 
 const PublicApp = (props) => {
-    const oldUser = props.visited;
 
-    if (!oldUser) {
+    const {children,alertIntro, visited} = props;
+    if (!visited) {
         return (<Header {...props}/>)
     }
     return (
@@ -22,7 +22,7 @@ const PublicApp = (props) => {
             <div id="wrapper">
 
                 <div className="full-column">
-                    <HomePage {...props}/>
+                    {children}
                 </div>
                 <div className={'clear-both'}/>
             </div>
