@@ -60,14 +60,14 @@ server
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta charSet='utf-8' />
         <title>Welcome to Razzle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
          <!-- FontsOnline -->
         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <!-- Load jQuery(1.7+) -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdn.auth0.com/js/lock/10.21.1/lock.min.js"></script>
 
         <!-- JavaScripts -->
         <script>
@@ -93,7 +93,8 @@ server
     <body>
         <div id="root">${markup}</div>
 
-
+        <!-- Prompt a message in the browser if users disabled JS -->
+        <noscript>Your browser does not support JavaScript!</noscript>
         <!-- JavaScripts -->
      
 

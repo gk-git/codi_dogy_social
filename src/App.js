@@ -1,14 +1,16 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
+import axios from 'axios';
 
 import {PublicApp} from "./routes/PublicApp";
 import {mixProps} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
 import {Header} from "./components/Header";
-import {EditProfilePage} from "./routes/EditProfilePage";
 import {ProfilePage} from "./routes/ProfilePage";
 import {HomePage} from "./routes/HomePage";
+import Callback from "./components/Callback";
+import {getAccessToken} from "./utils/AuthService";
 
 
 class App extends React.Component {
@@ -35,6 +37,7 @@ class App extends React.Component {
                 images: []
             }
         };
+        this.getCelebrityData = this.getCelebrityData.bind(this);
         this.welcomeAction = this.welcomeAction.bind(this);
     }
 
@@ -89,6 +92,16 @@ class App extends React.Component {
         return "";
     }
 
+    getCelebrityData() {
+        const BASE_URL = 'http://localhost:3000';
+        const url = `${BASE_URL}/api/auth/signup`;
+        this.setState({
+            ...this.state,
+            token: getAccessToken()
+        });
+        return axios.get(url, {headers: {Authorization: `Bearer ${getAccessToken()}`}}).then(response => console.log(response.data));
+    }
+
     welcomeAction(status) {
         const oldState = this.state;
         this.setBrowserCookie('have-dog', status, 10000);
@@ -105,6 +118,8 @@ class App extends React.Component {
 
         return (
             <div>
+                <button onClick={()=> this.getCelebrityData()}>Click me</button>
+                <div className="" style={{background: '#fff'}}>{this.state.token || 'token not found'}</div>
                 <Switch>
                     <Route path="/s" render={(props) => {
                         return (
@@ -123,6 +138,9 @@ class App extends React.Component {
 
                     }
                     }/>
+                    <Route path="/callback" component={Callback}/>
+
+
                     <Route path="/" render={(props) => {
 
                         return (
@@ -134,6 +152,7 @@ class App extends React.Component {
 
                     }
                     }/>
+
                 </Switch>
 
             </div>

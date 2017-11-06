@@ -39,7 +39,7 @@ const Carousel = (props) => {
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/500'/>
+                        <img className={'img'} src='http://placekitten.com/g/500' alt={''}/>
                         <div className={'img-action '}>
                             <button><i className={'fa fa-trash'}/></button>
                         </div>
@@ -49,7 +49,7 @@ const Carousel = (props) => {
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/550'/>
+                        <img className={'img'} src='http://placekitten.com/g/550' alt={''}/>
                         <div className={'img-action '}>
                             <button><i className={'fa fa-trash'}/></button>
                         </div>
@@ -59,7 +59,7 @@ const Carousel = (props) => {
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/600/300'/>
+                        <img className={'img'} src='http://placekitten.com/g/600/300' alt={''}/>
                         <div className={'img-action '}>
                             <button><i className={'fa fa-trash'}/></button>
                         </div>
@@ -69,7 +69,7 @@ const Carousel = (props) => {
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/400/600'/>
+                        <img className={'img'} src='http://placekitten.com/g/400/600' alt={''}/>
                         <div className={'img-action '}>
                             <button><i className={'fa fa-user'}/></button>
                         </div>

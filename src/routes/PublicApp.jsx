@@ -2,12 +2,11 @@ import React from 'react';
 import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
-import {HomePage} from "./HomePage";
 import {Header} from "../components/Header";
 
 const PublicApp = (props) => {
 
-    const {children,alertIntro, visited} = props;
+    const {children, visited} = props;
     if (!visited) {
         return (<Header {...props}/>)
     }

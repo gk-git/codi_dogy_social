@@ -10,7 +10,7 @@ Universal JavaScript applications are tough to setup. Either you buy into a fram
 - Comes with your favorite ES6 JavaScript goodies (through `babel-preset-razzle`)
 - Comes with the same CSS setup as [create-react-app](https://github.com/facebookincubator/create-react-app) 
 - Works with [React](https://github.com/facebook/react), [Preact](https://github.com/developit/preact), [Elm](http://elm-lang.org/),  [Reason-React](https://github.com/jaredpalmer/razzle/tree/master/examples/with-reason-react), [Inferno](https://github.com/infernojs), and [Rax](https://github.com/alibaba/rax) as well as [Angular](https://github.com/angular/angular) and [Vue](https://github.com/vuejs/vue) if that's your thing
-- Escape hatches for customization via `.babelrc` and `razzle.config.js`
+- Escape hatches for customization via `.babelrc` and `razzle.index.js`
 - [Jest](https://github.com/facebook/jest) test runner setup with sensible defaults via `razzle test`
 
 
@@ -98,10 +98,10 @@ Razzle comes with most of ES6 stuff you need. However, if you want to add your o
 
 ### Extending Webpack
 
-You can also extend the underlying webpack config. Create a file called `razzle.config.js` in your project's root. 
+You can also extend the underlying webpack config. Create a file called `razzle.index.js` in your project's root. 
 
 ```js
-// razzle.config.js
+// razzle.index.js
 
 module.exports = {
   modify: (config, {target, dev}, webpack) => {
@@ -112,10 +112,10 @@ module.exports = {
 }
 ```
 
-A word of advice: `razzle.config.js` is an escape hatch. However, since it's just JavaScript, you can and should publish your `modify` function to npm to make it reusable across your projects. For example, imagine you added some custom webpack loaders and published it as a package to npm as `my-razzle-modifictions`. You could then write your `razzle.config.js` like so:
+A word of advice: `razzle.index.js` is an escape hatch. However, since it's just JavaScript, you can and should publish your `modify` function to npm to make it reusable across your projects. For example, imagine you added some custom webpack loaders and published it as a package to npm as `my-razzle-modifictions`. You could then write your `razzle.index.js` like so:
 
 ```
-// razzle.config.js
+// razzle.index.js
 const modify = require('my-razzle-modifictions');
 
 module.exports = {
