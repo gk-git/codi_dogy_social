@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-
-import {PublicApp} from "./routes/PublicApp";
+import {Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
+import PublicApp from "./routes/PublicApp";
 import {mixProps} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
@@ -9,6 +9,7 @@ import {Header} from "./components/Header";
 import {EditProfilePage} from "./routes/EditProfilePage";
 import {ProfilePage} from "./routes/ProfilePage";
 import {HomePage} from "./routes/HomePage";
+import {config} from "./auth-okta";
 
 
 class App extends React.Component {
@@ -36,7 +37,9 @@ class App extends React.Component {
             }
         };
         this.welcomeAction = this.welcomeAction.bind(this);
+
     }
+
 
     componentDidMount() {
         const oldState = this.state;
@@ -105,37 +108,43 @@ class App extends React.Component {
 
         return (
             <div>
-                <Switch>
-                    <Route path="/s" render={(props) => {
-                        return (
-                            <Header  {...mix(props)}/>
-                        )
-                    }
-                    }/>
-                    <Route path="/u" render={(props) => {
+                <Security issuer={config.issuer}
+                          client_id={config.clientId}
+                          redirect_uri={config.redirectUri}>
 
-                        return (
-                            <PublicApp {...mix(props)} >
-                                <ProfilePage {...mix(props)} />
-                            </PublicApp>
-                        )
+                    <Switch>
 
+                        <Route path="/s" render={(props) => {
+                            return (
+                                <Header  {...mix(props)}/>
+                            )
+                        }
+                        }/>
+                        <Route path="/u" render={(props) => {
 
-                    }
-                    }/>
-                    <Route path="/" render={(props) => {
-
-                        return (
-                            <PublicApp {...mix(props)} >
-                                <HomePage {...mix(props)} />
-                            </PublicApp>
-                        )
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    <ProfilePage {...mix(props)} />
+                                </PublicApp>
+                            )
 
 
-                    }
-                    }/>
-                </Switch>
+                        }
+                        }/>
+                        <Route path='/implicit/callback' component={ImplicitCallback}/>
+                        <Route path="/" render={(props) => {
 
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    <HomePage {...mix(props)} />
+                                </PublicApp>
+                            )
+
+
+                        }
+                        }/>
+                    </Switch>
+                </Security>
             </div>
         )
     }
