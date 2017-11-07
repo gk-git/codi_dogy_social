@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Pagination} from "react-bootstrap";
+import {Pagination} from "react-bootstrap";
 import {DogCard} from "../components/DogCard";
 import {AlertIntro} from "../components/AlertIntro";
 import '../styles/HomePage.css'

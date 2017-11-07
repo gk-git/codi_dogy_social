@@ -1,0 +1,10 @@
+.login-page {
+    text-align: center;
+    /*margin: 75px auto auto;*/
+}
+
+@media (max-width: 800px) {
+    .login-page {
+        /*margin: 40px;*/
+    }
+}

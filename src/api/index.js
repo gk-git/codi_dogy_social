@@ -1,38 +1,44 @@
 import express from "express";
-import { firebasePushData, subscribe} from "./firebaseData";
-import {isEmpty} from "../utils/index";
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
 
-let allData = {};
-if (isEmpty(allData)) {
-    setTimeout(() => firebasePushData({
-            databaseRef: 'logs',
-            data: {
-                date: Date.now(),
-                message: 'All Data is Empty server restart'
-            }
-        }
-    ), 2000);
 
-}
-subscribe(newData => {
-    allData = newData;
-});
-export {allData};
 
 
 const router = express.Router();
 
-router.use(function (req, res, next) {
+
+// DB connection through Mongoose
+const options = {
+    useMongoClient: true
+};
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/reactgames', options);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// Body parser and Morgan middleware
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
+router.use(morgan('dev'));
+
+
+// Enable CORS so that we can make HTTP request from webpack-dev-server
+router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
     next();
 });
+
 
 //  Extract Get url
 // var parts = url.parse(req.url, true);
 // var query = parts.query;
 router.get("/*", (req, res, next) => {
     res.send({
-        allData: allData,
         default: true
     });
 });

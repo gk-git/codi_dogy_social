@@ -1,13 +1,24 @@
 import React from 'react';
 import {Login} from "../components/Login";
+import  '../styles/LoginPage.css'
+const LoginPage = (props) => {
+    const {authenticated} = props;
 
-const LoginPage = () => {
+    if (authenticated) {
 
-    return (
-        <div className={'login-page'}>
-            <Login/>
-        </div>
-    )
+        return (
+            <h2>Redirect</h2>
+        )
+    } else {
+
+        return (
+            <div className={'login-page'}>
+                <Login {...props}/>
+                <div className="clear-both"/>
+
+            </div>
+        )
+    }
 }
 
 export {LoginPage}

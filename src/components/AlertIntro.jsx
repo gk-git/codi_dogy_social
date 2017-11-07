@@ -10,9 +10,9 @@ const AlertIntro = (props) => {
 
                 <div className="profile-block">
                     {
-                        images.map(image => {
+                        images.map((image, index) => {
                             return (
-                                <img src={image.src}
+                                <img key={index} src={image.src}
                                      className="circle thumbnail" alt={image.alt}/>
                             )
                         })

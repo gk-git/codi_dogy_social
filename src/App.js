@@ -1,14 +1,13 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-
+import superagent from 'superagent';
 import {PublicApp} from "./routes/PublicApp";
 import {mixProps} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
-import {Header} from "./components/Header";
-import {EditProfilePage} from "./routes/EditProfilePage";
 import {ProfilePage} from "./routes/ProfilePage";
 import {HomePage} from "./routes/HomePage";
+import {LoginPage} from "./routes/LoginPage";
 
 
 class App extends React.Component {
@@ -33,9 +32,38 @@ class App extends React.Component {
                 actionText: '',
                 actionLink: '/',
                 images: []
-            }
+            },
+            registerUser: {
+                username: {
+                    value: '',
+                    error: ''
+                },
+                email: {
+                    value: '',
+                    error: ''
+                },
+                name: {
+                    value: '',
+                    error: ''
+                },
+                dogName: {
+                    value: '',
+                    error: ''
+                },
+                password: {
+                    value: '',
+                    error: ''
+                },
+                confirmPassword: {
+                    value: '',
+                    error: ''
+                }
+            },
+            authenticated: false
         };
         this.welcomeAction = this.welcomeAction.bind(this);
+        this.checkLoginStatus = this.checkLoginStatus.bind(this);
+        this.handleRegisterInputChange = this.handleRegisterInputChange.bind(this);
     }
 
     componentDidMount() {
@@ -64,6 +92,39 @@ class App extends React.Component {
                 ]
             }
         })
+    }
+
+    checkLoginStatus(nextState, replace) {
+        if (!this.state.authenticated) {
+            replace({pathname: '/'});
+        }
+    }
+
+    handleRegisterInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            ...this.state, registerUser: {
+                ...this.state.registerUser,
+                [name]: {
+                    ...this.state.registerUser[name],
+                    value
+                }
+            }
+        });
+    }
+
+    validateRegisterForm() {
+
+        return {
+            success: true
+        }
+    }
+
+    handleRegisterFormSubmit(event) {
+        event.preventDefault();
+
     }
 
     setBrowserCookie(cname, cvalue, exdays) {
@@ -96,9 +157,11 @@ class App extends React.Component {
         this.setState({...oldState, haveDog: status, visited: true});
     }
 
+
     render() {
-        const {welcomeAction} = this;
-        const passedProps = {...this.state, welcomeAction};
+        const {welcomeAction, handleRegisterInputChange} = this;
+        const passedProps = {...this.state, welcomeAction, handleRegisterInputChange};
+
 
         const mix = mixProps(passedProps);
 
@@ -106,9 +169,12 @@ class App extends React.Component {
         return (
             <div>
                 <Switch>
-                    <Route path="/s" render={(props) => {
+                    <Route path="/login" render={(props) => {
                         return (
-                            <Header  {...mix(props)}/>
+                            <PublicApp {...mix(props)} noBackground={true}>
+                                <LoginPage  {...mix(props)}/>
+                            </PublicApp>
+
                         )
                     }
                     }/>

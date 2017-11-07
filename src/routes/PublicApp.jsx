@@ -2,12 +2,11 @@ import React from 'react';
 import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
-import {HomePage} from "./HomePage";
 import {Header} from "../components/Header";
 
 const PublicApp = (props) => {
 
-    const {children,alertIntro, visited} = props;
+    const {children, visited, noBackground} = props;
     if (!visited) {
         return (<Header {...props}/>)
     }
@@ -21,7 +20,7 @@ const PublicApp = (props) => {
             </div>
             <div id="wrapper">
 
-                <div className="full-column">
+                <div className={`full-column ${ noBackground ? 'noBackground' : ''}`}>
                     {children}
                 </div>
                 <div className={'clear-both'}/>
@@ -31,23 +30,23 @@ const PublicApp = (props) => {
         </div>
     )
 };
-
-const C = ({children}) => <div>
-    <div className={'header'}>
-        <TopNavBar/>
-    </div>
-    <div className="fixed-cont">
-        <SideBar/>
-    </div>
-    <div id="wrapper">
-
-        <div className="full-column">
-            {children}
-        </div>
-        <div className={'clear-both'}/>
-    </div>
-
-</div>
+//
+// const C = ({children}) => <div>
+//     <div className={'header'}>
+//         <TopNavBar/>
+//     </div>
+//     <div className="fixed-cont">
+//         <SideBar/>
+//     </div>
+//     <div id="wrapper">
+//
+//         <div className="full-column">
+//             {children}
+//         </div>
+//         <div className={'clear-both'}/>
+//     </div>
+//
+// </div>
 
 
 export {PublicApp};

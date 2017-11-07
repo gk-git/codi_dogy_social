@@ -3,8 +3,7 @@ import '../styles/ProfilePage.css';
 import {Button} from "react-bootstrap";
 import {Carousel} from "../components/Carousel";
 
-const ProfilePage = (props) => {
-    const {dogName} = props;
+const ProfilePage = () => {
     return [
         <div key={0} className={'profile-page'}>
             <div className="">
@@ -54,7 +53,7 @@ const ProfilePage = (props) => {
 
                 <div className="dog-post">
                     <div className="cover-image">
-                        <img className={''}
+                        <img className={''} alt={''}
                              src={'http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23252_dogue-de-bordeaux-dog-breed.jpg'}/>
                     </div>
                     <div className="post-content">
@@ -84,7 +83,7 @@ const ProfilePage = (props) => {
                 </div>
                 <div className="dog-post">
                     <div className="cover-image">
-                        <img className={''}
+                        <img className={''} alt={''}
                              src={'http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23252_dogue-de-bordeaux-dog-breed.jpg'}/>
                     </div>
                     <div className="post-content">
