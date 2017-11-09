@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import {login, signup} from "./routes/user";
 
 
 
@@ -14,7 +15,7 @@ const options = {
     useMongoClient: true
 };
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/reactgames', options);
+mongoose.connect('mongodb://localhost:27017/dogo-database', options);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -33,6 +34,8 @@ router.use((req, res, next) => {
     next();
 });
 
+router.post('/user', signup);
+router.post('/login', login);
 
 //  Extract Get url
 // var parts = url.parse(req.url, true);

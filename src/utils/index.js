@@ -19,4 +19,8 @@ export const parseCookies = request => {
 
     return list;
 }
+export const valideEmail = (email) => {
+    const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email); // Assuming email has a text attribute
+}
 

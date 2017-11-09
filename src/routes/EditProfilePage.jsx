@@ -659,36 +659,30 @@ class EditProfilePage extends React.Component {
     }
 
     handleOriginChange(val) {
-        console.log(val);
         this.setState({...this.state, origin: val})
     }
 
     handleGenderChange(val) {
-        console.log(val);
         this.setState({...this.state, gender: val})
     }
 
     handleBreedChange(val) {
-        console.log(val);
         this.setState({...this.state, breed: val})
     }
 
     handleDateChange(date) {
-        console.log('date', date);
         this.setState({
             birthDate: date
         });
     }
     handleFormSubmit(event) {
         event.preventDefault();
-        console.log('event', event)
         alert(JSON.stringify(event));
     }
 
 
     render() {
 
-        console.log(this.state.origin);
         const current_year = new Date().getFullYear();
 
         return (

@@ -1,48 +1,49 @@
 
-.form-authentication   *, .form-authentication   *:before,.form-authentication    *:after {
+.form-authentication *, .form-authentication *:before, .form-authentication *:after {
     box-sizing: border-box;
 }
 
-.form-authentication   {
-    background: rgba(19, 35, 47, 0.9);
+.form-authentication {
+    background: rgba(56, 124, 237, 0.9);
     padding: 40px;
     max-width: 600px;
-    margin: 40px auto;
+    margin:  auto;
     border-radius: 4px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     font-family: 'Titillium Web', sans-serif;
     box-sizing: border-box;
 
 }
-.form-authentication   a {
+
+.form-authentication a {
     text-decoration: none;
-    color: #1ab188;
+    color: rgb(141, 198, 63);
     -webkit-transition: .5s ease;
     transition: .5s ease;
 }
 
-.form-authentication   a:hover {
-    color: #179b77;
+.form-authentication a:hover {
+    color: rgb(67, 198, 49);
 }
 
-.form-authentication   .tab-group {
+.form-authentication .tab-group {
     list-style: none;
     padding: 0;
     margin: 0 0 40px 0;
 }
 
-.form-authentication   .tab-group:after {
+.form-authentication .tab-group:after {
     content: "";
     display: table;
     clear: both;
 }
 
-.form-authentication   .tab-group li a {
+.form-authentication .tab-group li a {
     display: block;
     text-decoration: none;
     padding: 15px;
     background: rgba(160, 179, 176, 0.25);
-    color: #a0b3b0;
+    color: rgba(19, 35, 47, 0.9);;
     font-size: 20px;
     float: left;
     width: 50%;
@@ -52,28 +53,29 @@
     transition: .5s ease;
 }
 
-.form-authentication   .tab-group li a:hover {
-    background: #179b77;
+.form-authentication .tab-group li a:hover {
+    background: rgb(67, 198, 49);
     color: #ffffff;
 }
 
-.form-authentication   .tab-group .active a {
-    background: #1ab188;
+.form-authentication .tab-group .active a {
+    /*background: #1ab188;*/
+    background: rgb(141, 198, 63);
     color: #ffffff;
 }
 
-.form-authentication   .tab-content > div:last-child {
+.form-authentication .tab-content > div:last-child {
     display: none;
 }
 
-.form-authentication   h1 {
+.form-authentication h1 {
     text-align: center;
     color: #ffffff;
     font-weight: 300;
     margin: 0 0 40px;
 }
 
-.form-authentication   label {
+.form-authentication label.label-input {
     position: absolute;
     -webkit-transform: translateY(6px);
     transform: translateY(6px);
@@ -86,34 +88,45 @@
     font-size: 22px;
 }
 
-.form-authentication   label .req {
+.form-authentication label.error {
+    position: relative;
+    -webkit-transform: translateY(0px);
+    transform: translateY(-2px);
+    left: 0;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.form-authentication label .req {
     margin: 2px;
     color: #1ab188;
 }
 
-.form-authentication   label.active {
-    -webkit-transform: translateY(50px);
-    transform: translateY(50px);
+.form-authentication label.label-input.active {
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
     left: 2px;
     font-size: 14px;
 }
 
-.form-authentication   label.active .req {
+.form-authentication label.active .req {
     opacity: 0;
 }
 
-.form-authentication   label.highlight {
+.form-authentication label.highlight {
     color: #ffffff;
 }
 
-.form-authentication  input, textarea {
+.form-authentication input, textarea {
     font-size: 22px;
     display: block;
     width: 100%;
     height: 100%;
     padding: 5px 10px;
     background: none;
-    background-image: none;
     border: 1px solid #a0b3b0;
     color: #ffffff;
     border-radius: 0;
@@ -121,38 +134,44 @@
     transition: border-color .25s ease, box-shadow .25s ease;
 }
 
-.form-authentication  input:focus, textarea:focus {
+.form-authentication input:focus, textarea:focus {
     outline: 0;
     border-color: #1ab188;
 }
 
-.form-authentication  textarea {
+.form-authentication textarea {
     border: 2px solid #a0b3b0;
     resize: vertical;
 }
 
-.form-authentication  .field-wrap {
+.form-authentication .field-wrap {
     position: relative;
-    margin-bottom: 40px;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
-.form-authentication  .top-row:after {
+.form-authentication .field-wrap.error {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-authentication .top-row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-.form-authentication  .top-row > div {
+.form-authentication .top-row > div {
     float: left;
     width: 48%;
     margin-right: 4%;
 }
 
-.form-authentication  .top-row > div:last-child {
+.form-authentication .top-row > div:last-child {
     margin: 0;
 }
 
-.form-authentication  .button {
+.form-authentication .button {
     border: 0;
     outline: none;
     border-radius: 0;
@@ -161,23 +180,23 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .1em;
-    background: #1ab188;
+    background: rgb(141, 198, 63);
     color: #ffffff;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     -webkit-appearance: none;
 }
 
-.form-authentication  .button:hover, .button:focus {
-    background: #179b77;
+.form-authentication .button:hover, .button:focus {
+    background: rgb(67, 198, 49);
 }
 
-.form-authentication  .button-block {
+.form-authentication .button-block {
     display: block;
     width: 100%;
 }
 
-.form-authentication  .forgot {
+.form-authentication .forgot {
     margin-top: -20px;
     text-align: right;
 }

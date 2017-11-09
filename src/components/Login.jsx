@@ -1,111 +1,92 @@
 import React from "react";
-
 import "../styles/Login.css";
 import {Link} from "react-router-dom";
 
 
-const tabSignInOnClick = event => {
-    event.preventDefault();
-    const form_sign_up = document.getElementById("form_sign_up");
-    const form_sign_in = document.getElementById("form_sign_in");
-    form_sign_up.classList.remove("active");
-    form_sign_in.classList.add("active");
-
-    const form_sign_up_content = document.getElementById("form_sign_up_content");
-    const form_sign_in_content = document.getElementById("form_sign_in_content");
-
-    form_sign_up_content.style.display = "none";
-    form_sign_in_content.style.display = "block";
-};
-
-const tabSignUpOnClick = event => {
-    event.preventDefault();
-    const form_sign_up = document.getElementById("form_sign_up");
-    const form_sign_in = document.getElementById("form_sign_in");
-    form_sign_up.classList.add("active");
-    form_sign_in.classList.remove("active");
-
-    const form_sign_up_content = document.getElementById("form_sign_up_content");
-    const form_sign_in_content = document.getElementById("form_sign_in_content");
-
-    form_sign_up_content.style.display = "block";
-    form_sign_in_content.style.display = "none";
-};
-
-const handleChange = event => {
-    const target = event.target;
-    const label = target.previousSibling;
-    if (event.type === "focus") {
-        if (target.value === "") {
-            label.classList.remove("highlight");
-        } else {
-            label.classList.add("highlight");
-        }
-    } else if (event.type === "blur") {
-        if (target.value === "") {
-            label.classList.remove("active");
-            label.classList.remove("highlight");
-
-        } else {
-            label.classList.remove("highlight");
-
-        }
-    }
-    else if (event.type === "keyup") {
-        if (target.value === "") {
-            label.classList.remove("active");
-            label.classList.remove("highlight");
-        } else {
-            label.classList.add("active");
-            label.classList.add("highlight");
-        }
-        if (target.nextSibling) {
-            target.nextSibling.innerHTML = '';
-        }
-
-    }
-};
 const Login = (props) => {
-    const {registerUser, handleRegisterInputChange} = props;
+    const {registerUser, handleLoginFormSubmit, handleLoginFormChange, loginUser, handleRegisterInputChange, handleRegisterFormSubmit, history, showLoginForm, showSignupForm} = props;
+
+
+    const handleChange = (event) => {
+        const target = event.target;
+        const label = target.previousSibling;
+        if (event.type === "focus") {
+            if (target.value === "") {
+                label.classList.remove("highlight");
+            } else {
+                label.classList.add("highlight");
+            }
+        } else if (event.type === "blur") {
+            if (target.value === "") {
+                label.classList.remove("active");
+                label.classList.remove("highlight");
+
+            } else {
+                label.classList.remove("highlight");
+
+            }
+        }
+        else if (event.type === "keyup") {
+            // handleRegisterInputChange(event);
+
+            if (target.value === "") {
+                label.classList.remove("active");
+                label.classList.remove("highlight");
+            } else {
+                label.classList.add("active");
+                label.classList.add("highlight");
+            }
+            if (target.nextSibling) {
+                target.nextSibling.innerHTML = '';
+            }
+
+        }
+    };
 
     return (
         <div className="form-authentication">
             <ul className="tab-group">
-                <li className="tab active" id={"form_sign_up"}>
+                <li className={`tab ${!registerUser.actions.login ? 'active' : ''} `} id={"form_sign_up"}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        showSignupForm();
+                    }}>
                     <a
-                        onClick={event => {
-                            tabSignUpOnClick(event);
-                        }}
+
                     >
                         Sign Up
                     </a>
                 </li>
-                <li className="tab" id={"form_sign_in"}>
-                    <a
-                        onClick={event => {
-                            tabSignInOnClick(event);
-                        }}
-                    >
+                <li className={`tab ${registerUser.actions.login ? 'active' : ''} `} id={"form_sign_in"}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        showLoginForm();
+                    }}>
+                    <a>
                         Log In
                     </a>
                 </li>
             </ul>
             <div className="tab-content">
-                <div id="form_sign_up_content">
+                <div id="form_sign_up_content" style={{display: `${!registerUser.actions.login ? 'block' : 'none'}`}}>
                     <h1>Sign Up for Free</h1>
-                    <form action="/" method="post">
+                    <form action="/" method="post" onSubmit={(event) => {
+                        event.preventDefault();
+                        handleRegisterFormSubmit(event, history)
+                    }}>
                         <div className="top-row">
-                            <div className="field-wrap">
-                                <label className={""}>
+                            <div className={`field-wrap ${registerUser.errors.name ? 'error' : ''}`}>
+                                <label className={`${registerUser.name !== '' ? 'active' : ''} label-input`}>
                                     Your Name<span className="req">*</span>
+
                                 </label>
                                 <input
                                     type="text"
                                     required
-                                    defaultValue={registerUser.name.value}
+                                    defaultValue={registerUser.name}
                                     autoComplete="off"
                                     name={'name'}
-                                    onChange={(event)=> {
+                                    onChange={(event) => {
                                         handleRegisterInputChange(event)
                                     }}
                                     onKeyUp={event => {
@@ -119,18 +100,20 @@ const Login = (props) => {
                                     }}
                                 />
                                 <label className={'error'}>
-                                    {registerUser.name.error}
+                                    {registerUser.errors.name}
                                 </label>
+
                             </div>
-                            <div className="field-wrap">
-                                <label className={""}>
+                            <div className={`field-wrap ${registerUser.errors.dogName ? 'error' : ''}`}>
+                                <label className={`${registerUser.dogName !== '' ? 'active' : ''} label-input`}>
                                     Your Dog Name<span className="req">*</span>
+
                                 </label>
                                 <input
                                     type="text"
                                     required
                                     autoComplete="off"
-                                    defaultValue={registerUser.dogName.value}
+                                    defaultValue={registerUser.dogName}
                                     name={'dogName'}
 
                                     onChange={(event) => {
@@ -147,16 +130,18 @@ const Login = (props) => {
                                     }}
                                 />
                                 <label className={'error'}>
-                                    {registerUser.dogName.error}
+                                    {registerUser.errors.dogName}
                                 </label>
+
                             </div>
                         </div>
-                        <div className="field-wrap">
-                            <label>
+                        <div className={`field-wrap ${registerUser.errors.username ? 'error' : ''}`}>
+                            <label className={`${registerUser.username !== '' ? 'active' : ''} label-input`}>
                                 Username<span className="req">*</span>
+
                             </label>
                             <input type="text" required autoComplete="off"
-                                   defaultValue={registerUser.username.value}
+                                   defaultValue={registerUser.username}
                                    name={'username'}
 
                                    onChange={(event) => {
@@ -172,15 +157,17 @@ const Login = (props) => {
                                        handleChange(event);
                                    }}/>
                             <label className={'error'}>
-                                {registerUser.username.error}
+                                {registerUser.errors.username}
                             </label>
+
                         </div>
-                        <div className="field-wrap">
-                            <label>
+                        <div className={`field-wrap ${registerUser.errors.email ? 'error' : ''}`}>
+                            <label className={`${registerUser.email !== '' ? 'active' : ''} label-input`}>
                                 Email Address<span className="req">*</span>
+
                             </label>
                             <input type="email" required autoComplete="off"
-                                   defaultValue={registerUser.email.value}
+                                   defaultValue={registerUser.email}
                                    name={'email'}
 
                                    onChange={(event) => {
@@ -196,16 +183,18 @@ const Login = (props) => {
                                        handleChange(event);
                                    }}/>
                             <label className={'error'}>
-                                {registerUser.email.error}
+                                {registerUser.errors.email}
                             </label>
+
                         </div>
-                        <div className="field-wrap">
-                            <label>
+                        <div className={`field-wrap ${registerUser.errors.password ? 'error' : ''}`}>
+                            <label className={`${registerUser.password !== '' ? 'active' : ''} label-input`}>
                                 Set A Password<span className="req">*</span>
+
                             </label>
                             <input type="password" required autoComplete="off"
                                    name={'password'}
-                                   defaultValue={registerUser.password.value}
+                                   defaultValue={registerUser.password}
 
                                    onChange={(event) => {
                                        handleRegisterInputChange(event)
@@ -221,15 +210,18 @@ const Login = (props) => {
                                    }}
                             />
                             <label className={'error'}>
-                                {registerUser.password.error}
+                                {registerUser.errors.password}
                             </label>
+
                         </div>
-                        <div className="field-wrap">
-                            <label>
+                        <div className={`field-wrap ${registerUser.errors.confirmPassword ? 'error' : ''}`}>
+                            <label
+                                className={`${registerUser.confirmPassword !== '' ? 'active' : ''} label-input`}>
                                 Confirm Password<span className="req">*</span>
+
                             </label>
                             <input type="password" required autoComplete="off" name={'confirmPassword'}
-                                   defaultValue={registerUser.confirmPassword.value}
+                                   defaultValue={registerUser.confirmPassword}
                                    onChange={(event) => {
                                        handleRegisterInputChange(event)
                                    }}
@@ -243,26 +235,33 @@ const Login = (props) => {
                                        handleChange(event);
                                    }}
                             />
-                            <label className={'error'}>
-                                {registerUser.confirmPassword.error}
-                            </label>
 
+                            <label className={'error'}>
+                                {registerUser.errors.confirmPassword}
+                            </label>
                         </div>
 
-                        <button type="submit" className="button button-block">
+                        <button type="submit" className="button button-block"
+                                disabled={registerUser.actions.submitDisable}>
                             Get Started
                         </button>
                     </form>
                 </div>
-                <div id="form_sign_in_content">
+                <div id="form_sign_in_content" style={{display: `${registerUser.actions.login ? 'block' : 'none'}`}}>
                     <h1>Welcome Back!</h1>
-                    <form action="/" method="post">
+                    <form action="/" method="post" onSubmit={(event)=> {
+                        event.preventDefault();
+                        handleLoginFormSubmit(event, history);
+                    }}>
                         <div className="field-wrap">
-                            <label>
+                            <label className={'label-input'}>
                                 Email Address Or Username<span className="req">*</span>
                             </label>
-                            <input type="email" required autoComplete="off"
+                            <input type="text" name={'email_username'}  autoComplete="off"
 
+                                   onChange={(event)=>{
+                                       handleLoginFormChange(event);
+                                   }}
                                    onKeyUp={event => {
                                        handleChange(event);
                                    }}
@@ -272,12 +271,18 @@ const Login = (props) => {
                                    onBlur={event => {
                                        handleChange(event);
                                    }}/>
+                            <label className={'error'}>
+                                {loginUser.errors.email_username}
+                            </label>
                         </div>
                         <div className="field-wrap">
-                            <label>
+                            <label className={'label-input'}>
                                 Password<span className="req">*</span>
                             </label>
-                            <input type="password" required autoComplete="off"
+                            <input type="password" name={'password'} required autoComplete="off"
+                                   onChange={(event) => {
+                                       handleLoginFormChange(event);
+                                   }}
                                    onKeyUp={event => {
                                        handleChange(event);
                                    }}
@@ -287,6 +292,9 @@ const Login = (props) => {
                                    onBlur={event => {
                                        handleChange(event);
                                    }}/>
+                            <label className={'error'}>
+                                {loginUser.errors.password}
+                            </label>
                         </div>
                         <p className="forgot">
                             <Link to={'/forget-password'}>Forgot Password?</Link>

@@ -1,4 +1,5 @@
 import React from 'react';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
@@ -6,7 +7,7 @@ import {Header} from "../components/Header";
 
 const PublicApp = (props) => {
 
-    const {children, visited, noBackground} = props;
+    const {children, visited, sweetAlert, noBackground, hideRegisterAlert} = props;
     if (!visited) {
         return (<Header {...props}/>)
     }
@@ -26,6 +27,16 @@ const PublicApp = (props) => {
                 <div className={'clear-both'}/>
             </div>
 
+            <SweetAlert
+                show={sweetAlert.show}
+                success={sweetAlert.success}
+                error={!sweetAlert.success}
+                title={sweetAlert.title || 'Title'}
+                onConfirm={() => hideRegisterAlert()}
+                onOutsideClick={() => hideRegisterAlert()}
+            >
+                {sweetAlert.text || 'Text hello world'}
+            </SweetAlert>
 
         </div>
     )

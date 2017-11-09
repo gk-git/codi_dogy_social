@@ -4,28 +4,11 @@ import {StaticRouter} from 'react-router-dom';
 import express from 'express';
 import {renderToString} from 'react-dom/server';
 import api from './api';
-import {firebasePushData} from './api/firebaseData';
-import {subscribe} from "./api/firebaseData";
-import {isEmpty, parseCookies} from "./utils/index";
+import {parseCookies} from "./utils/index";
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
 let allData = {};
-if (isEmpty(allData)) {
-    setTimeout(() => firebasePushData({
-            databaseRef: 'logs',
-            data: {
-                date: Date.now(),
-                message: 'All Data is Empty server restart'
-            }
-        }
-    ), 2000);
-
-}
-subscribe((newData) => {
-    allData = newData
-});
-
 
 server.use('/api', api);
 server
@@ -59,7 +42,7 @@ server
         <head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta charSet='utf-8' />
-        <title>Welcome to Razzle</title>
+        <title>Welcome to Doggo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
          <!-- FontsOnline -->

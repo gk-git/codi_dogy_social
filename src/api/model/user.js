@@ -1,5 +1,7 @@
 import mongoose, {Schema} from 'mongoose'
 import bcrypt from 'bcrypt';
+import uniqueValidator from 'mongoose-unique-validator';
+import {valideEmail} from "../../utils/index";
 
 const userSchema = new Schema({
     email: {
@@ -8,7 +10,11 @@ const userSchema = new Schema({
     },
     password: {type: String, select: false},
     username: {type: String, unique: [true, 'Username already exist'], lowercase: true},
-    name: String
+    name: {type: String, required: [true, 'Name is required']},
+    dogName: {type: String, required: true},
+    emailVerified: {type: Boolean, default: false},
+    token: {type: String, default: ''}
+
 });
 
 userSchema.pre('save', function (next) {
@@ -22,31 +28,25 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.path('email').validate(function (email) {
-    const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailRegex.test(email.text); // Assuming email has a text attribute
-}, 'The e-mail field cannot be empty.');
-
-userSchema.path('username').validate(function (value) {
-    return /[0-9]{6,15}[a-zA-Z]/.test(value);
-}, 'Invalid username');
-
-userSchema.methods = {
-    comparePwd: (password, done) => {
-        bcrypt.compare(password, this.password, (err, isMatch) => {
-            done(err, isMatch);
-        });
-    },
-
-    getUserByToken: () => {
-
-    }
-}
+    return valideEmail(email);
+}, 'The e-mail is invalid.');
 //
-// userSchema.methods.comparePwd = function (password, done) {
-//     bcrypt.compare(password, this.password, (err, isMatch) => {
-//         done(err, isMatch);
-//     });
-// };
+// userSchema.methods = {
+//     comparePwd: (password, done) => {
+//         console.log('password =>', password);
+//         console.log('this.password ', this.password);
+//         bcrypt.compare(password, this.password, (err, isMatch) => {
+//             done(err, isMatch);
+//         });
+//     }
+// }
+
+userSchema.methods.comparePwd = function (password, done) {
+    bcrypt.compare(password, this.password, (err, isMatch) => {
+        done(err, isMatch);
+    });
+};
+userSchema.plugin(uniqueValidator);
 
 export default mongoose.model('User', userSchema);
 // module.exports = mongoose.model('User', userSchema);

@@ -13,37 +13,111 @@ const createToken = name => {
 };
 
 const signup = (req, res) => {
-    User.findOne({email: req.body.email}, (err, existingUser) => {
+    const {username, email} = req.body;
+
+    // User.findOne({$or: [{email}, {username}, {}]}, (err, existingUser) => {
+    User.findOne({
+        $or: [{
+            email: email
+        }, {
+            username: username
+        }]
+    }, (err, existingUser) => {
+        let response = {
+            success: true,
+            errors: {},
+            message: ''
+        };
+
+
         if (existingUser) {
-            return res.status(409).json({message: 'Email is already taken'});
+            response = {
+                ...response,
+                success: false,
+                user: existingUser,
+                email,
+                username
+
+
+            };
+            if (existingUser.username === username) {
+                response.errors.username = 'Username already exist';
+
+            }
+            if (existingUser.email === email) {
+                response.errors.email = 'Email already exist';
+            }
+            response.message = 'check the errors and submit again'
+            return res.json(response);
         }
 
-        const user = Object.assign(new User(), req.body);
+        // if (existingUser) {
+        //     return res.json({message: 'Email is already taken'});
+        // }
+        const token = createToken(req.body.email);
+        const user = Object.assign(new User(), {...req.body, token});
         user.save((err, result) => {
             if (err) {
-                res.send(err);
+
+
+                res.send({
+                    err,
+                    body: req.body
+                });
             }
-            res.json({
-                message: 'Welcome to Retrogames, you are now logged in',
-                token: createToken(result.name)
-            });
+
+            else {
+                res.json({
+                    success: true,
+                    message: 'Welcome to Doggo, you are now logged in',
+                    token: user.token,
+                    user
+                });
+            }
+
         });
     });
 };
 
 const login = (req, res) => {
-    User.findOne({email: req.body.email}, '+password', (err, user) => {
+
+    const {email_username, password} = req.body;
+    let response = {
+        success: true,
+        errors: {},
+        message: ''
+    };
+    User.findOne({
+        $or: [{
+            email: email_username
+        }, {
+            username: email_username
+        }]
+    }, 'password', (err, user) => {
         if (!user) {
-            return res.status(401).json({message: 'Invalid email/password'});
+            response.success = false;
+            response.message = 'Invalid email/password';
+            return res.json(response);
         }
-        user.comparePwd(req.body.password, (err, isMatch) => {
+        user.comparePwd(password, (err, isMatch) => {
+
+            console.log(password);
             if (!isMatch) {
-                return res.status(401).send({message: 'Invalid email/password'});
+                response.success = false;
+                response.message = 'Invalid email/password';
+
+                return res.json(response);
             }
-            res.json({message: 'You are now logged in', token: createToken(user.name)});
+
+            const token = createToken(user.email);
+            user.token = token;
+            response.token = token;
+            response.user = user;
+            res.json(response);
         });
     });
 };
+
 
 const verifyAuth = (req, res, next) => {
     // Get the token from the header x-access-token
@@ -58,7 +132,20 @@ const verifyAuth = (req, res, next) => {
                 });
             } else {
                 // Goes to the next route since there are no errors
-                next();
+
+                User.findOne({token}, (err, user) => {
+
+                    if (err) {
+                        res.json({
+                            success: false,
+                            errors: {},
+                            message: 'Something wen wrong try to login again'
+                        })
+                    }
+                    req.user = user;
+                    next();
+
+                });
             }
         });
     } else {

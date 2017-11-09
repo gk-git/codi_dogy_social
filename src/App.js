@@ -2,12 +2,13 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import superagent from 'superagent';
 import {PublicApp} from "./routes/PublicApp";
-import {mixProps} from "./utils/index";
+import {mixProps, valideEmail} from "./utils/index";
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/App.css'
 import {ProfilePage} from "./routes/ProfilePage";
 import {HomePage} from "./routes/HomePage";
 import {LoginPage} from "./routes/LoginPage";
+import {websiteUrl} from './utils'
 
 
 class App extends React.Component {
@@ -25,6 +26,7 @@ class App extends React.Component {
             counter: 0,
             visited: props.visited,
             haveDog: true,
+            redirectRegister: false,
             alertIntro: {
                 title: '',
                 content: '',
@@ -33,37 +35,73 @@ class App extends React.Component {
                 actionLink: '/',
                 images: []
             },
-            registerUser: {
-                username: {
-                    value: '',
-                    error: ''
+            loginUser: {
+                inputs: {
+                    email: '',
+                    email_username: ''
                 },
-                email: {
-                    value: '',
-                    error: ''
+                errors: {
+                    email_username: '',
+                    password: ''
                 },
-                name: {
-                    value: '',
-                    error: ''
-                },
-                dogName: {
-                    value: '',
-                    error: ''
-                },
-                password: {
-                    value: '',
-                    error: ''
-                },
-                confirmPassword: {
-                    value: '',
-                    error: ''
+                actions: {
+                    submitDisable: false
                 }
             },
-            authenticated: false
+            registerUser: {
+
+                username: '',
+                email: '',
+                name: '',
+                dogName: '',
+                password: '',
+                confirmPassword: '',
+                actions: {
+                    submitDisable: false,
+                    login: true
+                },
+                errors: {
+                    username: '',
+                    email: '',
+                    name: '',
+                    dogName: '',
+                    password: '',
+                    confirmPassword: '',
+                }
+            },
+
+            authenticated: false,
+            user: {},
+            sweetAlert: {
+                show: false,
+                success: true,
+                title: 'Error',
+                text: ''
+            }
         };
-        this.welcomeAction = this.welcomeAction.bind(this);
-        this.checkLoginStatus = this.checkLoginStatus.bind(this);
-        this.handleRegisterInputChange = this.handleRegisterInputChange.bind(this);
+
+        this.bindMe([
+            'welcomeAction',
+            'checkLoginStatus',
+            'handleRegisterInputChange',
+            'handleRegisterFormSubmit',
+            'validateRegisterForm',
+            'hideRegisterAlert',
+            'login',
+            'logout',
+            'showSignupForm',
+            'showLoginForm',
+            'handleLoginFormChange',
+            'handleLoginFormSubmit',
+
+        ])
+
+    }
+
+    bindMe(methodNames) {
+        methodNames.map(methodName =>
+            this[methodName] = this[methodName].bind(this)
+        )
     }
 
     componentDidMount() {
@@ -104,27 +142,300 @@ class App extends React.Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+        const oldRegisterUser = this.state.registerUser;
         this.setState({
             ...this.state, registerUser: {
-                ...this.state.registerUser,
-                [name]: {
-                    ...this.state.registerUser[name],
-                    value
+                ...oldRegisterUser,
+                [name]: value,
+                errors: {
+                    ...oldRegisterUser.errors,
+                    [name]: ''
                 }
             }
         });
     }
 
-    validateRegisterForm() {
+    handleLoginFormChange(event) {
+        event.preventDefault();
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
 
-        return {
-            success: true
+        const oldLoginUser = this.state.loginUser;
+        this.setState({
+            ...this.state, loginUser: {
+                ...oldLoginUser,
+                inputs: {
+                    ...oldLoginUser.inputs,
+                    [name]: value,
+                },
+                errors: {
+                    ...oldLoginUser.errors,
+                    [name]: ''
+                }
+            }
+        });
+    }
+
+    validateLoginForm() {
+        const response = {
+            success: true,
+            errors: {
+                password: '',
+                email_username: ''
+            }
+        };
+        console.log(this.state.loginUser.inputs);
+        const password = this.state.loginUser.inputs.password.replace(/\s/g, '') === '';
+        const email_username = this.state.loginUser.inputs.email_username.replace(/\s/g, '') === '';
+        if (password || email_username) {
+            response.success = false;
+            response.errors.password = this.state.loginUser.inputs.password === '' ? 'Password is missing' : '';
+            response.errors.email_username = this.state.loginUser.inputs.email_username === '' ? 'Email or Username is missing' : '';
+            response.message = password && email_username ? 'Email and password are missing' : ( password ? 'Password is missing ' : 'Email is missing');
+        }
+        return response;
+
+    }
+
+    handleLoginFormSubmit(event, history) {
+        event.preventDefault();
+        console.log('Errr')
+        this.setState({
+            ...this.state,
+            loginUser: {
+                ...this.state.loginUser,
+                actions: {
+                    ...this.state.loginUser.actions,
+                    submitDisable: true,
+
+                }
+            }
+
+
+        });
+        const result = this.validateLoginForm();
+
+        if (result.success) {
+            superagent.post(websiteUrl + 'api/login').type('form').send({...this.state.loginUser.inputs})
+                .then(results => {
+                    const {success, message, user, errors} = results.body;
+                    console.log(results.body);
+                    if (success) {
+                        this.login(user);
+                        history.push('/');
+
+                    } else {
+                        this.setState({
+                            ...this.state,
+                            loginUser: {
+                                ...this.state.loginUser,
+                                errors,
+                                actions: {
+                                    ...this.state.loginUser.actions,
+                                    loginSuccess: false,
+                                    message
+
+                                }
+                            },
+                            sweetAlert: {
+                                show: true,
+                                success: false,
+                                title: 'Error',
+                                text: message
+                            }
+                        });
+                    }
+
+                }).catch(error => {
+                    console.log('App js errpr' , error);
+                this.setState({
+                    ...this.state,
+                    sweetAlert: {
+                        show: true,
+                        success: false,
+                        title: 'Error',
+                        text: 'Something went wrong please try again'
+                    }
+                });
+            });
+            this.setState({
+                ...this.state,
+                redirectRegister: true,
+
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                loginUser: {
+                    ...this.state.loginUser,
+                    errors: result.errors,
+                    actions: {
+                        ...this.state.loginUser.actions,
+                        loginSuccess: false,
+                        message: result.message
+
+                    }
+                },
+                sweetAlert: {
+                    show: true,
+                    success: false,
+                    title: 'Error',
+                    text: result.message
+                }
+            });
         }
     }
 
-    handleRegisterFormSubmit(event) {
-        event.preventDefault();
+    validateRegisterForm() {
 
+        const response = {
+            success: true,
+            errors: {}
+        };
+        if (this.state.registerUser.password !== this.state.registerUser.confirmPassword) {
+            response.success = false;
+            response.errors.password = 'Password do not match';
+        }
+
+        if (!valideEmail(this.state.registerUser.email)) {
+            response.success = false;
+            response.errors.email = 'Invalid Email';
+        }
+        return response;
+    }
+
+    handleRegisterFormSubmit(event, history) {
+
+        event.preventDefault();
+        this.setState({
+            ...this.state,
+            registerUser: {
+                ...this.state.registerUser,
+                submitDisable: true,
+            }
+
+        });
+        const result = this.validateRegisterForm();
+        // send to server
+        if (result.success === true) {
+            superagent.post(websiteUrl + 'api/user').type('form').send({...this.state.registerUser})
+                .then(results => {
+                    const {success, message, user, errors} = results.body;
+                    if (success) {
+                        this.login(user);
+                        history.push('/');
+
+                    } else {
+                        this.setState({
+                            ...this.state,
+                            sweetAlert: {
+                                show: true,
+                                success: false,
+                                title: 'Error',
+                                text: message
+                            },
+                            registerUser: {
+                                ...this.state.registerUser,
+                                errors
+                            }
+                        });
+                    }
+
+                }).catch(error => {
+                this.setState({
+                    ...this.state,
+                    sweetAlert: {
+                        show: true,
+                        success: false,
+                        title: 'Error',
+                        text: 'Something went wrong please try again'
+                    },
+                    registerUser: {
+                        ...this.state.registerUser,
+                        actions: {
+                            ...this.state.registerUser.actions,
+                            alert: {}
+                        }
+                    }
+                });
+            });
+            this.setState({
+                ...this.state,
+                redirectRegister: true,
+
+            });
+
+
+        } else {
+            console.log(result);
+            this.setState({
+                ...this.state,
+                registerUser: {
+                    ...this.state.registerUser,
+                    errors: {
+                        ...this.state.registerUser.errors,
+                        ...result.errors
+                    }
+                }
+            });
+
+        }
+
+    }
+
+    hideRegisterAlert() {
+        this.setState({
+            ...this.state,
+            sweetAlert: {
+                ...this.state.sweetAlert,
+                show: false,
+                success: true
+            }
+        })
+    }
+
+
+    login(user) {
+        this.setState({
+            ...this.state,
+            authenticated: true,
+            user
+        });
+    }
+
+    logout() {
+        this.setState({
+            ...this.state,
+            authenticated: false,
+            user: {}
+        });
+    }
+
+    showLoginForm() {
+        this.setState({
+            ...this.state,
+            registerUser: {
+                ...this.state.registerUser,
+                actions: {
+                    ...this.state.registerUser.actions,
+                    login: true
+                }
+            }
+        });
+    }
+
+    showSignupForm() {
+        this.setState({
+            ...this.state,
+            registerUser: {
+                ...this.state.registerUser,
+                actions: {
+                    ...this.state.registerUser.actions,
+                    login: false
+                }
+            }
+        });
     }
 
     setBrowserCookie(cname, cvalue, exdays) {
@@ -159,13 +470,18 @@ class App extends React.Component {
 
 
     render() {
-        const {welcomeAction, handleRegisterInputChange} = this;
-        const passedProps = {...this.state, welcomeAction, handleRegisterInputChange};
+        const {welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit, hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit} = this;
+        const passedProps = {
+            ...this.state, welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit,
+            hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit
+        };
 
 
         const mix = mixProps(passedProps);
 
-
+        // if(this.state.redirectRegister ){
+        //     return <Redirect to='/'/>;
+        // }
         return (
             <div>
                 <Switch>
