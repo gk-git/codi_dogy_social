@@ -5983,6 +5983,10 @@ react-calendar@^2.2.0:
     react ">=15.5"
     react-dom ">=15.5"
 
+react-confirm@^0.1.16:
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/react-confirm/-/react-confirm-0.1.16.tgz#953ceec7ba736867226d7032aa01ab4a5da82438"
+
 react-date-picker@^6.2.2:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.2.2.tgz#2df42c8aa942c70ac51e20197665be70377496a5"

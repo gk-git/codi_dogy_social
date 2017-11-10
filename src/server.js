@@ -29,6 +29,7 @@ server
         const markup = renderToString(
             <StaticRouter context={context} location={req.url}>
                 <App appData={allData} allData={allData} visited={visited}/>
+
             </StaticRouter>
         );
 

@@ -87,16 +87,18 @@ const login = (req, res) => {
         errors: {},
         message: ''
     };
+    console.log(email_username);
     User.findOne({
         $or: [{
             email: email_username
         }, {
             username: email_username
         }]
-    }, 'password', (err, user) => {
+    }, 'password').populate('images').exec((err, user) => {
         if (!user) {
             response.success = false;
-            response.message = 'Invalid email/password';
+            console.log(err);
+            response.message = 'Invalid email/password 1';
             return res.json(response);
         }
         user.comparePwd(password, (err, isMatch) => {
@@ -104,16 +106,25 @@ const login = (req, res) => {
             console.log(password);
             if (!isMatch) {
                 response.success = false;
-                response.message = 'Invalid email/password';
+                response.message = 'Invalid email/password 2';
 
                 return res.json(response);
             }
 
-            const token = createToken(user.email);
-            user.token = token;
-            response.token = token;
-            response.user = user;
-            res.json(response);
+            User.findOne({
+                $or: [{
+                    email: email_username
+                }, {
+                    username: email_username
+                }]
+            }, (err, user) => {
+                const token = createToken(user.email);
+                user.token = token;
+                response.token = token;
+                response.user = user;
+                res.json(response);
+            });
+
         });
     });
 };

@@ -3,19 +3,22 @@ import '../styles/ProfilePage.css';
 import {Button} from "react-bootstrap";
 import {Carousel} from "../components/Carousel";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
+    const {user} = props;
+    const {images} = user;
+    console.log(props);
     return [
         <div key={0} className={'profile-page'}>
             <div className="">
                 <Button bsStyle="info"> <span className={'fa fa-edit'}/></Button>
                 <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
-                <h2 className={'title profile-name'}>The Dog Name</h2>
+                <h2 className={'title profile-name'}>{user.dogName}</h2>
             </div>
             <div className={'add-image'}>
                 <button className={'btn btn-info '}><i className={'fa fa-camera'}/></button>
                 <span>Upload Image</span>
             </div>
-            <Carousel/>
+            <Carousel  {...props} images={images} user={user}/>
             <div>
                 <span className={'profile-state'}>Profile is unconfirmed</span> <Button>Confirm ?</Button>
             </div>

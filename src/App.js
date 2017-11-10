@@ -9,6 +9,8 @@ import {ProfilePage} from "./routes/ProfilePage";
 import {HomePage} from "./routes/HomePage";
 import {LoginPage} from "./routes/LoginPage";
 import {websiteUrl} from './utils'
+import {AlertIntro} from "./components/AlertIntro";
+import {confirm} from './utils';
 
 
 class App extends React.Component {
@@ -93,6 +95,7 @@ class App extends React.Component {
             'showLoginForm',
             'handleLoginFormChange',
             'handleLoginFormSubmit',
+            'handleUserGalleryImageDelete'
 
         ])
 
@@ -185,7 +188,6 @@ class App extends React.Component {
                 email_username: ''
             }
         };
-        console.log(this.state.loginUser.inputs);
         const password = this.state.loginUser.inputs.password.replace(/\s/g, '') === '';
         const email_username = this.state.loginUser.inputs.email_username.replace(/\s/g, '') === '';
         if (password || email_username) {
@@ -200,7 +202,6 @@ class App extends React.Component {
 
     handleLoginFormSubmit(event, history) {
         event.preventDefault();
-        console.log('Errr')
         this.setState({
             ...this.state,
             loginUser: {
@@ -220,7 +221,6 @@ class App extends React.Component {
             superagent.post(websiteUrl + 'api/login').type('form').send({...this.state.loginUser.inputs})
                 .then(results => {
                     const {success, message, user, errors} = results.body;
-                    console.log(results.body);
                     if (success) {
                         this.login(user);
                         history.push('/');
@@ -248,7 +248,6 @@ class App extends React.Component {
                     }
 
                 }).catch(error => {
-                    console.log('App js errpr' , error);
                 this.setState({
                     ...this.state,
                     sweetAlert: {
@@ -368,7 +367,6 @@ class App extends React.Component {
 
 
         } else {
-            console.log(result);
             this.setState({
                 ...this.state,
                 registerUser: {
@@ -394,7 +392,6 @@ class App extends React.Component {
             }
         })
     }
-
 
     login(user) {
         this.setState({
@@ -445,6 +442,22 @@ class App extends React.Component {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
+    handleUserGalleryImageDelete() {
+        confirm('Are you sure you want to delete this image?').then(()=>{
+            alert('deleted')
+        }, ()=>{
+           alert('cancel')
+        })
+        if (1) {
+            // Save it!
+            alert('yes');
+        } else {
+            // Do nothing!
+            alert('no');
+
+        }
+    }
+
     getBrowserCookie(cname) {
         const name = cname + "=";
         const decodedCookie = decodeURIComponent(document.cookie);
@@ -470,15 +483,17 @@ class App extends React.Component {
 
 
     render() {
-        const {welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit, hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit} = this;
+        const {welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit, hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit, handleUserGalleryImageDelete} = this;
         const passedProps = {
             ...this.state, welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit,
-            hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit
+            hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit,
+            handleUserGalleryImageDelete
         };
 
 
         const mix = mixProps(passedProps);
 
+        const {user} = this.state;
         // if(this.state.redirectRegister ){
         //     return <Redirect to='/'/>;
         // }
@@ -505,8 +520,40 @@ class App extends React.Component {
 
                     }
                     }/>
+
                     <Route path="/" render={(props) => {
 
+                        if (this.state.authenticated) {
+                            if (!user.completeProfile) {
+                                const alertIntro = {
+                                    title: ' welcome to Doggo Please complete your profile',
+                                    content: '',
+                                    actionShow: false,
+                                    images: [
+                                        {
+                                            src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                                            alt: 'user-x profile '
+                                        },
+                                        {
+                                            src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                                            alt: 'user-x profile '
+                                        },
+                                        {
+                                            src: 'https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg',
+                                            alt: 'user-x profile '
+                                        }
+                                    ]
+                                };
+                                return (
+                                    <PublicApp {...mix(props)} >
+                                        <AlertIntro {...alertIntro} key={1}/>,
+                                        <ProfilePage {...mix(props)}/>
+                                    </PublicApp>
+                                )
+                            }
+
+
+                        }
                         return (
                             <PublicApp {...mix(props)} >
                                 <HomePage {...mix(props)} />
@@ -524,3 +571,4 @@ class App extends React.Component {
 }
 
 export default App;
+

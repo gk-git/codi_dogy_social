@@ -2,6 +2,7 @@ import App from './App';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import React from 'react';
 import { hydrate } from 'react-dom';
+import registerServiceWorker from "./registerServiceWorker";
 
 /* eslint-disable */
 // eslint-disable-line no-undef
@@ -16,7 +17,7 @@ hydrate(
   </BrowserRouter>,
   document.getElementById('root')
 );
-
+registerServiceWorker();
 if (module.hot) {
   module.hot.accept();
 }

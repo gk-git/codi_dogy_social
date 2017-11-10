@@ -19,16 +19,16 @@ const AlertIntro = (props) => {
                     }
                 </div>
                 <div className="intro-content">
-                    <h3>{title || 'The Number One website'}</h3>
+                    <h3>{title || ''}</h3>
                     <p style={{
                         marginRight: '20px',
                         fontSize: '1.5em'
                     }}>
-                        {content || 'Find your perfect stud dog, bitch or puppy today, FREE to advertise, FREE to join and browse.'}
+                        {content || ''}
                     </p>
                     {
                         actionShow ? <Link to={actionLinkCopy} className={'btn btn-primary'}
-                                            style={{background: '#377CED'}}>{actionText || 'Play like-me game!'}</Link> : null
+                                            style={{background: '#377CED'}}>{actionText || ''}</Link> : null
                     }
 
                 </div>
