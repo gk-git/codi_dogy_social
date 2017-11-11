@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mydogy-lb",
+  "private_key_id": "e75ae52507e7b3153c50be1b160012346a23a823",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCgS2gs/eTQ2kaQ\nbVKOWE2sc64aW6gGwX6xMRAEILEwCsU0KcyEkGbaWbmQpofI89ks7gG1g348rs2r\n83mKlwW5SL7JoFN4Lcsel7QoZ79naVJhkUAp2qlrj+pBpY0OEhyCq6CD+9Klh7A0\ndm127YycH1q0KkRhRi5hZFTyPBIEIj7FG4j1xQaDg6CDO/v49PpsetO6M+vaEclx\njDZz6DIz1ab6vxJOYYzNHt9MKE+CAdOxAMuBl9d3L6D4VDKvmFzl1cNAFD24TfKR\nIrpuBHern+yG+f4rRpm5IVF3SnZOnuHiFFRVz4Kp/svGyNbBZZY+PtpQlwM+u4iS\nGvw8/YELAgMBAAECggEAATvZ8RnFqTEN2xu71o7xYeAqL8DecPU5UZERbu6zQFNi\ni0I2hEiyfbyHAVRZKszzlBNHJVMyzt8tdL11DMWn0D2biwpJFXujGs9xHiwHb763\nHML3EY46OTLfPCpL5suta/jiZAZir2xen5Kim/G0q3NRgkOPfi4u52J5lMqtR//4\nPIy07LHjrltm5gEIj0xX0Zu3HkTsfQxf+PVhxZrcvQTWCq8AYz9CWxTzEzil+o30\nT/RZwt2Sb0QWw1256R0UiD/PWdCTxz4WJN96xiPuSbjFXyr0+oH8tTwSVBZaVQrw\nsj3ZWexjXAGDTE13naYYritjklKHZD03u5IkXUOASQKBgQDYVI7EvAhc/3H57/CR\nTYQVKW7YwhUnR27Zun2G/0MbiUhr/GXiyKlfhBW+53SFnpwMv+jwx0zt0tw87Kjx\nH/BwAUptkguKGNIEIsgMd/XR56MWzQJqTL9tke7xCdA4u/uK5YpCQenLef7kcwcJ\nVIM+FsQfvX2F8U47TXHsIOe74wKBgQC9sEx+BIPL4qjA8/YvcDA4cNK+H230g95/\nF290ZjAZ/tE7xk7o+WILhzZz2U/nujSLFsnvN1rOWXGaBtpqvAGpnf5ONo5ZSpAM\nwH2EdwzkiuUKLbAJV34m67zvT4DN26sR2Gy5KH5TxdWY/5KeAWWlzMhAtsgychcO\nr26CpE9+uQKBgCcgG/Yu/+A5/xYyNDNDbskZBkhDyemhvMW6OevJjQyU5rlJG/BJ\nVIDG9dviJqvoBNc1el7Z3OsCgPyv3NpHaYgIY7qveFDQrmM7Gy1OIPKGz3NXPsGV\nAeZCR5HmsXchYJw9aaUUIMHBXb1ZpIMmetom6e/HqMUp4HlPR3Rqex77AoGBAKZ3\nk4l8GNXS4loDP2e+QvMlQC0NlAdjut06CdvS2h/WGnUkwZd/U+XeEZF1gsRQC1CM\n/UZsA8rXf/S2UvQcbjEWsFifVClUYDpwqzaW67+djQdztOtd1x38/9/cm6MNRoHw\ntul/ee22zo7oqxjzDOuGXa89OU/cBBQlLQyFeiYxAoGAUyO9fmXhLD/zQZUWOFkV\n5+KLLW/ebDUw5XQ/tXg2XtMLSu2iLnhqRhQc3cK2deAlXeFbpic7Ds7ihHugSQWc\n8USV+cBp1Nqep73Y4litUCSN7z5DPLZtrpiO4AKSUztTHDyqVXIFm8w2pP1SLHjG\n9MYQtO71NYLa3MagpVYiDW8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "doggo-service@mydogy-lb.iam.gserviceaccount.com",
+  "client_id": "100633019722817113603",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/doggo-service%40mydogy-lb.iam.gserviceaccount.com"
+}

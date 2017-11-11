@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-import User, {Location} from '../model/user';
+import User from '../model/user';
+import Location from '../model/location'
 import config from '../config';
+import {uploadImagesToStorage} from "../firebaseStorage";
 
 const createToken = name => {
     let payload = {
@@ -44,10 +46,7 @@ const signup = (req, res) => {
             response.message = 'check the errors and submit again'
             return res.json(response);
         }
-        // if (existingUser) {
-        //     return res.json({message: 'Email is already taken'});
-        // }
-        console.log(req.body);
+
         const token = createToken(req.body.email);
         const user = Object.assign(new User(), {...req.body, token});
         user.save((err, result) => {
@@ -157,31 +156,101 @@ const verifyAuth = (req, res, next) => {
 };
 
 const getLocations = (req, res) => {
-    console.log('    console.log(\'\');\n');
     Location.find({}, function (err, locations) {
+        if (err) {
+            res.send({
+                success: false,
+                data: {}
+            })
+        }
         let locationMap = {};
-
         locations.forEach(function (location) {
             locationMap[location._id] = location;
         });
-
-        res.send(locationMap);
+        res.send({
+            success: true,
+            data: locationMap
+        });
     });
 };
 const insertNewLocation = (req, res) => {
-    console.log(req.body);
     const location = Object.assign(new Location(), {...req.body});
     location.save((err, result) => {
-        if(err){
+        if (err) {
             res.status(300).send(err);
         }
         res.send(result);
     })
 };
+const updateUser = (req, res) => {
+    const {id, origin, breed, dogName, location, gender, personalData, dateOfBirth} = req.body;
+    User.findById(id, (err, user) => {
+        if (err) {
+            res.send({
+                success: false,
+                message: 'User not found'
+            })
+        }
+
+        user.origin = origin || user.origin;
+        user.breed = breed || user.breed;
+        user.dogName = dogName || user.dogName;
+        user.gender = gender || user.gender;
+        user.location = location || user.location;
+        user.personalData = personalData || user.personalData;
+        user.dateOfBirth = dateOfBirth || user.dateOfBirth;
+        user.save((err, user) => {
+            if (err) {
+                res.send({
+                    success: false,
+                    message: 'Something went wrong',
+                    err
+                })
+            }
+            res.status(200).send({
+                success: true,
+                message: 'User updated',
+                data: {
+                    user, body: req.body
+                }
+            });
+        });
+    })
+};
+const updateProfilePic = (req, res, next) => {
+    const files = req.files;
+
+    uploadImagesToStorage(files, 'profileImages')
+        .then(response => {
+
+            const image = response['profile_image'];
+            if (image) {
+                // data.imageSrc = image.url;
+
+            } else {
+                console.log('Image not found')
+            }
+            res.send({
+                success: true,
+                data: {
+                    image
+                }
+            })
+        })
+        .catch((err) => {
+            next(err);
+            res.send({
+                success: false,
+                error: err
+            })
+        });
+}
 export {
     signup,
     login,
     verifyAuth,
     getLocations,
-    insertNewLocation
+    insertNewLocation,
+    updateUser,
+    updateProfilePic
 };

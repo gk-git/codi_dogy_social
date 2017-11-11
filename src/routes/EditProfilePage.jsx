@@ -561,17 +561,35 @@ const breed_options = [
     }, {value: "LANCASHIRE HEELER", "label": "LANCASHIRE HEELER"}];
 
 const EditProfilePage = (props) => {
-    const {profileEdit, handleProfileEditChange, handleProfileEditSelectChange} = props;
+    const {profileEdit, handleProfileEditChange, handleProfileEditSelectChange, handleProfilePicChange, handleProfileEditSubmit, locations} = props;
+    let locations_options = [];
+    for (let key in locations) {
+        // skip loop if the property is from prototype
+        if (!locations.hasOwnProperty(key)) continue;
+
+        let obj = locations[key];
+        locations_options.push({value: obj._id, label: obj.label})
+    }
+    locations_options.sort((a, b) => {
+        if (a.label < b.label)
+            return -1;
+        if (a.label > b.label)
+            return 1;
+        return 0;
+    });
     const current_year = new Date().getFullYear();
     const birthDate = new Date(profileEdit.inputs.dateOfBirth);
     const selectedOrigin = origins_options.find(item => {
         return item.value === profileEdit.inputs.origin
     });
-    const selectedGender = origins_options.find(item => {
+    const selectedGender = gender_options.find(item => {
         return item.value === profileEdit.inputs.gender
     });
-    const selectedBreed = origins_options.find(item => {
+    const selectedBreed = breed_options.find(item => {
         return item.value === profileEdit.inputs.breed
+    });
+    const selectedLocation = locations_options.find(item => {
+        return item.value === profileEdit.inputs.location
     });
     return [
         <div key={1} className={'profile-image'}>
@@ -581,27 +599,42 @@ const EditProfilePage = (props) => {
             </div>
 
             <div className="change-profile-image">
-                <div className="file-input-wrapper">
-                    <button className={'btn btn-info btn-file-input'}>Change Image</button>
-                    <input type="file" name="file"/>
-                </div>
+                <form onSubmit={event => {
+                    event.preventDefault();
+                    alert(1)
+                }}>
+                    <div className="file-input-wrapper">
+                        <button type={'submit'} className={'btn btn-info btn-file-input'}>Change profile image</button>
+                        <input type="file" name="file" onChange={(event) => {
+                            handleProfilePicChange(event)
+                        }}/>
+                    </div>
+                </form>
             </div>
         </div>,
         <div key={2} className={'edit-profile'}>
 
             <form onSubmit={(event) => {
-                event.preventDefault()
+                event.preventDefault();
+                handleProfileEditSubmit();
             }}>
                 <h4>Name: </h4>
                 <input type={'text'} defaultValue={profileEdit.inputs.name} disabled={true} className={'form-control'}/>
+                <h4>Dog Name: </h4>
+                <input type={'text'} defaultValue={profileEdit.inputs.dogName} disabled={false}
+                       className={'form-control'}
+                       onChange={event => {
+                           event.preventDefault();
+                           handleProfileEditChange(event);
+                       }}/>
                 <h4>General Description: </h4>
-                <textarea defaultValue={profileEdit.inputs.personalData} rows="7" className={'form-control'} onChange={event => {
+                <textarea defaultValue={profileEdit.inputs.personalData} rows="7" name={'personalData'}
+                          className={'form-control'} onChange={event => {
                     event.preventDefault();
                     handleProfileEditChange(event);
                 }}/>
 
                 <h4>Origin: </h4>
-
                 <Select
                     name="origin"
                     value={selectedOrigin}
@@ -611,7 +644,6 @@ const EditProfilePage = (props) => {
                     }}
                 />
                 <h4>Gender: </h4>
-
                 <Select
                     name="gender"
                     value={selectedGender}
@@ -621,13 +653,21 @@ const EditProfilePage = (props) => {
                     }}
                 />
                 <h4>Breed: </h4>
-
                 <Select
                     name="breed"
                     value={selectedBreed}
                     options={breed_options}
                     onChange={(val) => {
                         handleProfileEditSelectChange(val, 'breed')
+                    }}
+                />
+                <h4>Location: </h4>
+                <Select
+                    name="location"
+                    value={selectedLocation}
+                    options={locations_options}
+                    onChange={(val) => {
+                        handleProfileEditSelectChange(val, 'location')
                     }}
                 />
                 <h4>Date Of Birth: </h4>
@@ -719,7 +759,7 @@ const EditProfilePage = (props) => {
                     </div>
 
                 </div>
-                <button className={'btn btn-block  btn-save'}>Save</button>
+                <button type={'submit'} className={'btn btn-block  btn-save'}>Save</button>
             </form>
         </div>,
     ]

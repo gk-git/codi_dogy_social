@@ -5,10 +5,10 @@ const googleStorage = require("@google-cloud/storage");
 
 
 const storage = googleStorage({
-    projectId: "b-west",
-    keyFilename: "../b-west/src/b-west-firebase-adminsdk-e58gj-0315440c03.json"
+    projectId: 'mydogy-lb',
+    keyFilename: "./src/myDogy-f89d092df55c.json"
 });
-const bucket = storage.bucket("b-west.appspot.com");
+const bucket = storage.bucket("mydogy-lb.appspot.com");
 
 
 const uploadGoogle = multer({
@@ -89,6 +89,7 @@ const uploadImagesToStorage = (files, path) => {
                 });
 
                 blobStream.on('error', (error) => {
+                    console.log('error =>', error);
                     reject('Something is wrong! Unable to upload at the moment.', error);
                 });
                 blobStream.on('finish', () => {

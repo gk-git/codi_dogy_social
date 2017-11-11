@@ -2,8 +2,8 @@ import express from "express";
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-import {getLocations, insertNewLocation, login, signup} from "./routes/user";
-
+import {getLocations, insertNewLocation, login, signup, updateProfilePic, verifyAuth, updateUser} from "./routes/user";
+import {uploadGoogle} from './firebaseStorage';
 
 const router = express.Router();
 
@@ -33,6 +33,8 @@ router.use((req, res, next) => {
 });
 
 router.post('/user', signup);
+router.put('/user', updateUser);
+router.post('/user/profile_pic', verifyAuth, uploadGoogle.any(), updateProfilePic);
 router.post('/login', login);
 router.get('/location', getLocations);
 router.post('/location', insertNewLocation);

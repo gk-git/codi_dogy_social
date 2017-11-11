@@ -4,14 +4,10 @@ import uniqueValidator from 'mongoose-unique-validator';
 import {valideEmail, websiteUrl} from "../../utils/index";
 
 require('../model/profileImage');
+require('../model/location');
 let defaultDate = new Date();
 defaultDate.setFullYear(defaultDate.getFullYear() - 2);
-const locationSchema = new Schema({
-    label: {type: String, required: true},
-    lat: {type: Number, required: true},
-    lang: {type: Number, required: true}
-});
-export const Location = mongoose.model('Location', locationSchema);
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -27,6 +23,7 @@ const userSchema = new Schema({
     lastLogin: {type: Date, default: '12/10/1990'},
     location: {type: Schema.Types.ObjectId, ref: 'Location'},
     personalData: {type: String, default: '', trim: true},
+    gender: {type: String, default: '', trim: true},
     origin: {type: String, default: '', trim: true},
     breed: {type: String, default: '', trim: true},
     dateOfBirth: {type: Date, default: defaultDate},
@@ -66,16 +63,6 @@ userSchema.pre('save', function (next) {
 userSchema.path('email').validate(function (email) {
     return valideEmail(email);
 }, 'The e-mail is invalid.');
-//
-// userSchema.methods = {
-//     comparePwd: (password, done) => {
-//         console.log('password =>', password);
-//         console.log('this.password ', this.password);
-//         bcrypt.compare(password, this.password, (err, isMatch) => {
-//             done(err, isMatch);
-//         });
-//     }
-// }
 
 userSchema.methods.comparePwd = function (password, done) {
     bcrypt.compare(password, this.password, (err, isMatch) => {

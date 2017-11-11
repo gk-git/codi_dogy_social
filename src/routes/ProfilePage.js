@@ -23,18 +23,19 @@ const formatDate = (date) => {
 
 
 const ProfilePage = (props) => {
-    const {user} = props;
+    const {user, locations} = props;
     const {images} = user;
     const dateListed = new Date(user.createdAt);
+
     let completePercentage = 0;
-    completePercentage += user.emailVerified ? 30 : 0;
     completePercentage += user.personalData ? 10 : 0;
-    completePercentage += user.origin ? 10 : 0;
-    completePercentage += user.breed ? 10 : 0;
+    completePercentage += user.gender ? 20 : 0;
+    completePercentage += user.origin ? 20 : 0;
+    completePercentage += user.breed ? 20 : 0;
     completePercentage += user.dateOfBirth ? 10 : 0;
     completePercentage += user.images.length > 1 ? 10 : 0;
-    completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 20 : 0;
-
+    completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 10 : 0;
+    console.log(images);
 
     const Timeline = () => {
         return (
@@ -133,7 +134,7 @@ const ProfilePage = (props) => {
             </div>
             <div className={'location'}>
                 <h4><i className="fa fa-map-marker" aria-hidden="true"/>Location </h4>
-                <span>{user.location}</span>
+                <span>{locations[user.location] ? locations[user.location].label : 'Lebanon'}</span>
             </div>
             <div className="personal-data">
                 <h4><i className="fa fa-user" aria-hidden="true"/>Personal data</h4>

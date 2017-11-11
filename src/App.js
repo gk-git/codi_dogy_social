@@ -27,6 +27,7 @@ class App extends React.Component {
             ...data,
             status: 2,
             counter: 0,
+            locations: {},
             visited: props.visited,
             haveDog: true,
             redirectRegister: false,
@@ -95,7 +96,6 @@ class App extends React.Component {
                 text: ''
             }
         };
-
         this.bindMe([
             'welcomeAction',
             'checkLoginStatus',
@@ -111,10 +111,12 @@ class App extends React.Component {
             'handleLoginFormSubmit',
             'handleUserGalleryImageDelete',
             'handleProfileEditChange',
-            'handleProfileEditSelectChange'
+            'handleProfileEditSelectChange',
+            'loadLocations',
+            'handleProfileEditSubmit',
+            'handleProfilePicChange'
 
         ])
-
     }
 
     bindMe(methodNames) {
@@ -149,6 +151,22 @@ class App extends React.Component {
                 ]
             }
         })
+        this.loadLocations()
+    }
+
+    loadLocations() {
+
+        superagent.get(`${websiteUrl}api/location`).then(results => {
+            const response = results.body;
+            if (response.success) {
+                const oldState = this.state;
+                const newState = {
+                    ...oldState,
+                    locations: response.data
+                };
+                this.setState(newState)
+            }
+        });
     }
 
     checkLoginStatus(nextState, replace) {
@@ -212,12 +230,10 @@ class App extends React.Component {
                 }
             }
         };
-        console.log(newState.profileEdit);
         this.setState(newState);
     }
 
     handleProfileEditChange(event) {
-        alert(JSON.stringify(event));
         event.preventDefault();
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -239,6 +255,40 @@ class App extends React.Component {
         };
         this.setState(newState);
 
+    }
+
+    handleProfileEditSubmit() {
+        const {profileEdit} = this.state;
+
+        const dateOfBirth = new Date(`${profileEdit.inputs.year}-${profileEdit.inputs.month}-${profileEdit.inputs.day}`);
+
+        const dataToSend = {
+            id: profileEdit.inputs._id,
+            dogName: profileEdit.inputs.dogName,
+            location: profileEdit.inputs.location,
+            personalData: profileEdit.inputs.personalData,
+            origin: profileEdit.inputs.origin,
+            breed: profileEdit.inputs.breed,
+            gender: profileEdit.inputs.gender,
+            dateOfBirth
+        };
+        superagent.put(websiteUrl + 'api/user').type('form').send(dataToSend).then(result => {
+            const response = result.body;
+            console.log(response)
+        })
+    }
+
+    handleProfilePicChange(event) {
+        let file = event.target.files[0];
+        let formData = new FormData();
+
+        formData.append('id',this.state.user._id );
+        formData.append("profile_image", file);
+        superagent
+            .post(websiteUrl + "api/user/profile_pic").set('x-access-token', this.state.user.token)
+            .send(formData).then(results => {
+            console.log(results);
+        })
     }
 
     validateLoginForm() {
@@ -548,7 +598,7 @@ class App extends React.Component {
 
     render() {
         const passedProps = {
-            ...this.state,...this
+            ...this.state, ...this
         };
 
 

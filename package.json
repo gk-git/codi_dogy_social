@@ -9,6 +9,7 @@
     "start_prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "^1.4.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
@@ -38,6 +39,7 @@
     "react-slick": "^0.15.4",
     "slick-carousel": "^1.8.1",
     "stylus-loader": "^3.0.1",
-    "superagent": "^3.6.3"
+    "superagent": "^3.6.3",
+    "util": "^0.10.3"
   }
 }
