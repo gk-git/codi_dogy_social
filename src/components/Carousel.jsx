@@ -4,14 +4,17 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../styles/Carousel.css'
+import {websiteUrl} from "../utils/index";
 
 const Carousel = (props) => {
+    const {user, handleUserGalleryImageDelete} = props;
+    const {images = []} = user;
+    const slidesToShow = images.length > 3 ? 3 : images.length;
     let settings = {
-        infinite: true,
         accessibility: true,
         speed: 500,
         autoplay: false,
-        slidesToShow: 3,
+        slidesToShow: slidesToShow,
         slidesToScroll: 1,
         initialSlide: 0,
         className: 'center profile-gallery',
@@ -22,17 +25,16 @@ const Carousel = (props) => {
         ]
     };
 
-    const {user, handleUserGalleryImageDelete} = props;
-    const {images} = user;
+
     return (
         <Slider {...settings}>
 
             <div>
                 <div className="cover-image">
                     <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/400' alt={'dog pic'}/>
+                        <img className={'img'} src={`${websiteUrl}default_profile.png`} alt={'dog pic'}/>
                         <div className={'img-action '}>
-                            <button><i className={'fa fa-trash'}/></button>
+                            <button><i className={'fa fa-plus'}/></button>
                         </div>
                     </div>
 
@@ -62,36 +64,6 @@ const Carousel = (props) => {
             }
 
 
-            <div>
-                <div className="cover-image">
-                    <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/550' alt={''}/>
-                        <div className={'img-action '}>
-                            <button><i className={'fa fa-trash'}/></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className="cover-image">
-                    <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/600/300' alt={''}/>
-                        <div className={'img-action '}>
-                            <button><i className={'fa fa-trash'}/></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className="cover-image">
-                    <div className="img">
-                        <img className={'img'} src='http://placekitten.com/g/400/600' alt={''}/>
-                        <div className={'img-action '}>
-                            <button><i className={'fa fa-user'}/></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </Slider>
     )
 };

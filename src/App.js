@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import superagent from 'superagent';
 import {PublicApp} from "./routes/PublicApp";
 import {mixProps, valideEmail} from "./utils/index";
@@ -11,6 +11,7 @@ import {LoginPage} from "./routes/LoginPage";
 import {websiteUrl} from './utils'
 import {AlertIntro} from "./components/AlertIntro";
 import {confirm} from './utils';
+import {EditProfilePage} from "./routes/EditProfilePage";
 
 
 class App extends React.Component {
@@ -443,10 +444,10 @@ class App extends React.Component {
     }
 
     handleUserGalleryImageDelete() {
-        confirm('Are you sure you want to delete this image?').then(()=>{
+        confirm('Are you sure you want to delete this image?').then(() => {
             alert('deleted')
-        }, ()=>{
-           alert('cancel')
+        }, () => {
+            alert('cancel')
         })
         if (1) {
             // Save it!
@@ -493,41 +494,27 @@ class App extends React.Component {
 
         const mix = mixProps(passedProps);
 
-        const {user} = this.state;
-        // if(this.state.redirectRegister ){
-        //     return <Redirect to='/'/>;
-        // }
-        return (
-            <div>
-                <Switch>
-                    <Route path="/login" render={(props) => {
-                        return (
-                            <PublicApp {...mix(props)} noBackground={true}>
-                                <LoginPage  {...mix(props)}/>
-                            </PublicApp>
+        const {user, authenticated} = this.state;
 
-                        )
-                    }
-                    }/>
-                    <Route path="/u" render={(props) => {
+        if (authenticated) {
+            return (
+                <div>
+                    <Switch>
+                        <Route path="/u/profile/edit" render={(props) => {
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    <EditProfilePage {...mix(props)}/>
+                                </PublicApp>
+                            )
+                        }
+                        }/>
+                        <Route exact path={'/u/profile'} render={(props) => {
 
-                        return (
-                            <PublicApp {...mix(props)} >
-                                <ProfilePage {...mix(props)} />
-                            </PublicApp>
-                        )
-
-
-                    }
-                    }/>
-
-                    <Route path="/" render={(props) => {
-
-                        if (this.state.authenticated) {
+                            let alertIntro = false;
                             if (!user.completeProfile) {
-                                const alertIntro = {
-                                    title: ' welcome to Doggo Please complete your profile',
-                                    content: '',
+                                alertIntro = {
+                                    title: ' welcome to Doggo',
+                                    content: 'Please complete your profile so other dogs can find you',
                                     actionShow: false,
                                     images: [
                                         {
@@ -544,31 +531,59 @@ class App extends React.Component {
                                         }
                                     ]
                                 };
-                                return (
-                                    <PublicApp {...mix(props)} >
-                                        <AlertIntro {...alertIntro} key={1}/>,
-                                        <ProfilePage {...mix(props)}/>
-                                    </PublicApp>
-                                )
                             }
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    {
+                                        alertIntro ? <AlertIntro {...alertIntro} key={1}/> : null
+                                    }
+                                    <ProfilePage {...mix(props)}/>
+                                </PublicApp>
+                            )
+                        }}/>
+                        <Route path="/" render={(props) => {
+                            if (!user.completeProfile) {
 
-
+                                return <Redirect to='/u/profile'/>;
+                            }
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    <HomePage {...mix(props)} />
+                                </PublicApp>
+                            )
                         }
+                        }/>
+                    </Switch>
+                </div>
+            )
+        } else {
+
+        }
+        return (
+            <div>
+                <Switch>
+                    <Route path="/login" render={(props) => {
+                        return (
+                            <PublicApp {...mix(props)} noBackground={true}>
+                                <LoginPage  {...mix(props)}/>
+                            </PublicApp>
+
+                        )
+                    }
+                    }/>
+                    <Route path="/" render={(props) => {
                         return (
                             <PublicApp {...mix(props)} >
                                 <HomePage {...mix(props)} />
                             </PublicApp>
                         )
-
-
                     }
                     }/>
                 </Switch>
-
             </div>
         )
     }
 }
 
-export default App;
 
+export default App;

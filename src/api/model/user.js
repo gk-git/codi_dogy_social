@@ -1,8 +1,8 @@
 import mongoose, {Schema} from 'mongoose'
 import bcrypt from 'bcrypt';
 import uniqueValidator from 'mongoose-unique-validator';
-import {valideEmail} from "../../utils/index";
-import ProfileImage from '../model/profileImage'
+import {valideEmail, websiteUrl} from "../../utils/index";
+require('../model/profileImage');
 const userSchema = new Schema({
     email: {
         type: String,
@@ -19,16 +19,24 @@ const userSchema = new Schema({
     location: {type: String, default: ''},
     personalData: {type: String, default: ''},
     origin: {type: String, default: ''},
+    breed: {type: String, default: ''},
     dateOfBirth: {type: String, default: ''},
     age: {type: String, default: ''},
     createdAt: {type: Date, default: Date.now()},
-    images: [{type: Schema.Types.ObjectId, ref: 'ProfileImage'}]
+    images: [{type: Schema.Types.ObjectId, ref: 'ProfileImage'}],
+    profileImage: {type: String, default: `${websiteUrl}default_profile.png`},
+    likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
 
 });
 
 userSchema.pre('save', function (next) {
     let user = this;
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+    console.log('savve');
+
     bcrypt.genSalt(10, function (err, salt) {
+        if (err) return next(err);
         bcrypt.hash(user.password, salt, function (err, hash) {
             user.password = hash;
             next();

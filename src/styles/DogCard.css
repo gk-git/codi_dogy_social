@@ -3,6 +3,8 @@
 
 .dog-list .profile-link {
     font-weight: 600;
+    color: #fff;
+    font-size: 2rem;
 }
 
 .dog-list section img {
@@ -30,7 +32,7 @@
     overflow: hidden;
     margin-bottom: 15px;
     padding: 15px;
-    background-color: rgb(35, 39, 45);;
+    background-color: rgba(56, 124, 237, 0.69);
 }
 
 .dog-list .dog-card .card-info {
@@ -47,7 +49,7 @@
     margin-top: 0;
     cursor: pointer;
     border: none;
-    color: #fff ;
+    color: #fff;
     padding: 7px 10px 9px 10px;
     text-shadow: 1px 1px 0 rgba(63, 107, 169, 0.5);
     box-shadow: inset 0 -3px 1px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.25);
@@ -64,6 +66,16 @@
 
 /*! CSS Used from: Embedded */
 .btn-love {
-    background: #fd135a;
+    background: #D72D2D;
     float: right;
+}
+.dog-card .like-love .btn {
+    font-size: 2rem;
+}
+.dog-card .like-love .btn i {
+    padding-right: 5px;
+}
+.dog-info .username {
+    color: #fff;
+    font-size: 1.8rem;
 }

@@ -5,6 +5,10 @@ import {DogCard} from "../components/DogCard";
 import {AlertIntro} from "../components/AlertIntro";
 import '../styles/HomePage.css'
 
+const dogCardUser = {
+    username: 'dogo',
+    location: 'Mount Beirut'
+}
 const HomePage = (props) => {
     const {alertIntro} = props;
 
@@ -12,31 +16,31 @@ const HomePage = (props) => {
         <AlertIntro {...alertIntro} key={1}/>,
         <div key={2} className="row">
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
             <div className="col-md-4 col-xs-6">
-                <DogCard/>
+                <DogCard {...props} user={dogCardUser}/>
             </div>
         </div>,
         <div key={3} className="row text-center">

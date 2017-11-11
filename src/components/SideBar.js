@@ -1,31 +1,42 @@
 import React from "react";
 import {NavLink} from 'react-router-dom';
 
-import  '../styles/Sidebar.css';
-const SideBar = props => {
+import '../styles/Sidebar.css';
+import {websiteUrl} from "../utils/index";
 
+const SideBar = props => {
+    const {user, authenticated} = props;
+
+    const UserProfileCard = ()=>(
+        <div className="profile-card">
+            <img
+                src={user.profileImage}
+                alt={`${user.username} profile`}
+                className="profile-photo"
+            />
+            <span className={'profile-name'}>
+                    <NavLink to={`${websiteUrl}u/${user.username}`} className={''}>Sarah Cruiz</NavLink>
+                </span>
+
+            {
+                user.likes ? ( <span className={'profile-followers'}>
+                    <i className="ion ion-android-person-add"/> {user.likes.length} followers
+               </span>) : null
+            }
+        </div>
+    )
     return (
         <div className={"sidebar-block"}>
-            <div className="profile-card">
-                <img
-                    src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                    alt="user"
-                    className="profile-photo"
-                />
-                <h5>
-                    <NavLink to={'/'} className={'text-white'}>Sarah Cruiz</NavLink>
-                </h5>
+            {
+                authenticated ?  <UserProfileCard/> : null
+            }
 
-                <a href="newsfeed.html#" className="text-white">
-                    <i className="ion ion-android-person-add"/> 9 followers
-                </a>
-            </div>
 
             <ul className="nav-news-feed">
                 <li>
                     <i className="icon ion-ios-paper"/>
                     <div className="ffspan">
-                        <button  className={'menu-item menu-modal'} data-toggle="modal" data-target="#filterbox">
+                        <button className={'menu-item menu-modal'} data-toggle="modal" data-target="#filterbox">
                             <i className={'fa fa-filter'}/>
                             <span>Filter your matches!</span></button>
                     </div>

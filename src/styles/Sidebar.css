@@ -254,11 +254,24 @@ ul.edit-menu li.active i.icon {
 .sidebar-block ul.online-users {
     display: none;
 }
+
 .menu-item.menu-modal {
     background: transparent;
     border: none;
-}.menu-item.menu-modal span {
+}
+
+.menu-item.menu-modal span {
     background: transparent;
     border: none;
     color: black;
+}
+
+.profile-name a {
+    font-size: 2rem;
+}
+
+.profile-card .profile-followers {
+    display: block;
+    color: rgb(39, 170, 225);
+    font-size: 1.7rem;
 }

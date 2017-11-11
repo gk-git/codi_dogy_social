@@ -1,14 +1,59 @@
 .edit-profile {
     max-width: 700px;
 }
+
 .date-of-birth div {
     display: inline-block;
     margin: 10px;
 }
+
 button.btn-save {
     max-width: 150px;
     float: right;
     margin: 10px;
     background: rgb(141, 198, 63);
     border-radius: 15px
+}
+
+.profile-image {
+    min-height: 200px;
+    position: relative;
+    border-bottom: 1px dashed rgb(141, 198, 63);
+    margin-bottom: 60px;
+
+}
+
+.profile-image .profile {
+    max-width: 200px;
+    position: absolute;
+    bottom: -30px;
+}
+
+.profile-image .profile img {
+    width: 100%;
+}
+
+.change-profile-image {
+    position: absolute;
+    bottom: 5px;
+    left: 215px;
+}
+
+.file-input-wrapper {
+
+    overflow: hidden;
+    position: relative;
+}
+
+.file-input-wrapper > input[type="file"] {
+    font-size: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+}
+
+.file-input-wrapper > .btn-file-input {
+    display: inline-block;
+    width: 100%;
 }

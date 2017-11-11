@@ -30,3 +30,11 @@ const defaultConfirmation = createConfirmation(Confirmation);
 export function confirm(confirmation, options = {}) {
     return defaultConfirmation({confirmation, ...options});
 }
+export const getLocation = ()=>{
+    if(typeof window !== 'undefined'){
+        return '2'
+
+    }else  {
+        return '/'
+    }
+}

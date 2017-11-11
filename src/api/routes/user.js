@@ -87,7 +87,6 @@ const login = (req, res) => {
         errors: {},
         message: ''
     };
-    console.log(email_username);
     User.findOne({
         $or: [{
             email: email_username
@@ -97,13 +96,11 @@ const login = (req, res) => {
     }, 'password').populate('images').exec((err, user) => {
         if (!user) {
             response.success = false;
-            console.log(err);
             response.message = 'Invalid email/password 1';
             return res.json(response);
         }
         user.comparePwd(password, (err, isMatch) => {
 
-            console.log(password);
             if (!isMatch) {
                 response.success = false;
                 response.message = 'Invalid email/password 2';
@@ -118,6 +115,11 @@ const login = (req, res) => {
                     username: email_username
                 }]
             }, (err, user) => {
+
+                user.lastLogin = new Date();
+                user.save();
+
+
                 const token = createToken(user.email);
                 user.token = token;
                 response.token = token;
