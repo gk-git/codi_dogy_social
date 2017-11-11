@@ -59,6 +59,9 @@ class App extends React.Component {
                 dogName: '',
                 password: '',
                 confirmPassword: '',
+                year: new Date().getYear(),
+                month: new Date().getMonth(),
+                day: new Date().getDay(),
                 actions: {
                     submitDisable: false,
                     login: true
@@ -72,7 +75,17 @@ class App extends React.Component {
                     confirmPassword: '',
                 }
             },
+            profileEdit: {
+                inputs: {
+                    personalData: '',
+                    origin: '',
+                    gender: '',
+                    breed: '',
+                    dateOfBirth: new Date(),
 
+
+                }, errors: {}, actions: {}
+            },
             authenticated: false,
             user: {},
             sweetAlert: {
@@ -96,7 +109,9 @@ class App extends React.Component {
             'showLoginForm',
             'handleLoginFormChange',
             'handleLoginFormSubmit',
-            'handleUserGalleryImageDelete'
+            'handleUserGalleryImageDelete',
+            'handleProfileEditChange',
+            'handleProfileEditSelectChange'
 
         ])
 
@@ -147,7 +162,7 @@ class App extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         const oldRegisterUser = this.state.registerUser;
-        this.setState({
+        const newState = {
             ...this.state, registerUser: {
                 ...oldRegisterUser,
                 [name]: value,
@@ -156,7 +171,8 @@ class App extends React.Component {
                     [name]: ''
                 }
             }
-        });
+        };
+        this.setState(newState);
     }
 
     handleLoginFormChange(event) {
@@ -179,6 +195,50 @@ class App extends React.Component {
                 }
             }
         });
+    }
+
+    handleProfileEditSelectChange(val, target) {
+        const oldProfileEdit = this.state.profileEdit;
+        const newState = {
+            ...this.state, profileEdit: {
+                ...oldProfileEdit,
+                inputs: {
+                    ...oldProfileEdit.inputs,
+                    [target]: val.value,
+                },
+                errors: {
+                    ...oldProfileEdit.errors,
+                    [target]: ''
+                }
+            }
+        };
+        console.log(newState.profileEdit);
+        this.setState(newState);
+    }
+
+    handleProfileEditChange(event) {
+        alert(JSON.stringify(event));
+        event.preventDefault();
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        const oldProfileEdit = this.state.profileEdit;
+        const newState = {
+            ...this.state, profileEdit: {
+                ...oldProfileEdit,
+                inputs: {
+                    ...oldProfileEdit.inputs,
+                    [name]: value,
+                },
+                errors: {
+                    ...oldProfileEdit.errors,
+                    [name]: ''
+                }
+            }
+        };
+        this.setState(newState);
+
     }
 
     validateLoginForm() {
@@ -306,20 +366,21 @@ class App extends React.Component {
     }
 
     handleRegisterFormSubmit(event, history) {
-
         event.preventDefault();
+        const {registerUser} = this.state;
         this.setState({
             ...this.state,
             registerUser: {
-                ...this.state.registerUser,
+                ...registerUser,
                 submitDisable: true,
             }
-
         });
         const result = this.validateRegisterForm();
         // send to server
         if (result.success === true) {
-            superagent.post(websiteUrl + 'api/user').type('form').send({...this.state.registerUser})
+            const dateOfBirth = new Date(`${registerUser.year}-${registerUser.month}-${registerUser.day}`);
+            const dataToSend = {...registerUser, dateOfBirth};
+            superagent.post(websiteUrl + 'api/user').type('form').send({...dataToSend, dateOfBirth})
                 .then(results => {
                     const {success, message, user, errors} = results.body;
                     if (success) {
@@ -378,9 +439,7 @@ class App extends React.Component {
                     }
                 }
             });
-
         }
-
     }
 
     hideRegisterAlert() {
@@ -398,7 +457,11 @@ class App extends React.Component {
         this.setState({
             ...this.state,
             authenticated: true,
-            user
+            user,
+            profileEdit: {
+                ...this.state.profileEdit,
+                inputs: user
+            }
         });
     }
 
@@ -484,11 +547,8 @@ class App extends React.Component {
 
 
     render() {
-        const {welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit, hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit, handleUserGalleryImageDelete} = this;
         const passedProps = {
-            ...this.state, welcomeAction, handleRegisterInputChange, handleRegisterFormSubmit,
-            hideRegisterAlert, logout, showLoginForm, showSignupForm, handleLoginFormChange, handleLoginFormSubmit,
-            handleUserGalleryImageDelete
+            ...this.state,...this
         };
 
 

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-import User from '../model/user';
+import User, {Location} from '../model/user';
 import config from '../config';
 
 const createToken = name => {
@@ -11,7 +11,6 @@ const createToken = name => {
 
     return jwt.sign(payload, config.TOKEN_SECRET);
 };
-
 const signup = (req, res) => {
     const {username, email} = req.body;
 
@@ -28,8 +27,6 @@ const signup = (req, res) => {
             errors: {},
             message: ''
         };
-
-
         if (existingUser) {
             response = {
                 ...response,
@@ -37,12 +34,9 @@ const signup = (req, res) => {
                 user: existingUser,
                 email,
                 username
-
-
             };
             if (existingUser.username === username) {
                 response.errors.username = 'Username already exist';
-
             }
             if (existingUser.email === email) {
                 response.errors.email = 'Email already exist';
@@ -50,22 +44,19 @@ const signup = (req, res) => {
             response.message = 'check the errors and submit again'
             return res.json(response);
         }
-
         // if (existingUser) {
         //     return res.json({message: 'Email is already taken'});
         // }
+        console.log(req.body);
         const token = createToken(req.body.email);
         const user = Object.assign(new User(), {...req.body, token});
         user.save((err, result) => {
             if (err) {
-
-
                 res.send({
                     err,
                     body: req.body
                 });
             }
-
             else {
                 res.json({
                     success: true,
@@ -74,11 +65,9 @@ const signup = (req, res) => {
                     user
                 });
             }
-
         });
     });
 };
-
 const login = (req, res) => {
 
     const {email_username, password} = req.body;
@@ -130,8 +119,6 @@ const login = (req, res) => {
         });
     });
 };
-
-
 const verifyAuth = (req, res, next) => {
     // Get the token from the header x-access-token
     const token = req.headers['x-access-token'];
@@ -169,8 +156,32 @@ const verifyAuth = (req, res, next) => {
     }
 };
 
+const getLocations = (req, res) => {
+    console.log('    console.log(\'\');\n');
+    Location.find({}, function (err, locations) {
+        let locationMap = {};
+
+        locations.forEach(function (location) {
+            locationMap[location._id] = location;
+        });
+
+        res.send(locationMap);
+    });
+};
+const insertNewLocation = (req, res) => {
+    console.log(req.body);
+    const location = Object.assign(new Location(), {...req.body});
+    location.save((err, result) => {
+        if(err){
+            res.status(300).send(err);
+        }
+        res.send(result);
+    })
+};
 export {
     signup,
     login,
-    verifyAuth
+    verifyAuth,
+    getLocations,
+    insertNewLocation
 };

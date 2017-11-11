@@ -42,6 +42,7 @@ const Login = (props) => {
 
         }
     };
+    const current_year = new Date().getFullYear();
 
     return (
         <div className="form-authentication">
@@ -161,6 +162,102 @@ const Login = (props) => {
                             </label>
 
                         </div>
+
+                        <div className={`field-wrap ${registerUser.errors.username ? 'error' : ''}`}>
+                            <label className={'date'}>Dog Date Of Birth:<span className="req">*</span></label>
+                            <div className="date-of-birth">
+                                <div className="date-month">
+                                    <select className="display-inline-block form-control"
+                                            name={'month'}
+                                            onChange={(event) => {
+                                                handleRegisterInputChange(event)
+                                            }}
+                                    >
+                                        <option value={1}>January</option>
+                                        <option value={2}>February</option>
+                                        <option value={3}>March</option>
+                                        <option value={4}>April</option>
+                                        <option value={5}>May</option>
+                                        <option value={6}>June</option>
+                                        <option value={7}>July</option>
+                                        <option value={8}>August</option>
+                                        <option value={9}>September</option>
+                                        <option value={10}>October</option>
+                                        <option value={11}>November</option>
+                                        <option value={12}>December</option>
+                                    </select>
+
+                                </div>
+                                <div className="day">
+                                    <select className="display-inline-block form-control"
+                                            name={'day'}
+
+                                            onChange={(event) => {
+                                                handleRegisterInputChange(event)
+                                            }}>
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                        <option value={5}>5</option>
+                                        <option value={6}>6</option>
+                                        <option value={7}>7</option>
+                                        <option value={8}>8</option>
+                                        <option value={9}>9</option>
+                                        <option value={10}>10</option>
+                                        <option value={11}>11</option>
+                                        <option value={12}>12</option>
+                                        <option value={13}>13</option>
+                                        <option value={14}>14</option>
+                                        <option value={15}>15</option>
+                                        <option value={16}>16</option>
+                                        <option value={17}>17</option>
+                                        <option value={18}>18</option>
+                                        <option value={19}>19</option>
+                                        <option value={20}>20</option>
+                                        <option value={21}>21</option>
+                                        <option value={22}>22</option>
+                                        <option value={23}>23</option>
+                                        <option value={24}>24</option>
+                                        <option value={25}>25</option>
+                                        <option value={26}>26</option>
+                                        <option value={27}>27</option>
+                                        <option value={28}>28</option>
+                                        <option value={29}>29</option>
+                                        <option value={30}>30</option>
+                                        <option value={31}>31</option>
+                                    </select>
+                                </div>
+
+                                <div className="year">
+                                    <select className="display-inline-block form-control"
+                                            name={'year'}
+
+                                            defaultValue={new Date().getYear()} onChange={(event) => {
+                                        handleRegisterInputChange(event)
+                                    }}>
+                                        <option value={current_year}>{current_year}</option>
+                                        <option value={current_year - 1}>{current_year - 1}</option>
+                                        <option value={current_year - 2}>{current_year - 2}</option>
+                                        <option value={current_year - 3}>{current_year - 3}</option>
+                                        <option value={current_year - 4}>{current_year - 4}</option>
+                                        <option value={current_year - 5}>{current_year - 5}</option>
+                                        <option value={current_year - 6}>{current_year - 6}</option>
+                                        <option value={current_year - 7}>{current_year - 7}</option>
+                                        <option value={current_year - 8}>{current_year - 8}</option>
+                                        <option value={current_year - 9}>{current_year - 9}</option>
+                                        <option value={current_year - 10}>{current_year - 10}</option>
+                                        <option value={current_year - 11}>{current_year - 11}</option>
+                                        <option value={current_year - 12}>{current_year - 13}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <label className={'error'}>
+                                {registerUser.errors.username}
+                            </label>
+
+                        </div>
                         <div className={`field-wrap ${registerUser.errors.email ? 'error' : ''}`}>
                             <label className={`${registerUser.email !== '' ? 'active' : ''} label-input`}>
                                 Email Address<span className="req">*</span>
@@ -249,7 +346,7 @@ const Login = (props) => {
                 </div>
                 <div id="form_sign_in_content" style={{display: `${registerUser.actions.login ? 'block' : 'none'}`}}>
                     <h1>Welcome Back!</h1>
-                    <form action="/" method="post" onSubmit={(event)=> {
+                    <form action="/" method="post" onSubmit={(event) => {
                         event.preventDefault();
                         handleLoginFormSubmit(event, history);
                     }}>
@@ -257,9 +354,9 @@ const Login = (props) => {
                             <label className={'label-input'}>
                                 Email Address Or Username<span className="req">*</span>
                             </label>
-                            <input type="text" name={'email_username'}  autoComplete="off"
+                            <input type="text" name={'email_username'} autoComplete="off"
 
-                                   onChange={(event)=>{
+                                   onChange={(event) => {
                                        handleLoginFormChange(event);
                                    }}
                                    onKeyUp={event => {

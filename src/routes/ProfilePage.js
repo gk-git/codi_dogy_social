@@ -31,8 +31,8 @@ const ProfilePage = (props) => {
     completePercentage += user.personalData ? 10 : 0;
     completePercentage += user.origin ? 10 : 0;
     completePercentage += user.breed ? 10 : 0;
-    completePercentage += user.age ? 10 : 0;
-    // completePercentage += user.images.length > 2 ? 10 : 0;
+    completePercentage += user.dateOfBirth ? 10 : 0;
+    completePercentage += user.images.length > 1 ? 10 : 0;
     completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 20 : 0;
 
 

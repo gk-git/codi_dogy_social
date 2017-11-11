@@ -90,7 +90,7 @@ const origins_options = [
     {value: "MEDITERRANEAN", label: "MEDITERRANEAN"},
     {value: "BASIN", label: ["BASIN", "BASIN"]}
 ];
-const gendre_options = [
+const gender_options = [
     {value: "Male", label: 'Male'},
     {value: "Female", label: 'Female'},
 
@@ -558,199 +558,170 @@ const breed_options = [
         value: "SOUTHEASTERN EUROPEAN SHEPHERD", "label": "SOUTHEASTERN EUROPEAN SHEPHERD"
     }, {value: "THAI BANGKAEW DOG", "label": "THAI BANGKAEW DOG"}, {
         value: "MINIATURE BULL TERRIER", "label": "MINIATURE BULL TERRIER"
-    }, {value: "LANCASHIRE HEELER", "label": "LANCASHIRE HEELER"}]
+    }, {value: "LANCASHIRE HEELER", "label": "LANCASHIRE HEELER"}];
 
+const EditProfilePage = (props) => {
+    const {profileEdit, handleProfileEditChange, handleProfileEditSelectChange} = props;
+    const current_year = new Date().getFullYear();
+    const birthDate = new Date(profileEdit.inputs.dateOfBirth);
+    const selectedOrigin = origins_options.find(item => {
+        return item.value === profileEdit.inputs.origin
+    });
+    const selectedGender = origins_options.find(item => {
+        return item.value === profileEdit.inputs.gender
+    });
+    const selectedBreed = origins_options.find(item => {
+        return item.value === profileEdit.inputs.breed
+    });
+    return [
+        <div key={1} className={'profile-image'}>
+            <h4>Profile Image</h4>
+            <div className="profile">
+                <img src={profileEdit.inputs.profileImage} alt={'profile'}/>
+            </div>
 
-class EditProfilePage extends React.Component {
-
-    constructor(props, context) {
-        super(props, context);
-        const {children, name, general_description} = props;
-
-
-        this.state = {
-            ...props,
-            children,
-            name,
-            general_description,
-            origin: origins_options[0],
-            gender: gendre_options[0],
-            breed: breed_options[0],
-            birthDate: new Date()
-        };
-        this.handleOriginChange = this.handleOriginChange.bind(this);
-        this.handleGenderChange = this.handleGenderChange.bind(this);
-        this.handleBreedChange = this.handleBreedChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    }
-
-    handleOriginChange(val) {
-        this.setState({...this.state, origin: val})
-    }
-
-    handleGenderChange(val) {
-        this.setState({...this.state, gender: val})
-    }
-
-    handleBreedChange(val) {
-        this.setState({...this.state, breed: val})
-    }
-
-    handleDateChange(date) {
-        this.setState({
-            birthDate: date
-        });
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-        alert(JSON.stringify(event));
-    }
-
-
-    render() {
-
-        const current_year = new Date().getFullYear();
-        const {user} = this.state;
-        return [
-            <div key={1} className={'profile-image'}>
-                <h4>Profile Image</h4>
-                <div className="profile">
-                    <img src={user.profileImage} alt={'profile'}/>
+            <div className="change-profile-image">
+                <div className="file-input-wrapper">
+                    <button className={'btn btn-info btn-file-input'}>Change Image</button>
+                    <input type="file" name="file"/>
                 </div>
+            </div>
+        </div>,
+        <div key={2} className={'edit-profile'}>
 
-                <div className="change-profile-image">
-                    <div className="file-input-wrapper">
-                        <button className={'btn btn-info btn-file-input'}>Change Image</button>
-                        <input type="file" name="file"/>
-                    </div>
-                </div>
-            </div>,
-            <div key={2} className={'edit-profile'}>
+            <form onSubmit={(event) => {
+                event.preventDefault()
+            }}>
+                <h4>Name: </h4>
+                <input type={'text'} defaultValue={profileEdit.inputs.name} disabled={true} className={'form-control'}/>
+                <h4>General Description: </h4>
+                <textarea defaultValue={profileEdit.inputs.personalData} rows="7" className={'form-control'} onChange={event => {
+                    event.preventDefault();
+                    handleProfileEditChange(event);
+                }}/>
 
-                <form onSubmit={(event) => this.handleFormSubmit(event)}>
-                    <h4>Name: </h4>
-                    <input type={'text'} defaultValue={user.name} className={'form-control'}/>
-                    <h4>General Description: </h4>
-                    <textarea defaultValue={user.personalData} rows="7" className={'form-control'}/>
+                <h4>Origin: </h4>
 
-                    <h4>Origin: </h4>
+                <Select
+                    name="origin"
+                    value={selectedOrigin}
+                    options={origins_options}
+                    onChange={(val) => {
+                        handleProfileEditSelectChange(val, 'origin')
+                    }}
+                />
+                <h4>Gender: </h4>
 
-                    <Select
-                        name="form-field-name"
-                        //value='BASIN'
-                        defaultValue={user.origin}
-                        options={origins_options}
-                        onChange={(val) => {
-                            this.handleOriginChange(val)
-                        }}
-                    />
-                    <h4>Gender: </h4>
+                <Select
+                    name="gender"
+                    value={selectedGender}
+                    options={gender_options}
+                    onChange={(val) => {
+                        handleProfileEditSelectChange(val, 'gender')
+                    }}
+                />
+                <h4>Breed: </h4>
 
-                    <Select
-                        name="form-field-name"
-                        //value='BASIN'
-                        defaultValue={user.gender}
-                        options={gendre_options}
-                        onChange={(val) => {
-                            this.handleGenderChange(val)
-                        }}
-                    />
-                    <h4>Breed: </h4>
-
-                    <Select
-                        name="form-field-name"
-                        value={user.breed}
-                        //value='BASIN'
-                        options={breed_options}
-                        defaultValue={breed_options[0]}
-                        onChange={(val) => {
-                            this.handleBreedChange(val)
-                        }}
-                    />
-                    <h4>Date Of Birth: </h4>
-                    <div className="date-of-birth">
-                        <div className="date-month">
-                            <select className="display-inline-block form-control" defaultValue={0}>
-                                <option value={0}>Month</option>
-                                <option value={1}>January</option>
-                                <option value={2}>February</option>
-                                <option value={3}>March</option>
-                                <option value={4}>April</option>
-                                <option value={5}>May</option>
-                                <option value={6}>June</option>
-                                <option value={7}>July</option>
-                                <option value={8}>August</option>
-                                <option value={9}>September</option>
-                                <option value={10}>October</option>
-                                <option value={11}>November</option>
-                                <option value={12}>December</option>
-                            </select>
-
-                        </div>
-                        <div className="day">
-                            <select className="display-inline-block form-control" defaultValue={0}>
-                                <option value={0}>Day</option>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                                <option value={6}>6</option>
-                                <option value={7}>7</option>
-                                <option value={8}>8</option>
-                                <option value={9}>9</option>
-                                <option value={10}>10</option>
-                                <option value={11}>11</option>
-                                <option value={12}>12</option>
-                                <option value={13}>13</option>
-                                <option value={14}>14</option>
-                                <option value={15}>15</option>
-                                <option value={16}>16</option>
-                                <option value={17}>17</option>
-                                <option value={18}>18</option>
-                                <option value={19}>19</option>
-                                <option value={20}>20</option>
-                                <option value={21}>21</option>
-                                <option value={22}>22</option>
-                                <option value={23}>23</option>
-                                <option value={24}>24</option>
-                                <option value={25}>25</option>
-                                <option value={26}>26</option>
-                                <option value={27}>27</option>
-                                <option value={28}>28</option>
-                                <option value={29}>29</option>
-                                <option value={30}>30</option>
-                                <option value={31}>31</option>
-                            </select>
-                        </div>
-
-                        <div className="year">
-                            <select className="display-inline-block form-control" defaultValue={0}>
-                                <option value={0}>year</option>
-                                <option value={current_year}>{current_year}</option>
-                                <option value={current_year - 1}>{current_year - 1}</option>
-                                <option value={current_year - 2}>{current_year - 2}</option>
-                                <option value={current_year - 3}>{current_year - 3}</option>
-                                <option value={current_year - 4}>{current_year - 4}</option>
-                                <option value={current_year - 5}>{current_year - 5}</option>
-                                <option value={current_year - 6}>{current_year - 6}</option>
-                                <option value={current_year - 7}>{current_year - 7}</option>
-                                <option value={current_year - 8}>{current_year - 8}</option>
-                                <option value={current_year - 9}>{current_year - 9}</option>
-                                <option value={current_year - 10}>{current_year - 10}</option>
-                                <option value={current_year - 11}>{current_year - 11}</option>
-                                <option value={current_year - 12}>{current_year - 13}</option>
-                            </select>
-                        </div>
+                <Select
+                    name="breed"
+                    value={selectedBreed}
+                    options={breed_options}
+                    onChange={(val) => {
+                        handleProfileEditSelectChange(val, 'breed')
+                    }}
+                />
+                <h4>Date Of Birth: </h4>
+                <div className="date-of-birth">
+                    <div className="date-month">
+                        <select className="display-inline-block form-control" name={'month'}
+                                onChange={event => {
+                                    event.preventDefault();
+                                    handleProfileEditChange(event);
+                                }}
+                                defaultValue={birthDate.getMonth()}>
+                            <option value={1}>January</option>
+                            <option value={2}>February</option>
+                            <option value={3}>March</option>
+                            <option value={4}>April</option>
+                            <option value={5}>May</option>
+                            <option value={6}>June</option>
+                            <option value={7}>July</option>
+                            <option value={8}>August</option>
+                            <option value={9}>September</option>
+                            <option value={10}>October</option>
+                            <option value={11}>November</option>
+                            <option value={12}>December</option>
+                        </select>
 
                     </div>
-                    <button className={'btn btn-block  btn-save'}>Save</button>
-                </form>
-            </div>,
-        ]
-    }
+                    <div className="day">
+                        <select className="display-inline-block form-control" name={'day'}
+                                onChange={event => {
+                                    event.preventDefault();
+                                    handleProfileEditChange(event);
+                                }}
+                                defaultValue={birthDate.getDay()}>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                            <option value={7}>7</option>
+                            <option value={8}>8</option>
+                            <option value={9}>9</option>
+                            <option value={10}>10</option>
+                            <option value={11}>11</option>
+                            <option value={12}>12</option>
+                            <option value={13}>13</option>
+                            <option value={14}>14</option>
+                            <option value={15}>15</option>
+                            <option value={16}>16</option>
+                            <option value={17}>17</option>
+                            <option value={18}>18</option>
+                            <option value={19}>19</option>
+                            <option value={20}>20</option>
+                            <option value={21}>21</option>
+                            <option value={22}>22</option>
+                            <option value={23}>23</option>
+                            <option value={24}>24</option>
+                            <option value={25}>25</option>
+                            <option value={26}>26</option>
+                            <option value={27}>27</option>
+                            <option value={28}>28</option>
+                            <option value={29}>29</option>
+                            <option value={30}>30</option>
+                            <option value={31}>31</option>
+                        </select>
+                    </div>
+
+                    <div className="year">
+                        <select className="display-inline-block form-control" name={'year'}
+                                onChange={event => {
+                                    event.preventDefault();
+                                    handleProfileEditChange(event);
+                                }}
+                                defaultValue={birthDate.getFullYear()}>
+                            <option value={current_year}>{current_year}</option>
+                            <option value={current_year - 1}>{current_year - 1}</option>
+                            <option value={current_year - 2}>{current_year - 2}</option>
+                            <option value={current_year - 3}>{current_year - 3}</option>
+                            <option value={current_year - 4}>{current_year - 4}</option>
+                            <option value={current_year - 5}>{current_year - 5}</option>
+                            <option value={current_year - 6}>{current_year - 6}</option>
+                            <option value={current_year - 7}>{current_year - 7}</option>
+                            <option value={current_year - 8}>{current_year - 8}</option>
+                            <option value={current_year - 9}>{current_year - 9}</option>
+                            <option value={current_year - 10}>{current_year - 10}</option>
+                            <option value={current_year - 11}>{current_year - 11}</option>
+                            <option value={current_year - 12}>{current_year - 13}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <button className={'btn btn-block  btn-save'}>Save</button>
+            </form>
+        </div>,
+    ]
 }
-
 export {EditProfilePage}
