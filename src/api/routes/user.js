@@ -198,6 +198,7 @@ const updateUser = (req, res) => {
         user.gender = gender || user.gender;
         user.location = location || user.location;
         user.personalData = personalData || user.personalData;
+        console.log(dateOfBirth);
         user.dateOfBirth = dateOfBirth || user.dateOfBirth;
         user.save((err, user) => {
             if (err) {
@@ -219,6 +220,7 @@ const updateUser = (req, res) => {
 };
 const updateProfilePic = (req, res, next) => {
     const files = req.files;
+    const token = req.headers['x-access-token'];
 
     uploadImagesToStorage(files, 'profileImages')
         .then(response => {
@@ -226,16 +228,44 @@ const updateProfilePic = (req, res, next) => {
             const image = response['profile_image'];
             if (image) {
                 // data.imageSrc = image.url;
+                User.findOne({token}, (err, user) => {
+
+                    if (err) {
+                        res.json({
+                            success: false,
+                            errors: {},
+                            message: 'Something wen wrong try to login again'
+                        })
+                    }
+                    user.profileImage = image.url;
+                    user.save((err, user) => {
+                        if (err) {
+                            res.send({
+                                success: false,
+                                message: 'Something went wrong',
+                                err
+                            })
+                        }
+                        res.status(200).send({
+                            success: true,
+                            message: 'User profile pic updated',
+                            data: {
+                                user, body: req.body
+                            }
+                        });
+                    });
+                });
 
             } else {
                 console.log('Image not found')
+                res.json({
+                    success: false,
+                    errors: {},
+                    message: 'Something wen wrong try to login again'
+                })
             }
-            res.send({
-                success: true,
-                data: {
-                    image
-                }
-            })
+
+
         })
         .catch((err) => {
             next(err);

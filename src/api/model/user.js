@@ -59,6 +59,25 @@ userSchema.pre('save', function (next) {
     user.dateOfBirth = new Date(`${user.year}-${user.month}-${user.day}`);
     next();
 });
+userSchema.pre('save', function (next) {
+    let user = this;
+    let completePercentage = 0;
+    completePercentage += user.personalData ? 10 : 0;
+    completePercentage += user.gender ? 20 : 0;
+    completePercentage += user.origin ? 20 : 0;
+    completePercentage += user.breed ? 20 : 0;
+    completePercentage += user.dateOfBirth ? 10 : 0;
+    completePercentage += user.images.length > 1 ? 10 : 0;
+    completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 10 : 0;
+    // only hash the password if it has been modified (or is new)
+    if (completePercentage < 80) {
+        user.completeProfile = false;
+        next();
+    }
+
+    user.completeProfile = true;
+    next();
+});
 
 userSchema.path('email').validate(function (email) {
     return valideEmail(email);

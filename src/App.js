@@ -259,9 +259,8 @@ class App extends React.Component {
 
     handleProfileEditSubmit() {
         const {profileEdit} = this.state;
-
-        const dateOfBirth = new Date(`${profileEdit.inputs.year}-${profileEdit.inputs.month}-${profileEdit.inputs.day}`);
-
+        console.log(profileEdit.inputs.year, profileEdit.inputs.month, profileEdit.inputs.day);
+        const dateOfBirth = new Date(profileEdit.inputs.year, profileEdit.inputs.month, profileEdit.inputs.day);
         const dataToSend = {
             id: profileEdit.inputs._id,
             dogName: profileEdit.inputs.dogName,
@@ -270,11 +269,28 @@ class App extends React.Component {
             origin: profileEdit.inputs.origin,
             breed: profileEdit.inputs.breed,
             gender: profileEdit.inputs.gender,
-            dateOfBirth
+            dateOfBirth: dateOfBirth.toISOString()
         };
+        console.log(dataToSend);
         superagent.put(websiteUrl + 'api/user').type('form').send(dataToSend).then(result => {
             const response = result.body;
             console.log(response)
+            const oldState = this.state;
+            const date = new Date(response.data.user.dateOfBirth);
+            const newState = {
+                ...oldState,
+                profileEdit: {
+                    ...oldState.profileEdit,
+                    inputs: {
+                        ...response.data.user,
+                        day: date.getDay(),
+                        month: date.getMonth(),
+                        year: date.getYear()
+                    },
+                    errors: {}
+                }
+            }
+            this.setState(newState)
         })
     }
 
@@ -282,7 +298,7 @@ class App extends React.Component {
         let file = event.target.files[0];
         let formData = new FormData();
 
-        formData.append('id',this.state.user._id );
+        formData.append('id', this.state.user._id);
         formData.append("profile_image", file);
         superagent
             .post(websiteUrl + "api/user/profile_pic").set('x-access-token', this.state.user.token)
@@ -504,13 +520,20 @@ class App extends React.Component {
     }
 
     login(user) {
+        const date = new Date(user.dateOfBirth);
         this.setState({
             ...this.state,
             authenticated: true,
             user,
             profileEdit: {
                 ...this.state.profileEdit,
-                inputs: user
+                inputs: {
+                    ...user,
+                    day: date.getDay(),
+                    year: date.getFullYear(),
+                    month: date.getMonth()
+                },
+
             }
         });
     }

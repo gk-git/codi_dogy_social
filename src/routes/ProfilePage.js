@@ -21,12 +21,39 @@ const formatDate = (date) => {
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
 };
 
+const _calculateAge = (birthday) => { // birthday is a date
+
+    const now = new Date(); //Todays Date
+
+    const dobMonth = birthday.getMonth() + 1;
+    const dobDay = birthday.getDay();
+    const dobYear = birthday.getFullYear();
+
+    const nowDay = now.getDate();
+    const nowMonth = now.getMonth() + 1;  //jan=0 so month+1
+    const nowYear = now.getFullYear();
+
+    let ageyear = nowYear - dobYear;
+    let agemonth = nowMonth - dobMonth;
+    let ageday = nowDay - dobDay;
+    if (agemonth < 0) {
+        ageyear--;
+        agemonth = (12 + agemonth);
+    }
+    if (nowDay < dobDay) {
+        agemonth--;
+    }
+    return ageyear + " year and " + agemonth + 'month';
+
+}
+
 
 const ProfilePage = (props) => {
     const {user, locations} = props;
     const {images} = user;
     const dateListed = new Date(user.createdAt);
-
+    const dateOfBirth = new Date(user.dateOfBirth);
+    const today = new Date();
     let completePercentage = 0;
     completePercentage += user.personalData ? 10 : 0;
     completePercentage += user.gender ? 20 : 0;
@@ -35,7 +62,6 @@ const ProfilePage = (props) => {
     completePercentage += user.dateOfBirth ? 10 : 0;
     completePercentage += user.images.length > 1 ? 10 : 0;
     completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 10 : 0;
-    console.log(images);
 
     const Timeline = () => {
         return (
@@ -144,8 +170,9 @@ const ProfilePage = (props) => {
                 <div className={'item'}><span className={'section'}>Origin: </span>{user.origin}</div>
                 <div className={'item'}><span className={'section'}>Gender: </span>{user.gender}</div>
                 <div className={'item'}><span className={'section'}>Breed: </span>{user.breed}</div>
-                <div className={'item'}><span className={'section'}>Date of birth:  </span>28 February 2016</div>
-                <div className={'item'}><span className={'section'}>Age: </span>{user.age}</div>
+                <div className={'item'}><span className={'section'}>Date of birth:  </span>{formatDate(dateOfBirth)}
+                </div>
+                <div className={'item'}><span className={'section'}>Age: </span>{_calculateAge(dateOfBirth)}</div>
                 <div className={'item'}><span className={'section'}>Date listed: </span>{formatDate(dateListed)}</div>
             </div>
             <hr/>

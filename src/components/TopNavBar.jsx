@@ -1,13 +1,12 @@
 import React from 'react';
 import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
-
+import {LinkContainer} from 'react-router-bootstrap'
 
 import '../styles/TopNavBar.css'
 import {Link} from "react-router-dom";
-import {LinkContainer} from "react-router-bootstrap";
 
 const TopNavBar = (props) => {
-    const {authenticated, logout, showLoginForm,showSignupForm} = props;
+    const {authenticated, logout, showLoginForm, showSignupForm, user} = props;
     return (
         <Navbar collapseOnSelect className={'navbar'}>
             <Navbar.Header>
@@ -21,9 +20,11 @@ const TopNavBar = (props) => {
                 <Nav pullRight>
                     {/*fa fa-paw*/}
                     {
-                        authenticated ? (<NavDropdown eventKey={3} className={'profile-dropdown'} title="My Dog Name"
+                        authenticated ? (<NavDropdown eventKey={3} className={'profile-dropdown'} title={user.dogName}
                                                       id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}><i className={'fa fa-user'}/>My Dog Profile</MenuItem>
+                                <LinkContainer to="/u/profile">
+                                    <MenuItem eventKey={3.1}><i className={'fa fa-user'}/>My Dog Profile</MenuItem>
+                                </LinkContainer>
                                 <MenuItem eventKey={3.2}><i className={'fa fa-cogs'}/>Edit My Dog Profile</MenuItem>
                                 <MenuItem divider/>
                                 <MenuItem eventKey={3.3}
@@ -34,11 +35,12 @@ const TopNavBar = (props) => {
                                 ><i className={'fa fa-sign-out'}/>Sign Out</MenuItem>
                             </NavDropdown>)
                             : ([
-                                    <LinkContainer key={'login'} to="/login" onClick={()=>{
-                                        showLoginForm()}}>
+                                    <LinkContainer key={'login'} to="/login" onClick={() => {
+                                        showLoginForm()
+                                    }}>
                                         <NavItem eventKey={2}><i className={'fa fa-sign-in'}/> Login</NavItem>
                                     </LinkContainer>,
-                                    <LinkContainer key={'sign-up'} to="/login" onClick={()=> showSignupForm()}>
+                                    <LinkContainer key={'sign-up'} to="/login" onClick={() => showSignupForm()}>
 
                                         <NavItem eventKey={2}><i className={'fa fa-plus-square-o'}/> Sign up</NavItem>
                                     </LinkContainer>
