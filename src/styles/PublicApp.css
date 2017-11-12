@@ -149,3 +149,6 @@ nav.navbar .navbar-nav > li > a {
     border-radius: 50%;
 }
 
+.public-app .filter-modal {
+    margin-top: 120px;
+}

@@ -5,6 +5,7 @@ import express from 'express';
 import {renderToString} from 'react-dom/server';
 import api from './api';
 import {parseCookies} from "./utils/index";
+import Apps from "./Apps";
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
@@ -28,7 +29,7 @@ server
 
         const markup = renderToString(
             <StaticRouter context={context} location={req.url}>
-                <App initialLocation={req.url} appData={allData} allData={allData} visited={visited}/>
+                <Apps initialLocation={req.url} appData={allData} allData={allData} visited={visited}/>
 
             </StaticRouter>
         );

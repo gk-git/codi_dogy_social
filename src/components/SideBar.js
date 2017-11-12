@@ -7,7 +7,7 @@ import {websiteUrl} from "../utils/index";
 const SideBar = props => {
     const {user, authenticated} = props;
 
-    const UserProfileCard = ()=>(
+    const UserProfileCard = () => (
         <div className="profile-card">
             <img
                 src={user.profileImage}
@@ -16,7 +16,7 @@ const SideBar = props => {
             />
             <span className={'profile-name'}>
                     <NavLink to={`${websiteUrl}u/${user.username}`} className={''}>{user.name}</NavLink>
-                </span>
+            </span>
 
             {
                 user.likes ? ( <span className={'profile-followers'}>
@@ -24,11 +24,11 @@ const SideBar = props => {
                </span>) : null
             }
         </div>
-    )
+    );
     return (
         <div className={"sidebar-block"}>
             {
-                authenticated ?  <UserProfileCard/> : null
+                authenticated ? <UserProfileCard/> : null
             }
 
 

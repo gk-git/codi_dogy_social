@@ -1,0 +1,34 @@
+.login-notice {
+    background: rgba(56, 124, 237, 0.9);
+    padding: 40px;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+    font-family: 'Titillium Web', sans-serif;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+}
+.login-notice h2 {
+    color: #fff;
+}
+.login-notice p {
+    font-size: 2rem;
+}
+.login-notice .login-container .login, .login-notice .login-container .sign-up {
+    min-width: 120px;
+    margin: auto 30px;
+}
+
+.login-notice .login-container .login {
+    background-color: #fff;
+    color: rgba(56, 124, 237, 0.9);
+}
+
+.login-notice .login-container .sign-up {
+    color: rgb(140, 197, 64);
+    background-color: #fff;
+}

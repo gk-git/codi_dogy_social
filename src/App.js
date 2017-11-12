@@ -12,6 +12,10 @@ import {websiteUrl} from './utils'
 import {AlertIntro} from "./components/AlertIntro";
 import {confirm, scrollToTop} from './utils';
 import {EditProfilePage} from "./routes/EditProfilePage";
+import {LoginNotice} from "./components/LoginNotice";
+import {Button, Modal} from "react-bootstrap";
+import Select from "react-select";
+import {FilterModal} from "./components/FilterModal";
 
 
 class App extends React.Component {
@@ -31,6 +35,16 @@ class App extends React.Component {
             visited: props.visited,
             haveDog: true,
             redirectRegister: false,
+            userInfo: {},
+            filter: {
+                show: true,
+                query: {
+                    location: null,
+                    origin: null,
+                    breed: null,
+                    gender: null
+                }
+            },
             dogs: {
                 page: 1,
                 limit: 15,
@@ -123,7 +137,10 @@ class App extends React.Component {
             'handleProfileEditSubmit',
             'handleProfilePicChange',
             'handlePageChange',
-            'getDogsByPage'
+            'getDogsByPage',
+            'loadUserInfo',
+            'likeUser',
+            'handleFilterModalCancel'
 
         ])
     }
@@ -594,6 +611,8 @@ class App extends React.Component {
 
             }
         });
+
+        this.loadUserInfo(user.username);
     }
 
     logout() {
@@ -653,6 +672,19 @@ class App extends React.Component {
         }
     }
 
+    handleFilterModalCancel() {
+        const oldState = this.state;
+        const newState = {
+            ...oldState,
+            filter: {
+                ...oldState.filter,
+                show: false
+            }
+        };
+        this.setState(newState);
+    }
+
+
     getBrowserCookie(cname) {
         const name = cname + "=";
         const decodedCookie = decodeURIComponent(document.cookie);
@@ -676,6 +708,61 @@ class App extends React.Component {
         this.setState({...oldState, haveDog: status, visited: true});
     }
 
+    loadUserInfo(username) {
+        superagent.post(websiteUrl + 'api/dog').send({username}).then(result => {
+            const {success, user} = result.body;
+            if (success) {
+                const oldState = this.state;
+                const newState = {
+                    ...oldState,
+                    userInfo: {
+                        ...oldState.userInfo,
+                        ...user
+                    }
+                };
+                console.log('newState', newState);
+                this.setState(newState);
+            }
+        })
+    }
+
+    likeUser(_id) {
+        const oldState = this.state;
+
+        const dog = oldState.dogs.docs.find(dog => {
+            return dog._id === _id;
+        });
+        if (dog) {
+            if (!dog.likes.includes(this.state.user._id)) {
+
+                superagent.post(websiteUrl + 'api/dog-likes').set('x-access-token', this.state.user.token).send({
+                    _id
+                }).then(result => {
+                    console.log('result =>,', result.body);
+
+                    const newDogsDoc = oldState.dogs.docs.map(dog => {
+
+                        if (dog._id === _id) {
+                            dog.likes.push(this.state.user._id);
+                        }
+                        return dog;
+                    });
+                    const newState = {
+                        ...oldState,
+                        dogs: {
+                            ...oldState.dogs,
+                            docs: newDogsDoc
+                        }
+
+                    };
+                    this.setState(newState);
+                })
+            }
+
+
+        }
+
+    }
 
     render() {
         const passedProps = {
@@ -686,6 +773,7 @@ class App extends React.Component {
         const mix = mixProps(passedProps);
 
         const {user, authenticated} = this.state;
+
 
         if (authenticated) {
             return (
@@ -728,6 +816,14 @@ class App extends React.Component {
                                     {
                                         alertIntro ? <AlertIntro {...alertIntro} key={1}/> : null
                                     }
+                                    <ProfilePage {...mix(props)} />
+                                </PublicApp>
+                            )
+                        }}/>
+                        <Route path={'/dog/:username'} render={(props) => {
+
+                            return (
+                                <PublicApp {...mix(props)} >
                                     <ProfilePage {...mix(props)}/>
                                 </PublicApp>
                             )
@@ -745,10 +841,31 @@ class App extends React.Component {
                         }
                         }/>
                     </Switch>
+                    <div className="filter-modal">
+                        <Modal
+                            show={this.state.filter.show}
+                            onHide={this.handleFilterModalCancel}
+                            container={this}
+                            aria-labelledby="contained-modal-title"
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem
+                                fuga id
+                                earum?
+                                Inventore et facilis obcaecati.
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={this.handleFilterModalCancel}>Close</Button>
+                                <Button bsStyle="primary">Save changes</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
+
                 </div>
             )
-        } else {
-
         }
         return (
             <div>
@@ -762,6 +879,15 @@ class App extends React.Component {
                         )
                     }
                     }/>
+
+                    <Route path="/dog/:user" render={(props) => {
+                        return (
+                            <PublicApp {...mix(props)} noBackground={true}>
+                                <LoginNotice {...mix(props)} />
+                            </PublicApp>
+                        )
+                    }
+                    }/>
                     <Route path="/" render={(props) => {
                         return (
                             <PublicApp {...mix(props)} >
@@ -771,6 +897,7 @@ class App extends React.Component {
                     }
                     }/>
                 </Switch>
+                <FilterModal {...passedProps} container={this}/>
             </div>
         )
     }

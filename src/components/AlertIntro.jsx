@@ -1,9 +1,8 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import '../styles/AlertIntro.css';
 const AlertIntro = (props) => {
-    const {title, content, actionShow, actionText, actionLink, images} = props;
-    const actionLinkCopy = actionLink ? actionLink : '/';
+    const {title, content, images} = props;
+    // const actionLinkCopy = actionLink ? actionLink : '/';
     return (
         <div className="intro-alert ">
             <div className="custom-row">
@@ -26,10 +25,10 @@ const AlertIntro = (props) => {
                     }}>
                         {content || ''}
                     </p>
-                    {
-                        actionShow ? <Link to={actionLinkCopy} className={'btn btn-primary'}
-                                            style={{background: '#377CED'}}>{actionText || ''}</Link> : null
-                    }
+                    {/*{*/}
+                        {/*actionShow ? <Link to={actionLinkCopy} className={'btn btn-primary'}*/}
+                                            {/*style={{background: '#377CED'}}>{actionText || ''}</Link> : null*/}
+                    {/*}*/}
 
                 </div>
             </div>

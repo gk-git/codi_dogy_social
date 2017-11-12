@@ -157,21 +157,41 @@ const verifyAuth = (req, res, next) => {
 const getUsers = ((req, res) => {
     // User.find({})
     const page = req.body.page || 1;
-    User.paginate({}, {page}, function (err, results) {
-       if(err){
-           res.json({
-               success:false,
-               message: 'Something went wrong in Routes/user.js'
-           })
-       }else {
-           res.send({
-               success: true,
-               data: results
-           })
-       }
+    User.paginate({}, {page, populate: 'location images'}, function (err, results) {
+        if (err) {
+            res.json({
+                success: false,
+                message: 'Something went wrong in Routes/user.js'
+            })
+        } else {
+            res.send({
+                success: true,
+                data: results
+            })
+        }
     });
 
 });
+const getUserByUsername = (req, res) => {
+    const {username} = req.body;
+    const populateQuery = [{path: 'location', select: 'label lat lang'}, {path: 'images', select: 'imageSrc user'}];
+
+    User.findOne({username}).populate(populateQuery).exec((err, user) => {
+        if (err) {
+            res.json({
+                success: false,
+                err,
+                message: 'user not found'
+            })
+        } else {
+            res.json({
+                user,
+                success: true,
+                message: 'user find success'
+            })
+        }
+    })
+};
 const getLocations = (req, res) => {
     Location.find({}, function (err, locations) {
         if (err) {
@@ -291,6 +311,43 @@ const updateProfilePic = (req, res, next) => {
                 error: err
             })
         });
+};
+const loveDogById = (req, res) => {
+    const logidInUser = req.user;
+    const {_id} = req.body;
+    User.findOne({_id: _id}, (err, user) => {
+        if (err) {
+            res.send({
+                success: false,
+                message: 'User not found',
+                err
+            })
+        } else {
+            const oldLikes = user.likes;
+            oldLikes.push(logidInUser._id);
+            user.likes = oldLikes;
+            user.save((err, user) => {
+                if (err) {
+                    res.json({
+                        success: false,
+                        _id,
+                        userSignId: req.user,
+                        user
+                    })
+                } else {
+                    res.json({
+                        success: true,
+                        _id,
+                        userSignId: req.user,
+                        user
+                    })
+                }
+            })
+
+        }
+    });
+
+
 }
 export {
     signup,
@@ -300,5 +357,7 @@ export {
     insertNewLocation,
     updateUser,
     updateProfilePic,
-    getUsers
+    getUsers,
+    getUserByUsername,
+    loveDogById
 };

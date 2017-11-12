@@ -5,20 +5,21 @@ import '../styles/HomePage.css'
 import Pagination from "react-js-pagination";
 
 const HomePage = (props) => {
-    const {alertIntro, handlePageChange, dogs} = props;
+    const {alertIntro, handlePageChange, dogs, user} = props;
 
     return [
         <AlertIntro {...alertIntro} key={1}/>,
         <div key={2} className="row">
 
             {
-                dogs.docs.map( (dog,index) => {
-
-                    return (
-                        <div key={dog._id} className="col-md-4 col-xs-6">
-                            <DogCard {...props}  dog_user={dog}/>
-                        </div>
-                    )
+                dogs.docs.map((dog, index) => {
+                    if (dog.username !== user.username) {
+                        return (
+                            <div key={dog._id} className="col-md-4 col-xs-6">
+                                <DogCard {...props} dog_user={dog}/>
+                            </div>
+                        )
+                    }
                 })
             }
 

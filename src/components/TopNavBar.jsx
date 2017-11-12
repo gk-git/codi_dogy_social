@@ -6,7 +6,7 @@ import '../styles/TopNavBar.css'
 import {Link} from "react-router-dom";
 
 const TopNavBar = (props) => {
-    const {authenticated, logout, showLoginForm, showSignupForm, user} = props;
+    const {authenticated, logout, loadUserInfo, showLoginForm, showSignupForm, user} = props;
     return (
         <Navbar collapseOnSelect className={'navbar'}>
             <Navbar.Header>
@@ -22,7 +22,9 @@ const TopNavBar = (props) => {
                     {
                         authenticated ? (<NavDropdown eventKey={3} className={'profile-dropdown'} title={user.dogName}
                                                       id="basic-nav-dropdown">
-                                <LinkContainer to="/u/profile">
+                                <LinkContainer to="/u/profile" onClick={event =>{
+                                    loadUserInfo(user.username);}
+                                }>
                                     <MenuItem eventKey={3.1}><i className={'fa fa-user'}/>My Dog Profile</MenuItem>
                                 </LinkContainer>
                                 <LinkContainer to="/u/profile/edit">

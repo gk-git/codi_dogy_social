@@ -72,3 +72,6 @@ img {
     background: transparent;
     color: #fff;
 }
+#root .modal-dialog {
+    margin-top: 120px;
+}

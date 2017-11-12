@@ -35,7 +35,6 @@ const _calculateAge = (birthday) => { // birthday is a date
 
     let ageyear = nowYear - dobYear;
     let agemonth = nowMonth - dobMonth;
-    let ageday = nowDay - dobDay;
     if (agemonth < 0) {
         ageyear--;
         agemonth = (12 + agemonth);
@@ -43,25 +42,25 @@ const _calculateAge = (birthday) => { // birthday is a date
     if (nowDay < dobDay) {
         agemonth--;
     }
-    return ageyear + " year and " + agemonth + 'month';
+    return ageyear + " year and " + agemonth + ' month';
 
 }
 
 
 const ProfilePage = (props) => {
-    const {user, locations} = props;
-    const {images} = user;
-    const dateListed = new Date(user.createdAt);
-    const dateOfBirth = new Date(user.dateOfBirth);
-    const today = new Date();
+    const {user, userInfo, likeUser, locations} = props;
+    console.log('userInfo', userInfo);
+    const {images} = userInfo;
+    const dateListed = new Date(userInfo.createdAt);
+    const dateOfBirth = new Date(userInfo.dateOfBirth);
     let completePercentage = 0;
-    completePercentage += user.personalData ? 10 : 0;
-    completePercentage += user.gender ? 20 : 0;
-    completePercentage += user.origin ? 20 : 0;
-    completePercentage += user.breed ? 20 : 0;
-    completePercentage += user.dateOfBirth ? 10 : 0;
-    completePercentage += user.images.length > 1 ? 10 : 0;
-    completePercentage += user.profileImage !== websiteUrl + 'default_profile.png' ? 10 : 0;
+    completePercentage += userInfo.personalData ? 10 : 0;
+    completePercentage += userInfo.gender ? 20 : 0;
+    completePercentage += userInfo.origin ? 20 : 0;
+    completePercentage += userInfo.breed ? 20 : 0;
+    completePercentage += userInfo.dateOfBirth ? 10 : 0;
+    completePercentage += userInfo.images.length > 1 ? 10 : 0;
+    completePercentage += userInfo.profileImage !== websiteUrl + 'default_profile.png' ? 10 : 0;
 
     const Timeline = () => {
         return (
@@ -131,24 +130,47 @@ const ProfilePage = (props) => {
             </div>
         )
     };
-
+    const likesUser = userInfo.likes.find(item => {
+        return item === user._id
+    });
     return [
         <div key={0} className={'profile-page'}>
             <div className="">
-                <Link to={'/u/profile/edit'}>
-                    <Button bsStyle="info"> <span className={'fa fa-edit'}/></Button>
-                </Link>
-                <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
-                <h2 className={'title profile-name'}>{user.dogName}</h2>
-                <h3>{`${completePercentage} % profile completed`}</h3>
+
+
+                {
+                    user.username === userInfo.username ? (
+                        <Link to={'/u/profile/edit'}>
+                            <Button bsStyle="info"> <span className={'fa fa-edit'}/></Button>
+                        </Link>
+                    ) : null
+                }
+
+
+                <div className="profile">
+                    <img src={userInfo.profileImage}/>
+                    <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
+                    <h2 className={'title profile-name'}>{userInfo.dogName}</h2>
+                    {
+                        user.username === userInfo.username ? (
+                            <h3>{`${completePercentage} % profile completed`}</h3>
+                        ) : null
+                    }
+                </div>
+
             </div>
-            <div className={'add-image'}>
-                <button className={'btn btn-info '}><i className={'fa fa-camera'}/></button>
-                <span>Upload Image</span>
-            </div>
+
+            {
+                user.username === userInfo.username ? (
+                    <div className={'add-image'}>
+                        <button className={'btn btn-info '}><i className={'fa fa-camera'}/></button>
+                        <span>Upload Image</span>
+                    </div>
+                ) : null
+            }
             <Carousel  {...props} images={images} user={user}/>
             {
-                !user.emailVerified ? (
+                !userInfo.emailVerified && user.username === userInfo.username ? (
                     <div>
                         <span className={'profile-state'}>Profile is unconfirmed</span> <Button>Confirm ?</Button>
                     </div>
@@ -157,19 +179,33 @@ const ProfilePage = (props) => {
 
             <div>
                 <button className={'start-chat'}><i className={'fa fa-commenting'}/> Chat with Dog Owner</button>
+                {
+                    userInfo._id !== user._id ? (
+                        <button type="button" name="love-button"
+                                className={`buttontr btn btn-love ${likesUser ? 'active' : ''}`}
+                                onClick={(event => {
+                                    likeUser(userInfo._id)
+                                })}>
+                            <i className="fa fa-heart-o" aria-hidden="true"/> Love
+                        </button>
+                    ) : null
+                }
+
             </div>
+
             <div className={'location'}>
                 <h4><i className="fa fa-map-marker" aria-hidden="true"/>Location </h4>
-                <span>{locations[user.location] ? locations[user.location].label : 'Lebanon'}</span>
+                <span>{locations[userInfo.location] ? locations[userInfo.location].label : 'Lebanon'}</span>
             </div>
+
             <div className="personal-data">
                 <h4><i className="fa fa-user" aria-hidden="true"/>Personal data</h4>
                 <div className={'item'}><span className={'section'}>General Description: </span>
-                    {user.personalData}
+                    {userInfo.personalData}
                 </div>
-                <div className={'item'}><span className={'section'}>Origin: </span>{user.origin}</div>
-                <div className={'item'}><span className={'section'}>Gender: </span>{user.gender}</div>
-                <div className={'item'}><span className={'section'}>Breed: </span>{user.breed}</div>
+                <div className={'item'}><span className={'section'}>Origin: </span>{userInfo.origin}</div>
+                <div className={'item'}><span className={'section'}>Gender: </span>{userInfo.gender}</div>
+                <div className={'item'}><span className={'section'}>Breed: </span>{userInfo.breed}</div>
                 <div className={'item'}><span className={'section'}>Date of birth:  </span>{formatDate(dateOfBirth)}
                 </div>
                 <div className={'item'}><span className={'section'}>Age: </span>{_calculateAge(dateOfBirth)}</div>
