@@ -2,6 +2,7 @@ import mongoose, {Schema} from 'mongoose'
 import bcrypt from 'bcrypt';
 import uniqueValidator from 'mongoose-unique-validator';
 import {valideEmail, websiteUrl} from "../../utils/index";
+import {gender_data, origins_data, breed_data} from '../../utils/data';
 
 require('../model/profileImage');
 require('../model/location');
@@ -23,9 +24,9 @@ const userSchema = new Schema({
     lastLogin: {type: Date, default: '12/10/1990'},
     location: {type: Schema.Types.ObjectId, ref: 'Location'},
     personalData: {type: String, default: '', trim: true},
-    gender: {type: String, default: '', trim: true},
-    origin: {type: String, default: '', trim: true},
-    breed: {type: String, default: '', trim: true},
+    gender: {type: String, default: '', trim: true, enum: gender_data},
+    origin: {type: String, default: '', trim: true, enum: origins_data},
+    breed: {type: String, default: '', trim: true, enum: breed_data},
     dateOfBirth: {type: Date, default: defaultDate},
     createdAt: {type: Date, default: Date.now()},
     images: [{type: Schema.Types.ObjectId, ref: 'ProfileImage'}],

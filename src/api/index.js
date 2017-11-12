@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import {getLocations, insertNewLocation, login, signup, updateProfilePic, verifyAuth, updateUser} from "./routes/user";
 import {uploadGoogle} from './firebaseStorage';
+import User from './model/user'
+import dummy from 'mongoose-dummy';
+import {origins_data, gender_data, breed_data, location_data} from '../utils/data'
 
 const router = express.Router();
 
@@ -38,6 +41,20 @@ router.post('/user/profile_pic', verifyAuth, uploadGoogle.any(), updateProfilePi
 router.post('/login', login);
 router.get('/location', getLocations);
 router.post('/location', insertNewLocation);
+router.get('/fake', (req, res, next) => {
+    const ignoredFields = ['_id', 'created_at', '__v'];
+    let randomObject = dummy(User, {
+        ignore: ignoredFields,
+        autoDetect: true,
+        returnDate: true
+    });
+    console.log(randomObject);
+    res.send({
+        fake: true,
+        data: randomObject
+    })
+
+})
 
 //  Extract Get url
 // var parts = url.parse(req.url, true);
