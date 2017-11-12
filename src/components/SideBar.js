@@ -15,12 +15,12 @@ const SideBar = props => {
                 className="profile-photo"
             />
             <span className={'profile-name'}>
-                    <NavLink to={`${websiteUrl}u/${user.username}`} className={''}>Sarah Cruiz</NavLink>
+                    <NavLink to={`${websiteUrl}u/${user.username}`} className={''}>{user.name}</NavLink>
                 </span>
 
             {
                 user.likes ? ( <span className={'profile-followers'}>
-                    <i className="ion ion-android-person-add"/> {user.likes.length} followers
+                    <i className="ion ion-android-person-add"/> {user.likes.length} Likes
                </span>) : null
             }
         </div>

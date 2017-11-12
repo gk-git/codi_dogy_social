@@ -154,7 +154,24 @@ const verifyAuth = (req, res, next) => {
         });
     }
 };
+const getUsers = ((req, res) => {
+    // User.find({})
+    const page = req.body.page || 1;
+    User.paginate({}, {page}, function (err, results) {
+       if(err){
+           res.json({
+               success:false,
+               message: 'Something went wrong in Routes/user.js'
+           })
+       }else {
+           res.send({
+               success: true,
+               data: results
+           })
+       }
+    });
 
+});
 const getLocations = (req, res) => {
     Location.find({}, function (err, locations) {
         if (err) {
@@ -282,5 +299,6 @@ export {
     getLocations,
     insertNewLocation,
     updateUser,
-    updateProfilePic
+    updateProfilePic,
+    getUsers
 };

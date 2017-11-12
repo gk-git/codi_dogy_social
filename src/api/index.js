@@ -2,8 +2,12 @@ import express from "express";
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-import {getLocations, insertNewLocation, login, signup, updateProfilePic, verifyAuth, updateUser} from "./routes/user";
+import {
+    getLocations, insertNewLocation, login, signup, updateProfilePic, verifyAuth, updateUser,
+    getUsers
+} from "./routes/user";
 import {uploadGoogle} from './firebaseStorage';
+import {fakeDataUsertest, fakeUser} from "./routes/fakedata";
 
 const router = express.Router();
 
@@ -38,6 +42,9 @@ router.post('/user/profile_pic', verifyAuth, uploadGoogle.any(), updateProfilePi
 router.post('/login', login);
 router.get('/location', getLocations);
 router.post('/location', insertNewLocation);
+router.post('/dogs', getUsers);
+router.get('/fake-user', fakeUser);
+router.get('/fake', fakeDataUsertest);
 
 //  Extract Get url
 // var parts = url.parse(req.url, true);

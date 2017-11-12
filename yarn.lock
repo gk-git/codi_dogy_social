@@ -1230,6 +1230,10 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+bluebird@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.0.5.tgz#2ff9d07c9b3edb29d6d280fe07528365e7ecd392"
+
 bluebird@^3.0.5, bluebird@^3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
@@ -4806,6 +4810,12 @@ mongodb@2.2.33:
     mongodb-core "2.1.17"
     readable-stream "2.2.7"
 
+mongoose-paginate@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/mongoose-paginate/-/mongoose-paginate-5.0.3.tgz#d7ae49ed5bf64f1f7af7620ea865b67058c55371"
+  dependencies:
+    bluebird "3.0.5"
+
 mongoose-unique-validator@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-1.0.6.tgz#fab31e68c1a5ba6f5b05da8e93842db55eb0a3b1"
@@ -5211,6 +5221,10 @@ p-locate@^2.0.0:
 p-map@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/p-map/-/p-map-1.2.0.tgz#e4e94f311eabbc8633a1e79908165fca26241b6b"
+
+paginator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/paginator/-/paginator-1.0.0.tgz#7565702af9ab9616dca61fc22c70eba2a4357265"
 
 pako@~0.2.0:
   version "0.2.9"
@@ -6054,6 +6068,15 @@ react-input-autosize@^2.0.1:
   dependencies:
     create-react-class "^15.5.2"
     prop-types "^15.5.8"
+
+react-js-pagination@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-js-pagination/-/react-js-pagination-3.0.0.tgz#5f13839ebff4ef3c8393763b14d5c2f431ff2d2e"
+  dependencies:
+    classnames "^2.2.5"
+    paginator "^1.0.0"
+    prop-types "^15.6.0"
+    react "^16.0.0"
 
 react-overlays@^0.7.4:
   version "0.7.4"

@@ -10,7 +10,7 @@ import {HomePage} from "./routes/HomePage";
 import {LoginPage} from "./routes/LoginPage";
 import {websiteUrl} from './utils'
 import {AlertIntro} from "./components/AlertIntro";
-import {confirm} from './utils';
+import {confirm, scrollToTop} from './utils';
 import {EditProfilePage} from "./routes/EditProfilePage";
 
 
@@ -31,6 +31,13 @@ class App extends React.Component {
             visited: props.visited,
             haveDog: true,
             redirectRegister: false,
+            dogs: {
+                page: 1,
+                limit: 15,
+                pages: 3,
+                total: 45,
+                docs: []
+            },
             alertIntro: {
                 title: '',
                 content: '',
@@ -114,7 +121,9 @@ class App extends React.Component {
             'handleProfileEditSelectChange',
             'loadLocations',
             'handleProfileEditSubmit',
-            'handleProfilePicChange'
+            'handleProfilePicChange',
+            'handlePageChange',
+            'getDogsByPage'
 
         ])
     }
@@ -128,8 +137,8 @@ class App extends React.Component {
     componentDidMount() {
         const oldState = this.state;
         this.setState({
-            ...oldState
-            , alertIntro: {
+            ...oldState,
+            alertIntro: {
                 title: 'The Number One websites',
                 content: 'F2ind your perfect stud dog, bitch or puppy today, FREE to advertise, FREE to join and browse.',
                 actionShow: true,
@@ -150,8 +159,31 @@ class App extends React.Component {
                     }
                 ]
             }
-        })
+        });
+        this.getDogsByPage(1);
         this.loadLocations()
+    }
+
+    getDogsByPage(page = 1) {
+        superagent.post(websiteUrl + 'api/dogs').send({page}).then(results => {
+            console.log('results =>', results.body.data);
+            const {success, data} = results.body;
+            if (success) {
+                const oldState = this.state;
+                const newDogs = {};
+                data.docs.map(dog => {
+                    newDogs[dog._id] = dog;
+                });
+                const newState = {
+                    ...oldState,
+                    dogs: {
+                        ...oldState.dogs,
+                        ...data
+                    }
+                };
+                this.setState(newState);
+            }
+        });
     }
 
     loadLocations() {
@@ -213,6 +245,15 @@ class App extends React.Component {
                 }
             }
         });
+    }
+
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        // TODO: move this to componentDidMount
+        if (typeof window !== 'undefined') {
+            window.scrollTo(0, 100)
+        }
+        this.getDogsByPage(pageNumber)
     }
 
     handleProfileEditSelectChange(val, target) {
@@ -296,15 +337,31 @@ class App extends React.Component {
 
     handleProfilePicChange(event) {
         let file = event.target.files[0];
-        let formData = new FormData();
+        if (typeof file !== 'undefined') {
+            let formData = new FormData();
+            formData.append('id', this.state.user._id);
+            formData.append("profile_image", file);
+            superagent
+                .post(websiteUrl + "api/user/profile_pic").set('x-access-token', this.state.user.token)
+                .send(formData).then(results => {
+                const {data, success} = results.body;
+                if (success) {
+                    const oldState = this.state;
+                    const newState = {
+                        ...oldState,
+                        profileEdit: {
+                            ...oldState.profileEdit,
+                            inputs: {
+                                ...data.user
+                            }
+                        },
+                        user: data.user,
+                    };
+                    this.setState(newState)
+                }
 
-        formData.append('id', this.state.user._id);
-        formData.append("profile_image", file);
-        superagent
-            .post(websiteUrl + "api/user/profile_pic").set('x-access-token', this.state.user.token)
-            .send(formData).then(results => {
-            console.log(results);
-        })
+            })
+        }
     }
 
     validateLoginForm() {
@@ -380,6 +437,7 @@ class App extends React.Component {
                     sweetAlert: {
                         show: true,
                         success: false,
+                        error,
                         title: 'Error',
                         text: 'Something went wrong please try again'
                     }
@@ -584,7 +642,7 @@ class App extends React.Component {
             alert('deleted')
         }, () => {
             alert('cancel')
-        })
+        });
         if (1) {
             // Save it!
             alert('yes');

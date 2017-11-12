@@ -25,7 +25,9 @@ const TopNavBar = (props) => {
                                 <LinkContainer to="/u/profile">
                                     <MenuItem eventKey={3.1}><i className={'fa fa-user'}/>My Dog Profile</MenuItem>
                                 </LinkContainer>
-                                <MenuItem eventKey={3.2}><i className={'fa fa-cogs'}/>Edit My Dog Profile</MenuItem>
+                                <LinkContainer to="/u/profile/edit">
+                                    <MenuItem eventKey={3.2}><i className={'fa fa-cogs'}/>Edit My Dog Profile</MenuItem>
+                                </LinkContainer>
                                 <MenuItem divider/>
                                 <MenuItem eventKey={3.3}
                                           onClick={() => {

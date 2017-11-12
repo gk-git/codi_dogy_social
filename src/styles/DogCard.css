@@ -69,13 +69,30 @@
     background: #D72D2D;
     float: right;
 }
+
 .dog-card .like-love .btn {
     font-size: 2rem;
 }
+
 .dog-card .like-love .btn i {
     padding-right: 5px;
 }
+
 .dog-info .username {
     color: #fff;
     font-size: 1.8rem;
+}
+
+.dog-list .dog-card .profile-img {
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+}
+
+.dog-list .dog-card .profile-img img {
+    width: 100%;
+    height: 100%;
+}
+.dog-list .dog-card .card-info {
+    height: 200px;
 }
