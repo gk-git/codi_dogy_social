@@ -14,8 +14,8 @@ const TopNavBar = (props) => {
                 <Navbar.Toggle/>
 
                 <Navbar.Brand>
-                    <Link to={'/'}>
-                        <img src={`${websiteUrl}logo.png`} alt={'doggo logo'} style={{maxHeight: '100%', display: 'inline-block'}}/> <span style={{display: 'inline-block'}}> Doggo</span></Link>
+                    <Link to={'/'} style={{padding: '0'}}>
+                        <img src={`${websiteUrl}logo.png`} alt={'doggo logo'} style={{maxHeight: '100%',minHeight: '100%', display: 'inline-block'}}/> <span style={{display: 'inline-block'}}> Doggo</span></Link>
                 </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>

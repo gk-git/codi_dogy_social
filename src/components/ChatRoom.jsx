@@ -9,6 +9,7 @@ class ChatRoom extends React.Component {
         super(props);
 
         this.state = {
+            ...props,
             chats: [
                 {
                     username: "Kevin Hsu",
@@ -112,104 +113,36 @@ class ChatRoom extends React.Component {
 
     render() {
         const username = "Kevin Hsu";
-        const {chats} = this.state;
+        const {chats, randomUsers} = this.state;
 
         return (
             <div className="chatroom">
                 <h3>Chat Room</h3>
                 <div className=" chat-left">
 
-                    <button className="chat active">
-                       <div className="img-block">
-                           <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                           <span className={'message-count'}>2</span>
-                       </div>
+                    {
+
+                        randomUsers.map((item, index) => {
+                            return (
+                                <button className="chat active">
+                                    <div className="img-block">
+                                        <img src={item.profileImage} className={'profile-image'} alt=""/>
+                                        <span className={'message-count'}>{randomUsers%index}</span>
+                                    </div>
 
 
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
+                                    <span className={'dog-name'}>{item.username}</span>
+                                </button>
+                            )
+                        })
+                    }
 
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                            <span className={'message-count'}>2</span>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                            <span className={'message-count'}>2</span>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                            <span className={'message-count'}>2</span>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                            <span className={'message-count'}>2</span>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
-
-                    <button className="chat">
-                        <div className="img-block">
-                            <img src="http://i.imgur.com/Tj5DGiO.jpg" className={'profile-image'} alt=""/>
-                        </div>
-
-
-                        <span className={'dog-name'}>hellllweasadsaddsad</span>
-                    </button>
 
                 </div>
                 <ul className="chats" ref="chats">
 
 
-                        {chats.map(chat => <Message chat={chat} user={username}/>)}
+                    {chats.map((chat, index) => <Message key={index} chat={chat} user={username}/>)}
 
                 </ul>
                 <form className="input" onSubmit={e => this.submitMessage(e)}>

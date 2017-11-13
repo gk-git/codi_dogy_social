@@ -13,7 +13,7 @@ const Carousel = (props) => {
     let settings = {
         accessibility: true,
         speed: 500,
-        autoplay: false,
+        infinite: false,
         slidesToShow: slidesToShow,
         slidesToScroll: 1,
         initialSlide: 0,
@@ -26,45 +26,48 @@ const Carousel = (props) => {
     };
 
 
+
     return (
-        <Slider {...settings}>
+        <div>
+            <Slider {...settings}>
 
-            <div>
-                <div className="cover-image">
-                    <div className="img">
-                        <img className={'img'} src={`${websiteUrl}default_profile.png`} alt={'dog pic'}/>
-                        <div className={'img-action '}>
-                            <button><i className={'fa fa-plus'}/></button>
+                <div>
+                    <div className="cover-image">
+                        <div className="img">
+                            <img className={'img'} src={`${websiteUrl}default_profile.png`} alt={'dog pic'}/>
+                            <div className={'img-action '}>
+                                <button><i className={'fa fa-plus'}/></button>
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-            {
-                images.map((image, index) => {
+                {
+                    images.map((image, index) => {
 
-                    return (
-                        <div key={index}>
-                            <div className="cover-image">
-                                <div className="img">
-                                    <img className={'img'} src={image.imageSrc}
-                                         alt={`${user.username} gallery `}/>
-                                    <div className={'img-action '}>
-                                        <button onClick={(event) => {
-                                            event.preventDefault();
-                                            handleUserGalleryImageDelete()
-                                        }}><i className={'fa fa-trash'}/></button>
+                        return (
+                            <div key={index}>
+                                <div className="cover-image">
+                                    <div className="img">
+                                        <img className={'img'} src={image.imageSrc}
+                                             alt={`${user.username} gallery `}/>
+                                        <div className={'img-action '}>
+                                            <button onClick={(event) => {
+                                                event.preventDefault();
+                                                handleUserGalleryImageDelete()
+                                            }}><i className={'fa fa-trash'}/></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
+                        )
 
-                })
-            }
+                    })
+                }
 
 
-        </Slider>
+            </Slider>
+        </div>
     )
 };
 export {Carousel}

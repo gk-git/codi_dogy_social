@@ -12,12 +12,15 @@
     text-align: center;
     color: #fff;
 }
+
 .login-notice h2 {
     color: #fff;
 }
+
 .login-notice p {
     font-size: 2rem;
 }
+
 .login-notice .login-container .login, .login-notice .login-container .sign-up {
     min-width: 120px;
     margin: auto 30px;
@@ -31,4 +34,19 @@
 .login-notice .login-container .sign-up {
     color: rgb(140, 197, 64);
     background-color: #fff;
+}
+
+.login-notice .notice-img {
+    max-height: 300px;
+
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 60px;
+
+}
+.login-notice .notice-img .img {
+
+}
+.login-notice .login-container {
+    padding-top: 20px;
 }

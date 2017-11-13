@@ -295,11 +295,11 @@ ul.edit-menu li.active i.icon {
 
 }
 
-.sidebar-block.no-auth .image-profile {
+.sidebar-block  .image-profile {
     display: block;
 }
 
-.sidebar-block.no-auth .profile-content {
+.sidebar-block  .profile-content {
     position: absolute;
     top: 10px;
     left: 60px;
@@ -307,11 +307,11 @@ ul.edit-menu li.active i.icon {
     bottom: 0;
 }
 
-.sidebar-block.no-auth .profile-content .span-username {
+.sidebar-block .profile-content .span-username {
     color: rgb(52, 70, 225);
     font-size: 1.5rem;
 }
 
-.sidebar-block.no-auth .random-list {
+.sidebar-block .random-list {
     position: relative;
 }

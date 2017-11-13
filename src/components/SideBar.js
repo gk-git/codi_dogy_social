@@ -50,66 +50,27 @@ const SideBar = props => {
                     <div className="title">Chat online</div>
                 </Link>
                 <ul className="online-users list-inline">
-                    <li>
-                        <a href="newsfeed-messages.html" title="Linda Lohan">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="newsfeed-messages.html" title="Sophia Lee">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="newsfeed-messages.html" title="Robert Cook">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href={""} title="Richard Bell">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="newsfeed-messages.html" title="Anna Young">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="newsfeed-messages.html" title="Julia Cox">
-                            <img
-                                src={"https://pbs.twimg.com/media/CGn0rggUkAEPRlC.jpg"}
-                                alt="user"
-                                className="img-responsive profile-photo"
-                            />
-                            <span className="online-dot"/>
-                        </a>
-                    </li>
+                    {
+                        randomUsers.map(user => {
+                            return (
+                                <li key={user._id} className={'random-list'}>
+                                    <Link to={`/dog/${user.username}`}>
+                                        <div className="image-profile">
+                                            <img
+                                                src={user.profileImage}
+                                                alt={`${user.dogName} dog`}
+                                                className="img-responsive profile-photo"
+                                            />
+                                            <span className="online-dot"/>
+                                        </div>
+                                        <div className="profile-content">
+                                            <span className={'span-username'}>{user.username}</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </div>
 
