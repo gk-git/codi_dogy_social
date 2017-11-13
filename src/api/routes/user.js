@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-import User from '../model/user';
-import Location from '../model/location'
+import User from '../models/user';
+import Location from '../models/location'
 import config from '../config';
 import {uploadImagesToStorage} from "../firebaseStorage";
 

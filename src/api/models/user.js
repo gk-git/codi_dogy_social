@@ -4,8 +4,8 @@ import uniqueValidator from 'mongoose-unique-validator';
 import mongoosePaginate from 'mongoose-paginate';
 import {valideEmail, websiteUrl} from "../../utils/index";
 
-require('../model/profileImage');
-require('../model/location');
+require('../models/profileImage');
+require('../models/location');
 let defaultDate = new Date();
 defaultDate.setFullYear(defaultDate.getFullYear() - 2);
 const userSchema = new Schema({
@@ -41,14 +41,18 @@ const userSchema = new Schema({
 userSchema.pre('save', function (next) {
     let user = this;
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next();
-    bcrypt.genSalt(10, function (err, salt) {
-        if (err) return next(err);
-        bcrypt.hash(user.password, salt, function (err, hash) {
-            user.password = hash;
-            next();
+    if(this.isModified('password') || this.isNew()){
+        bcrypt.genSalt(10, function (err, salt) {
+            if (err) return next(err);
+            bcrypt.hash(user.password, salt, function (err, hash) {
+                user.password = hash;
+                next();
+            });
         });
-    });
+    }else{
+        next();
+    }
+
 });
 userSchema.pre('save', function (next) {
     let user = this;
@@ -88,7 +92,7 @@ userSchema.methods.comparePwd = function (password, done) {
 userSchema.plugin(uniqueValidator);
 mongoosePaginate.paginate.options = {
     lean: true,
-    limit: 15
+    limit: 12
 };
 userSchema.plugin(mongoosePaginate);
 export default mongoose.model('User', userSchema);

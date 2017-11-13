@@ -1,6 +1,6 @@
 import mongoose, {Schema} from 'mongoose'
 
-require('../model/user');
+require('../models/user');
 
 const postSchema = Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},

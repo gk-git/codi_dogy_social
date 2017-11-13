@@ -1,5 +1,5 @@
 import superagent from 'superagent'
-import User from '../model/user';
+import User from '../models/user';
 import userData from '../../../fakeData.json'
 
 export const fakeUser = (req, res) => {
