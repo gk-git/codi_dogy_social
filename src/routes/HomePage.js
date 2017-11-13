@@ -20,6 +20,7 @@ const HomePage = (props) => {
                             </div>
                         )
                     }
+                    return null
                 })
             }
 

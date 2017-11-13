@@ -33,13 +33,16 @@ export const fakeUser = (req, res) => {
                                 success: true,
                                 users
                             });
+                            return users;
                         }
                     }
                 });
             }
         }).catch(err => {
             console.log('err ==>>', err)
-        })
+        });
+        return null;
+
     })
 
 };

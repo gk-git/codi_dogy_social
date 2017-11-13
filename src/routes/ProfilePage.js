@@ -49,7 +49,6 @@ const _calculateAge = (birthday) => { // birthday is a date
 
 const ProfilePage = (props) => {
     const {user, userInfo, likeUser, locations} = props;
-    console.log('userInfo', userInfo);
     const {images} = userInfo;
     const dateListed = new Date(userInfo.createdAt);
     const dateOfBirth = new Date(userInfo.dateOfBirth);
@@ -148,7 +147,7 @@ const ProfilePage = (props) => {
 
 
                 <div className="profile">
-                    <img src={userInfo.profileImage} alt={`${userInfo.username} dog profile` }/>
+                    <img src={userInfo.profileImage} alt={`${userInfo.username} dog profile`}/>
                     <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
                     <h2 className={'title profile-name'}>{userInfo.dogName}</h2>
                     {
@@ -178,7 +177,15 @@ const ProfilePage = (props) => {
             }
 
             <div>
-                <button className={'start-chat'}><i className={'fa fa-commenting'}/> Chat with Dog Owner</button>
+                {
+                    userInfo._id !== user._id ? (
+                        <Link to={'/chat'}>
+                            <button className={'start-chat'}><i className={'fa fa-commenting'}/> Chat with Dog Owner
+                            </button>
+                        </Link>
+
+                    ) : null
+                }
                 {
                     userInfo._id !== user._id ? (
                         <button type="button" name="love-button"
@@ -212,7 +219,7 @@ const ProfilePage = (props) => {
                 <div className={'item'}><span className={'section'}>Date listed: </span>{formatDate(dateListed)}</div>
             </div>
             <hr/>
-            {/*<Timeline/>*/}
+            <Timeline/>
         </div>
     ]
 };

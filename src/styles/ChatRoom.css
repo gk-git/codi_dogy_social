@@ -203,3 +203,11 @@
 
     border-radius: 50%;
 }
+
+.chatroom .chat .img-block {
+    max-height: 50px;
+}
+.chatroom .chat .profile-image {
+    min-height: 40px;
+    max-height: 50px;
+}

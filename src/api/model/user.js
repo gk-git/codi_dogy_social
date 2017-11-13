@@ -42,7 +42,6 @@ userSchema.pre('save', function (next) {
     let user = this;
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
-    console.log('pre save');
     bcrypt.genSalt(10, function (err, salt) {
         if (err) return next(err);
         bcrypt.hash(user.password, salt, function (err, hash) {

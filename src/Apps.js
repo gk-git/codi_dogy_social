@@ -5,22 +5,12 @@ import {mixProps} from "./utils/index";
 
 class Apps extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
-    mixProps() {
-
-    }
-
     render() {
         const mix = mixProps({...this.props});
-
         return (
             <div>
                 <Switch>
                     <Route path={'/:path1?/:path2?/:path3?'} render={props => {
-
                         return <App {...mix(props)}/>
                     }}/>
                 </Switch>

@@ -10,12 +10,12 @@ import {HomePage} from "./routes/HomePage";
 import {LoginPage} from "./routes/LoginPage";
 import {websiteUrl} from './utils'
 import {AlertIntro} from "./components/AlertIntro";
-import {confirm, scrollToTop} from './utils';
+import {confirm} from './utils';
 import {EditProfilePage} from "./routes/EditProfilePage";
 import {LoginNotice} from "./components/LoginNotice";
-import {Button, Modal} from "react-bootstrap";
-import Select from "react-select";
 import {FilterModal} from "./components/FilterModal";
+import {ChatPage} from "./routes/ChatPage";
+import {Header} from "./components/Header";
 
 
 class App extends React.Component {
@@ -29,6 +29,7 @@ class App extends React.Component {
         }
         this.state = {
             ...data,
+            ...props,
             status: 2,
             counter: 0,
             locations: {},
@@ -36,6 +37,7 @@ class App extends React.Component {
             haveDog: true,
             redirectRegister: false,
             userInfo: {},
+            randomUsers: [],
             filter: {
                 show: false,
                 query: {
@@ -149,7 +151,8 @@ class App extends React.Component {
             'handleFilterModalCancel',
             'showFilterModal',
             'handleFilterOriginEdit',
-            'handleSubmitFilterModal'
+            'handleSubmitFilterModal',
+            'getRandomUser'
 
         ])
     }
@@ -166,7 +169,7 @@ class App extends React.Component {
             ...oldState,
             alertIntro: {
                 title: 'The Number One websites',
-                content: 'F2ind your perfect stud dog, bitch or puppy today, FREE to advertise, FREE to join and browse.',
+                content: 'Find your perfect stud dog, bitch or puppy today, FREE to join and browse.',
                 actionShow: true,
                 actionText: 'Play like-me game 2!',
                 actionLink: '/',
@@ -187,6 +190,7 @@ class App extends React.Component {
             }
         });
         this.getDogsByPage(1);
+        this.getRandomUser(8);
         this.loadLocations()
     }
 
@@ -208,7 +212,7 @@ class App extends React.Component {
                 const oldState = this.state;
                 const newDogs = {};
                 data.docs.map(dog => {
-                    newDogs[dog._id] = dog;
+                    return newDogs[dog._id] = dog;
                 });
                 const newState = {
                     ...oldState,
@@ -657,6 +661,20 @@ class App extends React.Component {
         });
     }
 
+    getRandomUser(limit) {
+        superagent.get(websiteUrl + 'api/random-dogs').query({limit}).then(response => {
+            const {results, success} = response.body;
+            const oldState = this.state;
+            if (success) {
+                const newState = {
+                    ...oldState,
+                    randomUsers: results
+                };
+                this.setState(newState);
+            }
+        })
+    }
+
     showSignupForm() {
         this.setState({
             ...this.state,
@@ -876,6 +894,14 @@ class App extends React.Component {
                                 </PublicApp>
                             )
                         }}/>
+                        <Route path={'/chat'} render={props => {
+                            return (
+                                <PublicApp {...mix(props)} >
+
+                                    <ChatPage {...mix(props)} />
+                                </PublicApp>
+                            )
+                        }}/>
                         <Route path="/" render={(props) => {
                             if (!user.completeProfile) {
 
@@ -895,39 +921,49 @@ class App extends React.Component {
                 </div>
             )
         }
-        return (
-            <div>
-                <Switch>
-                    <Route path="/login" render={(props) => {
-                        return (
-                            <PublicApp {...mix(props)} noBackground={true}>
-                                <LoginPage  {...mix(props)}/>
-                            </PublicApp>
+        else {
+            if (!this.state.visited) {
+                return (<Header {...passedProps}/>)
 
-                        )
-                    }
-                    }/>
+            }
+            return (
+                <div>
+                    <Switch>
+                        <Route path="/login" render={(props) => {
+                            return (
+                                <PublicApp {...mix(props)} noBackground={true}>
+                                    <LoginPage  {...mix(props)}/>
+                                </PublicApp>
 
-                    <Route path="/dog/:user" render={(props) => {
-                        return (
-                            <PublicApp {...mix(props)} noBackground={true}>
-                                <LoginNotice {...mix(props)} />
-                            </PublicApp>
-                        )
-                    }
-                    }/>
-                    <Route path="/" render={(props) => {
-                        return (
-                            <PublicApp {...mix(props)} >
-                                <HomePage {...mix(props)} />
-                            </PublicApp>
-                        )
-                    }
-                    }/>
-                </Switch>
-                <FilterModal {...passedProps} container={this}/>
-            </div>
-        )
+                            )
+                        }
+                        }/>
+
+                        <Route path="/dog/:user" render={(props) => {
+                            return (
+                                <PublicApp {...mix(props)} noBackground={true}>
+                                    <LoginNotice {...mix(props)} />
+                                </PublicApp>
+                            )
+                        }
+                        }/>
+                        <Route path="/chat" render={() => {
+                            return <Redirect to='/'/>;
+                        }
+                        }/>
+                        <Route path="/" render={(props) => {
+                            return (
+                                <PublicApp {...mix(props)} >
+                                    <HomePage {...mix(props)} />
+                                </PublicApp>
+                            )
+                        }
+                        }/>
+                    </Switch>
+                    <FilterModal {...passedProps} container={this}/>
+                </div>
+            )
+        }
     }
 }
 

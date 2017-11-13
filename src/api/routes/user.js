@@ -229,26 +229,23 @@ const getUsers = ((req, res) => {
         }
 
         filter = {...locationFilter, ...originFilter, ...breedFilter, ...genderFilter, ...userFilter};
-        User.paginate(filter, {page, populate: 'location images'}, function (err, results) {
-            if (err) {
-                res.send({
-                    success: false,
-                    message: 'some weird error'
-                })
-            } else {
+        User.paginate(filter, {page, populate: 'location images', sort: {createdAt: 'asc'}}).then((results) => {
+
                 res.send({
                     success: true,
                     data: results
                 })
-            }
-        });
-        // res.json({
-        //     success: false,
-        //     message: 'Something went wrong in Routes/user.js'
-        // })
-    } else {
 
-        User.paginate(filter, {page, populate: 'location images'}, function (err, results) {
+            }
+        ).catch(err => {
+            res.send({
+                success: false,
+                message: 'some weird error',
+                err
+            })
+        });
+    } else {
+        User.paginate(filter, {page, populate: 'location images', sort: {createdAt: 'desc'}}, function (err, results) {
             if (err) {
                 res.json({
                     success: false,
@@ -462,6 +459,26 @@ const updateUserFilter = (req, res) => {
         }
     })
 };
+
+const getRandomUser = (req, res) => {
+
+    User.aggregate([{$sample: {size: 5}}]).then(results => {
+        res.json({
+            success: true,
+            results,
+            query: req.query,
+            body: req.body
+        })
+    }).catch(err => {
+        res.json({
+            success: false,
+            err,
+            query: req.query,
+            body: req.body
+        })
+    });
+
+};
 export {
     signup,
     login,
@@ -474,5 +491,6 @@ export {
     getUserByUsername,
     loveDogById,
     updateUserFilter,
-    checkAuth
+    checkAuth,
+    getRandomUser
 };

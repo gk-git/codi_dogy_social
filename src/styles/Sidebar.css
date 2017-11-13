@@ -11,8 +11,8 @@ section img {
 }
 
 img.profile-photo {
-    height: 58px;
-    width: 58px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -177,10 +177,9 @@ ul.online-users li span.online-dot {
     width: 12px;
     border-radius: 50%;
     position: absolute;
-    bottom: -6px;
+    bottom: 7px;
     border: 2px solid rgb(255, 255, 255);
-    left: 0;
-    right: 0;
+    right: 7px;
     margin: auto;
 }
 
@@ -253,7 +252,18 @@ ul.edit-menu li.active i.icon {
 }
 
 .sidebar-block ul.online-users {
-    display: none;
+    display: block;
+}
+
+.sidebar-block .list-inline > li {
+    display: block;
+}
+
+.sidebar-block .image-profile {
+    height: 58px;
+    width: 58px;
+    overflow: hidden;
+    position: relative;
 }
 
 .menu-item.menu-modal {
@@ -275,4 +285,33 @@ ul.edit-menu li.active i.icon {
     display: block;
     color: rgb(39, 170, 225);
     font-size: 1.7rem;
+}
+
+.sidebar-block.no-auth {
+    padding-top: 40px;
+}
+
+.sidebar-block.no-auth .btn.title {
+
+}
+
+.sidebar-block.no-auth .image-profile {
+    display: block;
+}
+
+.sidebar-block.no-auth .profile-content {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+}
+
+.sidebar-block.no-auth .profile-content .span-username {
+    color: rgb(52, 70, 225);
+    font-size: 1.5rem;
+}
+
+.sidebar-block.no-auth .random-list {
+    position: relative;
 }

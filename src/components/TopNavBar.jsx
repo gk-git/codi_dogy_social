@@ -4,6 +4,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 import '../styles/TopNavBar.css'
 import {Link} from "react-router-dom";
+import {websiteUrl} from "../utils/index";
 
 const TopNavBar = (props) => {
     const {authenticated, logout, loadUserInfo, showLoginForm, showSignupForm, user} = props;
@@ -13,7 +14,8 @@ const TopNavBar = (props) => {
                 <Navbar.Toggle/>
 
                 <Navbar.Brand>
-                    <Link to={'/'}>Doggo</Link>
+                    <Link to={'/'}>
+                        <img src={`${websiteUrl}logo.png`} alt={'doggo logo'} style={{maxHeight: '100%', display: 'inline-block'}}/> <span style={{display: 'inline-block'}}> Doggo</span></Link>
                 </Navbar.Brand>
             </Navbar.Header>
             <Navbar.Collapse>
@@ -22,8 +24,9 @@ const TopNavBar = (props) => {
                     {
                         authenticated ? (<NavDropdown eventKey={3} className={'profile-dropdown'} title={user.dogName}
                                                       id="basic-nav-dropdown">
-                                <LinkContainer to="/u/profile" onClick={event =>{
-                                    loadUserInfo(user.username);}
+                                <LinkContainer to="/u/profile" onClick={event => {
+                                    loadUserInfo(user.username);
+                                }
                                 }>
                                     <MenuItem eventKey={3.1}><i className={'fa fa-user'}/>My Dog Profile</MenuItem>
                                 </LinkContainer>

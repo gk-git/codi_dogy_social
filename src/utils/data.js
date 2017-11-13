@@ -1,88 +1,343 @@
 export const origins_options = [
-    {value: "AFGHANISTAN", label: "AFGHANISTAN"},
-    {value: "ANATOLIA", label: "ANATOLIA"},
-    {value: "ARGENTINA", label: "ARGENTINA"},
-    {value: "AUSTRALIA", label: "AUSTRALIA"},
-    {value: "AUSTRIA", label: "AUSTRIA"},
-    {value: "BELGIUM", label: "BELGIUM"},
-    {value: "BELGIUM, FRANCE", label: "BELGIUM, FRANCE"},
-    {value: "BOSNIA", label: "BOSNIA"},
-    {value: "AND", label: "AND"},
-    {value: "HERZEGOVINA", label: "HERZEGOVINA"},
-    {value: "BOSNIA", label: "BOSNIA"},
-    {value: "AND", label: "AND"},
-    {value: "HERZEGOVINA, CROATIA", label: "HERZEGOVINA, CROATIA"},
-    {value: "BRAZIL", label: "BRAZIL"},
-    {value: "CANADA", label: "CANADA"},
-    {value: "CENTRAL", label: "CENTRAL"},
-    {value: "AFRICA", label: "AFRICA"},
-    {value: "CENTRAL", label: "CENTRAL"},
-    {value: "MEDITERRANEAN", label: "MEDITERRANEAN"},
-    {value: "BASIN", label: "BASIN"},
-    {value: "CHINA", label: "CHINA"},
-    {value: "CROATIA", label: "CROATIA"},
-    {value: "CZECH", label: "CZECH"},
-    {value: "REPUBLIC", label: "REPUBLIC"},
-    {value: "DENMARK", label: "DENMARK"},
-    {value: "DENMARK, SWEDEN", label: "DENMARK, SWEDEN"},
-    {value: "ENGLAND", label: "ENGLAND"},
-    {value: "FINLAND", label: "FINLAND"},
-    {value: "FRANCE", label: "FRANCE"},
-    {value: "GERMANY", label: "GERMANY"},
-    {value: "GERMANY, SWITZERLAND", label: "GERMANY, SWITZERLAND"},
-    {value: "GREAT", label: "GREAT"},
-    {value: "BRITAIN", label: "BRITAIN"},
-    {value: "GREECE", label: "GREECE"},
-    {value: "GREENLAND", label: "GREENLAND"},
-    {value: "HUNGARY", label: "HUNGARY"},
-    {value: "ICELAND", label: "ICELAND"},
-    {value: "IRELAND", label: "IRELAND"},
-    {value: "ISRAEL", label: "ISRAEL"},
-    {value: "ITALY", label: "ITALY"},
-    {value: "JAPAN", label: "JAPAN"},
-    {value: "MACEDONIA, SERBIA", label: "MACEDONIA, SERBIA"},
-    {value: "MADAGASCAR", label: "MADAGASCAR"},
-    {value: "MALI", label: "MALI"},
-    {value: "MALTA", label: "MALTA"},
-    {value: "MEXICO", label: "MEXICO"},
-    {value: "MIDDLE", label: "MIDDLE"},
-    {value: "EAST", label: "EAST"},
-    {value: "MONTENEGRO", label: "MONTENEGRO"},
-    {value: "MOROCCO", label: "MOROCCO"},
-    {value: "NORTHERN", label: "NORTHERN"},
-    {value: "RUSSIA, SIBERIA", label: "RUSSIA, SIBERIA"},
-    {value: "NORWAY", label: "NORWAY"},
-    {value: "PERU", label: "PERU"},
-    {value: "POLAND", label: "POLAND"},
-    {value: "PORTUGAL", label: "PORTUGAL"},
-    {value: "REPUBLIC", label: "REPUBLIC"},
-    {value: "OF", label: "OF"},
-    {value: "KOREA", label: "KOREA"},
-    {value: "ROMANIA", label: "ROMANIA"},
-    {value: "RUSSIA", label: "RUSSIA"},
-    {value: "SERBIA", label: "SERBIA"},
-    {value: "SLOVAKIA", label: "SLOVAKIA"},
-    {value: "SLOVENIA", label: "SLOVENIA"},
-    {value: "SOUTH", label: "SOUTH"},
-    {value: "AFRICA", label: "AFRICA"},
-    {value: "SOUTH - EASTERN", label: "SOUTH - EASTERN"},
-    {value: "EUROPE", label: "EUROPE"},
-    {value: "SPAIN", label: "SPAIN"},
-    {value: "SWEDEN", label: "SWEDEN"},
-    {value: "SWITZERLAND", label: "SWITZERLAND"},
-    {value: "TAIWAN", label: "TAIWAN"},
-    {value: "THAILAND", label: "THAILAND"},
-    {value: "THE", label: "THE"},
-    {value: "NETHERLANDS", label: "NETHERLANDS"},
-    {value: "Tibet(China)", label: "Tibet(China)"},
-    {value: "UNITED", label: "UNITED"},
-    {value: "STATES", label: "STATES"},
-    {value: "OF", label: "OF"},
-    {value: "AMERICA", label: "AMERICA"},
-    {value: "URUGUAY", label: "URUGUAY"},
-    {value: "WESTERN", label: "WESTERN"},
-    {value: "MEDITERRANEAN", label: "MEDITERRANEAN"},
-    {value: "BASIN", label: ["BASIN", "BASIN"]}
+    {
+        value: "afghanistan",
+        label: "AFGHANISTAN"
+    },
+    {
+        value: "anatolia",
+        label: "ANATOLIA"
+    },
+    {
+        value: "argentina",
+        label: "ARGENTINA"
+    },
+    {
+        value: "australia",
+        label: "AUSTRALIA"
+    },
+    {
+        value: "austria",
+        label: "AUSTRIA"
+    },
+    {
+        value: "belgium",
+        label: "BELGIUM"
+    },
+    {
+        value: "belgium, france",
+        label: "BELGIUM, FRANCE"
+    },
+    {
+        value: "bosnia",
+        label: "BOSNIA"
+    },
+    {
+        value: "and",
+        label: "AND"
+    },
+    {
+        value: "herzegovina",
+        label: "HERZEGOVINA"
+    },
+    {
+        value: "bosnia",
+        label: "BOSNIA"
+    },
+    {
+        value: "and",
+        label: "AND"
+    },
+    {
+        value: "herzegovina, croatia",
+        label: "HERZEGOVINA, CROATIA"
+    },
+
+    {
+        value: "brazil",
+        label: "BRAZIL"
+    },
+    {
+        value: "canada",
+        label: "CANADA"
+    },
+    {
+        value: "central",
+        label: "CENTRAL"
+    },
+    {
+        value: "africa",
+        label: "AFRICA"
+    },
+    {
+        value: "central",
+        label: "CENTRAL"
+    },
+    {
+        value: "mediterranean",
+        label: "MEDITERRANEAN"
+    },
+    {
+        value: "basin",
+        label: "BASIN"
+    },
+    {
+        value: "china",
+        label: "CHINA"
+    },
+    {
+        value: "croatia",
+        label: "CROATIA"
+    },
+    {
+        value: "czech",
+        label: "CZECH"
+    },
+    {
+        value: "republic",
+        label: "REPUBLIC"
+    },
+    {
+        value: "denmark",
+        label: "DENMARK"
+    },
+    {
+        value: "denmark, sweden",
+        label: "DENMARK, SWEDEN"
+    },
+    {
+        value: "england",
+        label: "ENGLAND"
+    },
+    {
+        value: "finland",
+        label: "FINLAND"
+    },
+    {
+        value: "france",
+        label: "FRANCE"
+    },
+    {
+        value: "germany",
+        label: "GERMANY"
+    },
+
+    {
+        value: "germany, switzerland",
+        label: "GERMANY, SWITZERLAND"
+    },
+    {
+        value: "great",
+        label: "GREAT"
+    },
+    {
+        value: "britain",
+        label: "BRITAIN"
+    },
+    {
+        value: "greece",
+        label: "GREECE"
+    },
+    {
+        value: "greenland",
+        label: "GREENLAND"
+    },
+    {
+        value: "hungary",
+        label: "HUNGARY"
+    },
+    {
+        value: "iceland",
+        label: "ICELAND"
+    },
+    {
+        value: "ireland",
+        label: "IRELAND"
+    },
+    {
+        value: "israel",
+        label: "ISRAEL"
+    },
+    {
+        value: "italy",
+        label: "ITALY"
+    },
+
+    {
+        value: "japan",
+        label: "JAPAN"
+    },
+    {
+        value: "macedonia, serbia",
+        label: "MACEDONIA, SERBIA"
+    },
+    {
+        value: "madagascar",
+        label: "MADAGASCAR"
+    },
+    {
+        value: "mali",
+        label: "MALI"
+    },
+    {
+        value: "malta",
+        label: "MALTA"
+    },
+    {
+        value: "mexico",
+        label: "MEXICO"
+    },
+    {
+        value: "middle",
+        label: "MIDDLE"
+    },
+    {
+        value: "east",
+        label: "EAST"
+    },
+    {
+        value: "montenegro",
+        label: "MONTENEGRO"
+    },
+    {
+        value: "morocco",
+        label: "MOROCCO"
+    },
+    {
+        value: "northern",
+        label: "NORTHERN"
+    },
+    {
+        value: "russia, siberia",
+        label: "RUSSIA, SIBERIA"
+    },
+    {
+        value: "norway",
+        label: "NORWAY"
+    },
+    {
+        value: "peru",
+        label: "PERU"
+    },
+    {
+        value: "poland",
+        label: "POLAND"
+    },
+    {
+        value: "portugal",
+        label: "PORTUGAL"
+    },
+    {
+        value: "republic",
+        label: "REPUBLIC"
+    },
+    {
+        value: "of",
+        label: "OF"
+    },
+    {
+        value: "korea",
+        label: "KOREA"
+    },
+    {
+        value: "romania",
+        label: "ROMANIA"
+    },
+    {
+        value: "russia",
+        label: "RUSSIA"
+    },
+    {
+        value: "serbia",
+        label: "SERBIA"
+    },
+    {
+        value: "slovakia",
+        label: "SLOVAKIA"
+    },
+    {
+        value: "slovenia",
+        label: "SLOVENIA"
+    },
+    {
+        value: "south",
+        label: "SOUTH"
+    },
+    {
+        value: "africa",
+        label: "AFRICA"
+    },
+    {
+        value: "south - eastern",
+        label: "SOUTH - EASTERN"
+    },
+    {
+        value: "europe",
+        label: "EUROPE"
+    },
+    {
+        value: "spain",
+        label: "SPAIN"
+    },
+    {
+        value: "sweden",
+        label: "SWEDEN"
+    },
+    {
+        value: "switzerland",
+        label: "SWITZERLAND"
+    },
+    {
+        value: "taiwan",
+        label: "TAIWAN"
+    },
+    {
+        value: "thailand",
+        label: "THAILAND"
+    },
+    {
+        value: "the",
+        label: "THE"
+    },
+    {
+        value: "netherlands",
+        label: "NETHERLANDS"
+    },
+    {
+        value: "tibet(china)",
+        label: "Tibet(China)"
+    },
+    {
+        value: "united",
+        label: "UNITED"
+    },
+    {
+        value: "states",
+        label: "STATES"
+    },
+    {
+        value: "of",
+        label: "OF"
+    },
+    {
+        value: "america",
+        label: "AMERICA"
+    },
+    {
+        value: "uruguay",
+        label: "URUGUAY"
+    },
+    {
+        value: "western",
+        label: "WESTERN"
+    },
+    {
+        value: "mediterranean",
+        label: "MEDITERRANEAN"
+    },
+    {
+        value: "basin",
+        label: "BASIN"
+    }
 ];
 export const gender_options = [
     {value: "Male", label: 'Male'},
@@ -185,375 +440,375 @@ export const breed_options = [
     }, {value: "BRITTANY SPANIEL", label: "BRITTANY SPANIEL"}, {
         value: "RAFEIRO OF ALENTEJO", label: "RAFEIRO OF ALENTEJO"
     }, {value: "GERMAN SPITZ", label: "GERMAN SPITZ"}, {
-        value: "GERMAN WIRE- HAIRED POINTING DOG", "label": "GERMAN WIRE- HAIRED POINTING DOG"
-    }, {value: "WEIMARANER", "label": "WEIMARANER"}, {
-        value: "WESTPHALIAN DACHSBRACKE", "label": "WESTPHALIAN DACHSBRACKE"
-    }, {value: "FRENCH BULLDOG", "label": "FRENCH BULLDOG"}, {
-        value: "KLEINER MÌÏNSTERLÌãNDER", "label": "KLEINER MÌÏNSTERLÌãNDER"
-    }, {value: "GERMAN HUNTING TERRIER", "label": "GERMAN HUNTING TERRIER"}, {
-        value: "GERMAN SPANIEL", "label": "GERMAN SPANIEL"
-    }, {value: "FRENCH WATER DOG", "label": "FRENCH WATER DOG"}, {
-        value: "BLUE PICARDY SPANIEL", "label": "BLUE PICARDY SPANIEL"
+        value: "GERMAN WIRE- HAIRED POINTING DOG", label: "GERMAN WIRE- HAIRED POINTING DOG"
+    }, {value: "WEIMARANER", label: "WEIMARANER"}, {
+        value: "WESTPHALIAN DACHSBRACKE", label: "WESTPHALIAN DACHSBRACKE"
+    }, {value: "FRENCH BULLDOG", label: "FRENCH BULLDOG"}, {
+        value: "KLEINER MÌÏNSTERLÌãNDER", label: "KLEINER MÌÏNSTERLÌãNDER"
+    }, {value: "GERMAN HUNTING TERRIER", label: "GERMAN HUNTING TERRIER"}, {
+        value: "GERMAN SPANIEL", label: "GERMAN SPANIEL"
+    }, {value: "FRENCH WATER DOG", label: "FRENCH WATER DOG"}, {
+        value: "BLUE PICARDY SPANIEL", label: "BLUE PICARDY SPANIEL"
     }, {
-        value: "WIRE-HAIRED POINTING GRIFFON KORTHALS", "label": "WIRE-HAIRED POINTING GRIFFON KORTHALS"
-    }, {value: "PICARDY SPANIEL", "label": "PICARDY SPANIEL"}, {
-        value: "CLUMBER SPANIEL", "label": "CLUMBER SPANIEL"
-    }, {value: "CURLY COATED RETRIEVER", "label": "CURLY COATED RETRIEVER"}, {
-        value: "GOLDEN RETRIEVER", "label": "GOLDEN RETRIEVER"
-    }, {value: "BRIARD", "label": "BRIARD"}, {
+        value: "WIRE-HAIRED POINTING GRIFFON KORTHALS", label: "WIRE-HAIRED POINTING GRIFFON KORTHALS"
+    }, {value: "PICARDY SPANIEL", label: "PICARDY SPANIEL"}, {
+        value: "CLUMBER SPANIEL", label: "CLUMBER SPANIEL"
+    }, {value: "CURLY COATED RETRIEVER", label: "CURLY COATED RETRIEVER"}, {
+        value: "GOLDEN RETRIEVER", label: "GOLDEN RETRIEVER"
+    }, {value: "BRIARD", label: "BRIARD"}, {
         value: "PONT-AUDEMER SPANIEL",
-        "label": "PONT-AUDEMER SPANIEL"
-    }, {value: "SAINT GERMAIN POINTER", "label": "SAINT GERMAIN POINTER"}, {
+        label: "PONT-AUDEMER SPANIEL"
+    }, {value: "SAINT GERMAIN POINTER", label: "SAINT GERMAIN POINTER"}, {
         value: "DOGUE DE BORDEAUX",
-        "label": "DOGUE DE BORDEAUX"
-    }, {value: "DEUTSCH LANGHAAR", "label": "DEUTSCH LANGHAAR"}, {
+        label: "DOGUE DE BORDEAUX"
+    }, {value: "DEUTSCH LANGHAAR", label: "DEUTSCH LANGHAAR"}, {
         value: "LARGE MUNSTERLANDER",
-        "label": "LARGE MUNSTERLANDER"
+        label: "LARGE MUNSTERLANDER"
     }, {
         value: "GERMAN SHORT- HAIRED POINTING DOG",
-        "label": "GERMAN SHORT- HAIRED POINTING DOG"
-    }, {value: "IRISH RED SETTER", "label": "IRISH RED SETTER"}, {
+        label: "GERMAN SHORT- HAIRED POINTING DOG"
+    }, {value: "IRISH RED SETTER", label: "IRISH RED SETTER"}, {
         value: "FLAT COATED RETRIEVER",
-        "label": "FLAT COATED RETRIEVER"
-    }, {value: "LABRADOR RETRIEVER", "label": "LABRADOR RETRIEVER"}, {
+        label: "FLAT COATED RETRIEVER"
+    }, {value: "LABRADOR RETRIEVER", label: "LABRADOR RETRIEVER"}, {
         value: "FIELD SPANIEL",
-        "label": "FIELD SPANIEL"
-    }, {value: "IRISH WATER SPANIEL", "label": "IRISH WATER SPANIEL"}, {
+        label: "FIELD SPANIEL"
+    }, {value: "IRISH WATER SPANIEL", label: "IRISH WATER SPANIEL"}, {
         value: "ENGLISH SPRINGER SPANIEL",
-        "label": "ENGLISH SPRINGER SPANIEL"
-    }, {value: "WELSH SPRINGER SPANIEL", "label": "WELSH SPRINGER SPANIEL"}, {
+        label: "ENGLISH SPRINGER SPANIEL"
+    }, {value: "WELSH SPRINGER SPANIEL", label: "WELSH SPRINGER SPANIEL"}, {
         value: "SUSSEX SPANIEL",
-        "label": "SUSSEX SPANIEL"
-    }, {value: "KING CHARLES SPANIEL", "label": "KING CHARLES SPANIEL"}, {
+        label: "SUSSEX SPANIEL"
+    }, {value: "KING CHARLES SPANIEL", label: "KING CHARLES SPANIEL"}, {
         value: "SMÌÉLANDSSTÌÐVARE",
-        "label": "SMÌÉLANDSSTÌÐVARE"
-    }, {value: "DREVER", "label": "DREVER"}, {
+        label: "SMÌÉLANDSSTÌÐVARE"
+    }, {value: "DREVER", label: "DREVER"}, {
         value: "SCHILLERSTÌÐVARE",
-        "label": "SCHILLERSTÌÐVARE"
-    }, {value: "HAMILTONSTÌÐVARE", "label": "HAMILTONSTÌÐVARE"}, {
+        label: "SCHILLERSTÌÐVARE"
+    }, {value: "HAMILTONSTÌÐVARE", label: "HAMILTONSTÌÐVARE"}, {
         value: "FRENCH POINTING DOG - GASCOGNE TYPE",
-        "label": "FRENCH POINTING DOG - GASCOGNE TYPE"
+        label: "FRENCH POINTING DOG - GASCOGNE TYPE"
     }, {
         value: "FRENCH POINTING DOG - PYRENEAN TYPE",
-        "label": "FRENCH POINTING DOG - PYRENEAN TYPE"
-    }, {value: "SWEDISH LAPPHUND", "label": "SWEDISH LAPPHUND"}, {
+        label: "FRENCH POINTING DOG - PYRENEAN TYPE"
+    }, {value: "SWEDISH LAPPHUND", label: "SWEDISH LAPPHUND"}, {
         value: "CAVALIER KING CHARLES SPANIEL",
-        "label": "CAVALIER KING CHARLES SPANIEL"
-    }, {value: "PYRENEAN MOUNTAIN DOG", "label": "PYRENEAN MOUNTAIN DOG"}, {
+        label: "CAVALIER KING CHARLES SPANIEL"
+    }, {value: "PYRENEAN MOUNTAIN DOG", label: "PYRENEAN MOUNTAIN DOG"}, {
         value: "PYRENEAN SHEEPDOG - SMOOTH FACED",
-        "label": "PYRENEAN SHEEPDOG - SMOOTH FACED"
-    }, {value: "IRISH TERRIER", "label": "IRISH TERRIER"}, {
+        label: "PYRENEAN SHEEPDOG - SMOOTH FACED"
+    }, {value: "IRISH TERRIER", label: "IRISH TERRIER"}, {
         value: "BOSTON TERRIER",
-        "label": "BOSTON TERRIER"
-    }, {value: "LONG-HAIRED PYRENEAN SHEEPDOG", "label": "LONG-HAIRED PYRENEAN SHEEPDOG"}, {
+        label: "BOSTON TERRIER"
+    }, {value: "LONG-HAIRED PYRENEAN SHEEPDOG", label: "LONG-HAIRED PYRENEAN SHEEPDOG"}, {
         value: "SLOVAKIAN CHUVACH",
-        "label": "SLOVAKIAN CHUVACH"
-    }, {value: "DOBERMANN", "label": "DOBERMANN"}, {value: "BOXER", "label": "BOXER"}, {
+        label: "SLOVAKIAN CHUVACH"
+    }, {value: "DOBERMANN", label: "DOBERMANN"}, {value: "BOXER", label: "BOXER"}, {
         value: "LEONBERGER",
-        "label": "LEONBERGER"
-    }, {value: "RHODESIAN RIDGEBACK", "label": "RHODESIAN RIDGEBACK"}, {
+        label: "LEONBERGER"
+    }, {value: "RHODESIAN RIDGEBACK", label: "RHODESIAN RIDGEBACK"}, {
         value: "ROTTWEILER",
-        "label": "ROTTWEILER"
-    }, {value: "DACHSHUND", "label": "DACHSHUND"}, {value: "BULLDOG", "label": "BULLDOG"}, {
+        label: "ROTTWEILER"
+    }, {value: "DACHSHUND", label: "DACHSHUND"}, {value: "BULLDOG", label: "BULLDOG"}, {
         value: "SERBIAN HOUND",
-        "label": "SERBIAN HOUND"
+        label: "SERBIAN HOUND"
     }, {
         value: "ISTRIAN SHORT-HAIRED HOUND",
-        "label": "ISTRIAN SHORT-HAIRED HOUND"
-    }, {value: "ISTRIAN WIRE-HAIRED HOUND", "label": "ISTRIAN WIRE-HAIRED HOUND"}, {
+        label: "ISTRIAN SHORT-HAIRED HOUND"
+    }, {value: "ISTRIAN WIRE-HAIRED HOUND", label: "ISTRIAN WIRE-HAIRED HOUND"}, {
         value: "DALMATIAN",
-        "label": "DALMATIAN"
-    }, {value: "POSAVATZ HOUND", "label": "POSAVATZ HOUND"}, {
+        label: "DALMATIAN"
+    }, {value: "POSAVATZ HOUND", label: "POSAVATZ HOUND"}, {
         value: "BOSNIAN BROKEN-HAIRED HOUND - CALLED BARAK",
-        "label": "BOSNIAN BROKEN-HAIRED HOUND - CALLED BARAK"
-    }, {value: "COLLIE ROUGH", "label": "COLLIE ROUGH"}, {
+        label: "BOSNIAN BROKEN-HAIRED HOUND - CALLED BARAK"
+    }, {value: "COLLIE ROUGH", label: "COLLIE ROUGH"}, {
         value: "BULLMASTIFF",
-        "label": "BULLMASTIFF"
-    }, {value: "GREYHOUND", "label": "GREYHOUND"}, {
+        label: "BULLMASTIFF"
+    }, {value: "GREYHOUND", label: "GREYHOUND"}, {
         value: "ENGLISH FOXHOUND",
-        "label": "ENGLISH FOXHOUND"
-    }, {value: "IRISH WOLFHOUND", "label": "IRISH WOLFHOUND"}, {
+        label: "ENGLISH FOXHOUND"
+    }, {value: "IRISH WOLFHOUND", label: "IRISH WOLFHOUND"}, {
         value: "BEAGLE",
-        "label": "BEAGLE"
-    }, {value: "WHIPPET", "label": "WHIPPET"}, {value: "BASSET HOUND", "label": "BASSET HOUND"}, {
+        label: "BEAGLE"
+    }, {value: "WHIPPET", label: "WHIPPET"}, {value: "BASSET HOUND", label: "BASSET HOUND"}, {
         value: "DEERHOUND",
-        "label": "DEERHOUND"
-    }, {value: "ITALIAN SPINONE", "label": "ITALIAN SPINONE"}, {
+        label: "DEERHOUND"
+    }, {value: "ITALIAN SPINONE", label: "ITALIAN SPINONE"}, {
         value: "GERMAN SHEPHERD DOG",
-        "label": "GERMAN SHEPHERD DOG"
-    }, {value: "AMERICAN COCKER SPANIEL", "label": "AMERICAN COCKER SPANIEL"}, {
+        label: "GERMAN SHEPHERD DOG"
+    }, {value: "AMERICAN COCKER SPANIEL", label: "AMERICAN COCKER SPANIEL"}, {
         value: "DANDIE DINMONT TERRIER",
-        "label": "DANDIE DINMONT TERRIER"
-    }, {value: "FOX TERRIER (WIRE)", "label": "FOX TERRIER (WIRE)"}, {
+        label: "DANDIE DINMONT TERRIER"
+    }, {value: "FOX TERRIER (WIRE)", label: "FOX TERRIER (WIRE)"}, {
         value: "CASTRO LABOREIRO DOG",
-        "label": "CASTRO LABOREIRO DOG"
-    }, {value: "BOUVIER DES ARDENNES", "label": "BOUVIER DES ARDENNES"}, {
+        label: "CASTRO LABOREIRO DOG"
+    }, {value: "BOUVIER DES ARDENNES", label: "BOUVIER DES ARDENNES"}, {
         value: "POODLE",
-        "label": "POODLE"
-    }, {value: "ESTRELA MOUNTAIN DOG", "label": "ESTRELA MOUNTAIN DOG"}, {
+        label: "POODLE"
+    }, {value: "ESTRELA MOUNTAIN DOG", label: "ESTRELA MOUNTAIN DOG"}, {
         value: "FRENCH SPANIEL",
-        "label": "FRENCH SPANIEL"
-    }, {value: "PICARDY SHEEPDOG", "label": "PICARDY SHEEPDOG"}, {
+        label: "FRENCH SPANIEL"
+    }, {value: "PICARDY SHEEPDOG", label: "PICARDY SHEEPDOG"}, {
         value: "ARIEGE POINTING DOG",
-        "label": "ARIEGE POINTING DOG"
-    }, {value: "BOURBONNAIS POINTING DOG", "label": "BOURBONNAIS POINTING DOG"}, {
+        label: "ARIEGE POINTING DOG"
+    }, {value: "BOURBONNAIS POINTING DOG", label: "BOURBONNAIS POINTING DOG"}, {
         value: "AUVERGNE POINTER",
-        "label": "AUVERGNE POINTER"
-    }, {value: "GIANT SCHNAUZER", "label": "GIANT SCHNAUZER"}, {
+        label: "AUVERGNE POINTER"
+    }, {value: "GIANT SCHNAUZER", label: "GIANT SCHNAUZER"}, {
         value: "SCHNAUZER",
-        "label": "SCHNAUZER"
-    }, {value: "MINIATURE SCHNAUZER", "label": "MINIATURE SCHNAUZER"}, {
+        label: "SCHNAUZER"
+    }, {value: "MINIATURE SCHNAUZER", label: "MINIATURE SCHNAUZER"}, {
         value: "GERMAN PINSCHER",
-        "label": "GERMAN PINSCHER"
-    }, {value: "MINIATURE PINSCHER", "label": "MINIATURE PINSCHER"}, {
+        label: "GERMAN PINSCHER"
+    }, {value: "MINIATURE PINSCHER", label: "MINIATURE PINSCHER"}, {
         value: "AFFENPINSCHER",
-        "label": "AFFENPINSCHER"
-    }, {value: "PORTUGUESE POINTING DOG", "label": "PORTUGUESE POINTING DOG"}, {
+        label: "AFFENPINSCHER"
+    }, {value: "PORTUGUESE POINTING DOG", label: "PORTUGUESE POINTING DOG"}, {
         value: "SLOUGHI",
-        "label": "SLOUGHI"
-    }, {value: "FINNISH LAPPHUND", "label": "FINNISH LAPPHUND"}, {
+        label: "SLOUGHI"
+    }, {value: "FINNISH LAPPHUND", label: "FINNISH LAPPHUND"}, {
         value: "HOVAWART",
-        "label": "HOVAWART"
-    }, {value: "BOUVIER DES FLANDRES", "label": "BOUVIER DES FLANDRES"}, {
+        label: "HOVAWART"
+    }, {value: "BOUVIER DES FLANDRES", label: "BOUVIER DES FLANDRES"}, {
         value: "KROMFOHRLÌãNDER",
-        "label": "KROMFOHRLÌãNDER"
+        label: "KROMFOHRLÌãNDER"
     }, {
         value: "BORZOI - RUSSIAN HUNTING SIGHTHOUND",
-        "label": "BORZOI - RUSSIAN HUNTING SIGHTHOUND"
-    }, {value: "BERGAMASCO SHEPHERD DOG", "label": "BERGAMASCO SHEPHERD DOG"}, {
+        label: "BORZOI - RUSSIAN HUNTING SIGHTHOUND"
+    }, {value: "BERGAMASCO SHEPHERD DOG", label: "BERGAMASCO SHEPHERD DOG"}, {
         value: "ITALIAN VOLPINO",
-        "label": "ITALIAN VOLPINO"
-    }, {value: "BOLOGNESE", "label": "BOLOGNESE"}, {
+        label: "ITALIAN VOLPINO"
+    }, {value: "BOLOGNESE", label: "BOLOGNESE"}, {
         value: "NEAPOLITAN MASTIFF",
-        "label": "NEAPOLITAN MASTIFF"
-    }, {value: "ITALIAN ROUGH-HAIRED SEGUGIO", "label": "ITALIAN ROUGH-HAIRED SEGUGIO"}, {
+        label: "NEAPOLITAN MASTIFF"
+    }, {value: "ITALIAN ROUGH-HAIRED SEGUGIO", label: "ITALIAN ROUGH-HAIRED SEGUGIO"}, {
         value: "CIRNECO DELL'ETNA",
-        "label": "CIRNECO DELL'ETNA"
-    }, {value: "ITALIAN GREYHOUND", "label": "ITALIAN GREYHOUND"}, {
+        label: "CIRNECO DELL'ETNA"
+    }, {value: "ITALIAN GREYHOUND", label: "ITALIAN GREYHOUND"}, {
         value: "MAREMMA AND THE ABRUZZES SHEEPDOG",
-        "label": "MAREMMA AND THE ABRUZZES SHEEPDOG"
-    }, {value: "ITALIAN POINTING DOG", "label": "ITALIAN POINTING DOG"}, {
+        label: "MAREMMA AND THE ABRUZZES SHEEPDOG"
+    }, {value: "ITALIAN POINTING DOG", label: "ITALIAN POINTING DOG"}, {
         value: "NORWEGIAN HOUND",
-        "label": "NORWEGIAN HOUND"
-    }, {value: "SPANISH HOUND", "label": "SPANISH HOUND"}, {
+        label: "NORWEGIAN HOUND"
+    }, {value: "SPANISH HOUND", label: "SPANISH HOUND"}, {
         value: "CHOW CHOW",
-        "label": "CHOW CHOW"
-    }, {value: "JAPANESE CHIN", "label": "JAPANESE CHIN"}, {
+        label: "CHOW CHOW"
+    }, {value: "JAPANESE CHIN", label: "JAPANESE CHIN"}, {
         value: "PEKINGESE",
-        "label": "PEKINGESE"
-    }, {value: "SHIH TZU", "label": "SHIH TZU"}, {
+        label: "PEKINGESE"
+    }, {value: "SHIH TZU", label: "SHIH TZU"}, {
         value: "TIBETAN TERRIER",
-        "label": "TIBETAN TERRIER"
-    }, {value: "SAMOYED", "label": "SAMOYED"}, {
+        label: "TIBETAN TERRIER"
+    }, {value: "SAMOYED", label: "SAMOYED"}, {
         value: "HANOVERIAN SCENTHOUND",
-        "label": "HANOVERIAN SCENTHOUND"
-    }, {value: "HELLENIC HOUND", "label": "HELLENIC HOUND"}, {
+        label: "HANOVERIAN SCENTHOUND"
+    }, {value: "HELLENIC HOUND", label: "HELLENIC HOUND"}, {
         value: "BICHON FRISE",
-        "label": "BICHON FRISE"
-    }, {value: "PUDELPOINTER", "label": "PUDELPOINTER"}, {
+        label: "BICHON FRISE"
+    }, {value: "PUDELPOINTER", label: "PUDELPOINTER"}, {
         value: "BAVARIAN MOUNTAIN SCENT HOUND",
-        "label": "BAVARIAN MOUNTAIN SCENT HOUND"
-    }, {value: "CHIHUAHUA", "label": "CHIHUAHUA"}, {
+        label: "BAVARIAN MOUNTAIN SCENT HOUND"
+    }, {value: "CHIHUAHUA", label: "CHIHUAHUA"}, {
         value: "FRENCH TRICOLOUR HOUND",
-        "label": "FRENCH TRICOLOUR HOUND"
-    }, {value: "FRENCH WHITE & BLACK HOUND", "label": "FRENCH WHITE & BLACK HOUND"}, {
+        label: "FRENCH TRICOLOUR HOUND"
+    }, {value: "FRENCH WHITE & BLACK HOUND", label: "FRENCH WHITE & BLACK HOUND"}, {
         value: "FRISIAN WATER DOG",
-        "label": "FRISIAN WATER DOG"
-    }, {value: "STABIJHOUN", "label": "STABIJHOUN"}, {
+        label: "FRISIAN WATER DOG"
+    }, {value: "STABIJHOUN", label: "STABIJHOUN"}, {
         value: "DUTCH SHEPHERD DOG",
-        "label": "DUTCH SHEPHERD DOG"
-    }, {value: "DRENTSCHE PARTRIDGE DOG", "label": "DRENTSCHE PARTRIDGE DOG"}, {
+        label: "DUTCH SHEPHERD DOG"
+    }, {value: "DRENTSCHE PARTRIDGE DOG", label: "DRENTSCHE PARTRIDGE DOG"}, {
         value: "FILA BRASILEIRO",
-        "label": "FILA BRASILEIRO"
+        label: "FILA BRASILEIRO"
     }, {
         value: "LANDSEER (EUROPEAN CONTINENTAL TYPE)",
-        "label": "LANDSEER (EUROPEAN CONTINENTAL TYPE)"
-    }, {value: "LHASA APSO", "label": "LHASA APSO"}, {
+        label: "LANDSEER (EUROPEAN CONTINENTAL TYPE)"
+    }, {value: "LHASA APSO", label: "LHASA APSO"}, {
         value: "AFGHAN HOUND",
-        "label": "AFGHAN HOUND"
-    }, {value: "SERBIAN TRICOLOUR HOUND", "label": "SERBIAN TRICOLOUR HOUND"}, {
+        label: "AFGHAN HOUND"
+    }, {value: "SERBIAN TRICOLOUR HOUND", label: "SERBIAN TRICOLOUR HOUND"}, {
         value: "TIBETAN MASTIFF",
-        "label": "TIBETAN MASTIFF"
-    }, {value: "TIBETAN SPANIEL", "label": "TIBETAN SPANIEL"}, {
+        label: "TIBETAN MASTIFF"
+    }, {value: "TIBETAN SPANIEL", label: "TIBETAN SPANIEL"}, {
         value: "DEUTSCH STICHELHAAR",
-        "label": "DEUTSCH STICHELHAAR"
-    }, {value: "LITTLE LION DOG", "label": "LITTLE LION DOG"}, {
+        label: "DEUTSCH STICHELHAAR"
+    }, {value: "LITTLE LION DOG", label: "LITTLE LION DOG"}, {
         value: "XOLOITZCUINTLE",
-        "label": "XOLOITZCUINTLE"
-    }, {value: "GREAT DANE", "label": "GREAT DANE"}, {
+        label: "XOLOITZCUINTLE"
+    }, {value: "GREAT DANE", label: "GREAT DANE"}, {
         value: "AUSTRALIAN SILKY TERRIER",
-        "label": "AUSTRALIAN SILKY TERRIER"
-    }, {value: "NORWEGIAN BUHUND", "label": "NORWEGIAN BUHUND"}, {
+        label: "AUSTRALIAN SILKY TERRIER"
+    }, {value: "NORWEGIAN BUHUND", label: "NORWEGIAN BUHUND"}, {
         value: "MUDI",
-        "label": "MUDI"
+        label: "MUDI"
     }, {
         value: "HUNGARIAN WIRE-HAIRED POINTER",
-        "label": "HUNGARIAN WIRE-HAIRED POINTER"
+        label: "HUNGARIAN WIRE-HAIRED POINTER"
     }, {
         value: "HUNGARIAN GREYHOUND",
-        "label": "HUNGARIAN GREYHOUND"
+        label: "HUNGARIAN GREYHOUND"
     }, {
         value: "HUNGARIAN HOUND - TRANSYLVANIAN SCENT HOUND",
-        "label": "HUNGARIAN HOUND - TRANSYLVANIAN SCENT HOUND"
-    }, {value: "NORWEGIAN ELKHOUND GREY", "label": "NORWEGIAN ELKHOUND GREY"}, {
+        label: "HUNGARIAN HOUND - TRANSYLVANIAN SCENT HOUND"
+    }, {value: "NORWEGIAN ELKHOUND GREY", label: "NORWEGIAN ELKHOUND GREY"}, {
         value: "ALASKAN MALAMUTE",
-        "label": "ALASKAN MALAMUTE"
-    }, {value: "SLOVAKIAN HOUND", "label": "SLOVAKIAN HOUND"}, {
+        label: "ALASKAN MALAMUTE"
+    }, {value: "SLOVAKIAN HOUND", label: "SLOVAKIAN HOUND"}, {
         value: "BOHEMIAN WIRE-HAIRED POINTING GRIFFON",
-        "label": "BOHEMIAN WIRE-HAIRED POINTING GRIFFON"
-    }, {value: "CESKY TERRIER", "label": "CESKY TERRIER"}, {
+        label: "BOHEMIAN WIRE-HAIRED POINTING GRIFFON"
+    }, {value: "CESKY TERRIER", label: "CESKY TERRIER"}, {
         value: "ATLAS MOUNTAIN DOG (AIDI)",
-        "label": "ATLAS MOUNTAIN DOG (AIDI)"
-    }, {value: "PHARAOH HOUND", "label": "PHARAOH HOUND"}, {
+        label: "ATLAS MOUNTAIN DOG (AIDI)"
+    }, {value: "PHARAOH HOUND", label: "PHARAOH HOUND"}, {
         value: "MAJORCA MASTIFF",
-        "label": "MAJORCA MASTIFF"
-    }, {value: "HAVANESE", "label": "HAVANESE"}, {
+        label: "MAJORCA MASTIFF"
+    }, {value: "HAVANESE", label: "HAVANESE"}, {
         value: "POLISH LOWLAND SHEEPDOG",
-        "label": "POLISH LOWLAND SHEEPDOG"
-    }, {value: "TATRA SHEPHERD DOG", "label": "TATRA SHEPHERD DOG"}, {
+        label: "POLISH LOWLAND SHEEPDOG"
+    }, {value: "TATRA SHEPHERD DOG", label: "TATRA SHEPHERD DOG"}, {
         value: "PUG",
-        "label": "PUG"
+        label: "PUG"
     },
-    {value: "ALPINE DACHSBRACKE", "label": "ALPINE DACHSBRACKE"}, {value: "AKITA", "label": "AKITA"},
-    {value: "SHIBA", "label": "SHIBA"}, {value: "JAPANESE TERRIER", "label": "JAPANESE TERRIER"}, {
+    {value: "ALPINE DACHSBRACKE", label: "ALPINE DACHSBRACKE"}, {value: "AKITA", label: "AKITA"},
+    {value: "SHIBA", label: "SHIBA"}, {value: "JAPANESE TERRIER", label: "JAPANESE TERRIER"}, {
         value: "TOSA",
-        "label": "TOSA"
+        label: "TOSA"
     },
-    {value: "HOKKAIDO", "label": "HOKKAIDO"}, {
-        value: "JAPANESE SPITZ", "label": "JAPANESE SPITZ"
-    }, {value: "CHESAPEAKE BAY RETRIEVER", "label": "CHESAPEAKE BAY RETRIEVER"}, {
-        value: "MASTIFF", "label": "MASTIFF"
-    }, {value: "NORWEGIAN LUNDEHUND", "label": "NORWEGIAN LUNDEHUND"}, {
-        value: "HYGEN HOUND", "label": "HYGEN HOUND"
-    }, {value: "HALDEN HOUND", "label": "HALDEN HOUND"}, {
-        value: "NORWEGIAN ELKHOUND BLACK", "label": "NORWEGIAN ELKHOUND BLACK"
-    }, {value: "SALUKI", "label": "SALUKI"}, {
+    {value: "HOKKAIDO", label: "HOKKAIDO"}, {
+        value: "JAPANESE SPITZ", label: "JAPANESE SPITZ"
+    }, {value: "CHESAPEAKE BAY RETRIEVER", label: "CHESAPEAKE BAY RETRIEVER"}, {
+        value: "MASTIFF", label: "MASTIFF"
+    }, {value: "NORWEGIAN LUNDEHUND", label: "NORWEGIAN LUNDEHUND"}, {
+        value: "HYGEN HOUND", label: "HYGEN HOUND"
+    }, {value: "HALDEN HOUND", label: "HALDEN HOUND"}, {
+        value: "NORWEGIAN ELKHOUND BLACK", label: "NORWEGIAN ELKHOUND BLACK"
+    }, {value: "SALUKI", label: "SALUKI"}, {
         value: "SIBERIAN HUSKY",
-        "label": "SIBERIAN HUSKY"
-    }, {value: "BEARDED COLLIE", "label": "BEARDED COLLIE"}, {
+        label: "SIBERIAN HUSKY"
+    }, {value: "BEARDED COLLIE", label: "BEARDED COLLIE"}, {
         value: "NORFOLK TERRIER",
-        "label": "NORFOLK TERRIER"
-    }, {value: "CANAAN DOG", "label": "CANAAN DOG"}, {
+        label: "NORFOLK TERRIER"
+    }, {value: "CANAAN DOG", label: "CANAAN DOG"}, {
         value: "GREENLAND DOG",
-        "label": "GREENLAND DOG"
-    }, {value: "NORRBOTTENSPITZ", "label": "NORRBOTTENSPITZ"}, {
+        label: "GREENLAND DOG"
+    }, {value: "NORRBOTTENSPITZ", label: "NORRBOTTENSPITZ"}, {
         value: "CROATIAN SHEPHERD DOG",
-        "label": "CROATIAN SHEPHERD DOG"
-    }, {value: "KARST SHEPHERD DOG", "label": "KARST SHEPHERD DOG"}, {
+        label: "CROATIAN SHEPHERD DOG"
+    }, {value: "KARST SHEPHERD DOG", label: "KARST SHEPHERD DOG"}, {
         value: "MONTENEGRIN MOUNTAIN HOUND",
-        "label": "MONTENEGRIN MOUNTAIN HOUND"
-    }, {value: "OLD DANISH POINTING DOG", "label": "OLD DANISH POINTING DOG"}, {
+        label: "MONTENEGRIN MOUNTAIN HOUND"
+    }, {value: "OLD DANISH POINTING DOG", label: "OLD DANISH POINTING DOG"}, {
         value: "GRAND GRIFFON VENDEEN",
-        "label": "GRAND GRIFFON VENDEEN"
-    }, {value: "COTON DE TULEAR", "label": "COTON DE TULEAR"}, {
+        label: "GRAND GRIFFON VENDEEN"
+    }, {value: "COTON DE TULEAR", label: "COTON DE TULEAR"}, {
         value: "LAPPONIAN HERDER",
-        "label": "LAPPONIAN HERDER"
-    }, {value: "SPANISH GREYHOUND", "label": "SPANISH GREYHOUND"}, {
+        label: "LAPPONIAN HERDER"
+    }, {value: "SPANISH GREYHOUND", label: "SPANISH GREYHOUND"}, {
         value: "AMERICAN STAFFORDSHIRE TERRIER",
-        "label": "AMERICAN STAFFORDSHIRE TERRIER"
-    }, {value: "AUSTRALIAN CATTLE DOG", "label": "AUSTRALIAN CATTLE DOG"}, {
+        label: "AMERICAN STAFFORDSHIRE TERRIER"
+    }, {value: "AUSTRALIAN CATTLE DOG", label: "AUSTRALIAN CATTLE DOG"}, {
         value: "CHINESE CRESTED DOG",
-        "label": "CHINESE CRESTED DOG"
-    }, {value: "ICELANDIC SHEEPDOG", "label": "ICELANDIC SHEEPDOG"}, {
+        label: "CHINESE CRESTED DOG"
+    }, {value: "ICELANDIC SHEEPDOG", label: "ICELANDIC SHEEPDOG"}, {
         value: "BEAGLE HARRIER",
-        "label": "BEAGLE HARRIER"
-    }, {value: "EURASIAN", "label": "EURASIAN"}, {
+        label: "BEAGLE HARRIER"
+    }, {value: "EURASIAN", label: "EURASIAN"}, {
         value: "DOGO ARGENTINO",
-        "label": "DOGO ARGENTINO"
-    }, {value: "AUSTRALIAN KELPIE", "label": "AUSTRALIAN KELPIE"}, {
+        label: "DOGO ARGENTINO"
+    }, {value: "AUSTRALIAN KELPIE", label: "AUSTRALIAN KELPIE"}, {
         value: "OTTERHOUND",
-        "label": "OTTERHOUND"
-    }, {value: "HARRIER", "label": "HARRIER"}, {
+        label: "OTTERHOUND"
+    }, {value: "HARRIER", label: "HARRIER"}, {
         value: "COLLIE SMOOTH",
-        "label": "COLLIE SMOOTH"
-    }, {value: "BORDER COLLIE", "label": "BORDER COLLIE"}, {
+        label: "COLLIE SMOOTH"
+    }, {value: "BORDER COLLIE", label: "BORDER COLLIE"}, {
         value: "ROMAGNA WATER DOG",
-        "label": "ROMAGNA WATER DOG"
-    }, {value: "GERMAN HOUND", "label": "GERMAN HOUND"}, {
+        label: "ROMAGNA WATER DOG"
+    }, {value: "GERMAN HOUND", label: "GERMAN HOUND"}, {
         value: "BLACK AND TAN COONHOUND",
-        "label": "BLACK AND TAN COONHOUND"
-    }, {value: "AMERICAN WATER SPANIEL", "label": "AMERICAN WATER SPANIEL"}, {
+        label: "BLACK AND TAN COONHOUND"
+    }, {value: "AMERICAN WATER SPANIEL", label: "AMERICAN WATER SPANIEL"}, {
         value: "IRISH GLEN OF IMAAL TERRIER",
-        "label": "IRISH GLEN OF IMAAL TERRIER"
-    }, {value: "AMERICAN FOXHOUND", "label": "AMERICAN FOXHOUND"}, {
+        label: "IRISH GLEN OF IMAAL TERRIER"
+    }, {value: "AMERICAN FOXHOUND", label: "AMERICAN FOXHOUND"}, {
         value: "RUSSIAN-EUROPEAN LAIKA",
-        "label": "RUSSIAN-EUROPEAN LAIKA"
-    }, {value: "EAST SIBERIAN LAIKA", "label": "EAST SIBERIAN LAIKA"}, {
+        label: "RUSSIAN-EUROPEAN LAIKA"
+    }, {value: "EAST SIBERIAN LAIKA", label: "EAST SIBERIAN LAIKA"}, {
         value: "WEST SIBERIAN LAIKA",
-        "label": "WEST SIBERIAN LAIKA"
-    }, {value: "AZAWAKH", "label": "AZAWAKH"}, {
+        label: "WEST SIBERIAN LAIKA"
+    }, {value: "AZAWAKH", label: "AZAWAKH"}, {
         value: "DUTCH SMOUSHOND",
-        "label": "DUTCH SMOUSHOND"
-    }, {value: "SHAR PEI", "label": "SHAR PEI"}, {
+        label: "DUTCH SMOUSHOND"
+    }, {value: "SHAR PEI", label: "SHAR PEI"}, {
         value: "PERUVIAN HAIRLESS DOG",
-        "label": "PERUVIAN HAIRLESS DOG"
-    }, {value: "SAARLOOS WOLFHOND", "label": "SAARLOOS WOLFHOND"}, {
+        label: "PERUVIAN HAIRLESS DOG"
+    }, {value: "SAARLOOS WOLFHOND", label: "SAARLOOS WOLFHOND"}, {
         value: "NOVA SCOTIA DUCK TOLLING RETRIEVER",
-        "label": "NOVA SCOTIA DUCK TOLLING RETRIEVER"
-    }, {value: "DUTCH SCHAPENDOES", "label": "DUTCH SCHAPENDOES"}, {
+        label: "NOVA SCOTIA DUCK TOLLING RETRIEVER"
+    }, {value: "DUTCH SCHAPENDOES", label: "DUTCH SCHAPENDOES"}, {
         value: "NEDERLANDSE KOOIKERHONDJE",
-        "label": "NEDERLANDSE KOOIKERHONDJE"
-    }, {value: "BROHOLMER", "label": "BROHOLMER"}, {
+        label: "NEDERLANDSE KOOIKERHONDJE"
+    }, {value: "BROHOLMER", label: "BROHOLMER"}, {
         value: "FRENCH WHITE AND ORANGE HOUND",
-        "label": "FRENCH WHITE AND ORANGE HOUND"
-    }, {value: "KAI", "label": "KAI"}, {value: "KISHU", "label": "KISHU"}, {
+        label: "FRENCH WHITE AND ORANGE HOUND"
+    }, {value: "KAI", label: "KAI"}, {value: "KISHU", label: "KISHU"}, {
         value: "SHIKOKU",
-        "label": "SHIKOKU"
-    }, {value: "WIREHAIRED SLOVAKIAN POINTER", "label": "WIREHAIRED SLOVAKIAN POINTER"}, {
+        label: "SHIKOKU"
+    }, {value: "WIREHAIRED SLOVAKIAN POINTER", label: "WIREHAIRED SLOVAKIAN POINTER"}, {
         value: "MAJORCA SHEPHERD DOG",
-        "label": "MAJORCA SHEPHERD DOG"
+        label: "MAJORCA SHEPHERD DOG"
     }, {
         value: "GREAT ANGLO-FRENCH TRICOLOUR HOUND",
-        "label": "GREAT ANGLO-FRENCH TRICOLOUR HOUND"
+        label: "GREAT ANGLO-FRENCH TRICOLOUR HOUND"
     }, {
         value: "GREAT ANGLO-FRENCH WHITE AND BLACK HOUND",
-        "label": "GREAT ANGLO-FRENCH WHITE AND BLACK HOUND"
+        label: "GREAT ANGLO-FRENCH WHITE AND BLACK HOUND"
     }, {
         value: "GREAT ANGLO-FRENCH WHITE & ORANGE HOUND",
-        "label": "GREAT ANGLO-FRENCH WHITE & ORANGE HOUND"
+        label: "GREAT ANGLO-FRENCH WHITE & ORANGE HOUND"
     }, {
         value: "MEDIUM-SIZED ANGLO-FRENCH HOUND",
-        "label": "MEDIUM-SIZED ANGLO-FRENCH HOUND"
-    }, {value: "SOUTH RUSSIAN SHEPHERD DOG", "label": "SOUTH RUSSIAN SHEPHERD DOG"}, {
-        value: "RUSSIAN BLACK TERRIER", "label": "RUSSIAN BLACK TERRIER"
-    }, {value: "CAUCASIAN SHEPHERD DOG", "label": "CAUCASIAN SHEPHERD DOG"}, {
-        value: "CANARIAN WARREN HOUND", "label": "CANARIAN WARREN HOUND"
-    }, {value: "IRISH RED AND WHITE SETTER", "label": "IRISH RED AND WHITE SETTER"}, {
-        value: "ANATOLIAN SHEPHERD DOG", "label": "ANATOLIAN SHEPHERD DOG"
-    }, {value: "CZECHOSLOVAKIAN WOLFDOG", "label": "CZECHOSLOVAKIAN WOLFDOG"}, {
-        value: "POLISH GREYHOUND", "label": "POLISH GREYHOUND"
-    }, {value: "KOREA JINDO DOG", "label": "KOREA JINDO DOG"}, {
-        value: "CENTRAL ASIA SHEPHERD DOG", "label": "CENTRAL ASIA SHEPHERD DOG"
-    }, {value: "SPANISH WATER DOG", "label": "SPANISH WATER DOG"}, {
-        value: "ITALIAN SHORT-HAIRED SEGUGIO", "label": "ITALIAN SHORT-HAIRED SEGUGIO"
-    }, {value: "THAI RIDGEBACK DOG", "label": "THAI RIDGEBACK DOG"}, {
-        value: "PARSON RUSSELL TERRIER", "label": "PARSON RUSSELL TERRIER"
-    }, {value: "SAINT MIGUEL CATTLE DOG", "label": "SAINT MIGUEL CATTLE DOG"}, {
-        value: "BRAZILIAN TERRIER", "label": "BRAZILIAN TERRIER"
-    }, {value: "AUSTRALIAN SHEPHERD", "label": "AUSTRALIAN SHEPHERD"}, {
-        value: "ITALIAN CORSO DOG", "label": "ITALIAN CORSO DOG"
-    }, {value: "AMERICAN AKITA", "label": "AMERICAN AKITA"}, {
-        value: "JACK RUSSELL TERRIER", "label": "JACK RUSSELL TERRIER"
-    }, {value: "DOGO CANARIO", "label": "DOGO CANARIO"}, {
-        value: "WHITE SWISS SHEPHERD DOG", "label": "WHITE SWISS SHEPHERD DOG"
-    }, {value: "TAIWAN DOG", "label": "TAIWAN DOG"}, {
-        value: "ROMANIAN MIORITIC SHEPHERD DOG", "label": "ROMANIAN MIORITIC SHEPHERD DOG"
+        label: "MEDIUM-SIZED ANGLO-FRENCH HOUND"
+    }, {value: "SOUTH RUSSIAN SHEPHERD DOG", label: "SOUTH RUSSIAN SHEPHERD DOG"}, {
+        value: "RUSSIAN BLACK TERRIER", label: "RUSSIAN BLACK TERRIER"
+    }, {value: "CAUCASIAN SHEPHERD DOG", label: "CAUCASIAN SHEPHERD DOG"}, {
+        value: "CANARIAN WARREN HOUND", label: "CANARIAN WARREN HOUND"
+    }, {value: "IRISH RED AND WHITE SETTER", label: "IRISH RED AND WHITE SETTER"}, {
+        value: "ANATOLIAN SHEPHERD DOG", label: "ANATOLIAN SHEPHERD DOG"
+    }, {value: "CZECHOSLOVAKIAN WOLFDOG", label: "CZECHOSLOVAKIAN WOLFDOG"}, {
+        value: "POLISH GREYHOUND", label: "POLISH GREYHOUND"
+    }, {value: "KOREA JINDO DOG", label: "KOREA JINDO DOG"}, {
+        value: "CENTRAL ASIA SHEPHERD DOG", label: "CENTRAL ASIA SHEPHERD DOG"
+    }, {value: "SPANISH WATER DOG", label: "SPANISH WATER DOG"}, {
+        value: "ITALIAN SHORT-HAIRED SEGUGIO", label: "ITALIAN SHORT-HAIRED SEGUGIO"
+    }, {value: "THAI RIDGEBACK DOG", label: "THAI RIDGEBACK DOG"}, {
+        value: "PARSON RUSSELL TERRIER", label: "PARSON RUSSELL TERRIER"
+    }, {value: "SAINT MIGUEL CATTLE DOG", label: "SAINT MIGUEL CATTLE DOG"}, {
+        value: "BRAZILIAN TERRIER", label: "BRAZILIAN TERRIER"
+    }, {value: "AUSTRALIAN SHEPHERD", label: "AUSTRALIAN SHEPHERD"}, {
+        value: "ITALIAN CORSO DOG", label: "ITALIAN CORSO DOG"
+    }, {value: "AMERICAN AKITA", label: "AMERICAN AKITA"}, {
+        value: "JACK RUSSELL TERRIER", label: "JACK RUSSELL TERRIER"
+    }, {value: "DOGO CANARIO", label: "DOGO CANARIO"}, {
+        value: "WHITE SWISS SHEPHERD DOG", label: "WHITE SWISS SHEPHERD DOG"
+    }, {value: "TAIWAN DOG", label: "TAIWAN DOG"}, {
+        value: "ROMANIAN MIORITIC SHEPHERD DOG", label: "ROMANIAN MIORITIC SHEPHERD DOG"
     }, {
-        value: "ROMANIAN CARPATHIAN SHEPHERD DOG", "label": "ROMANIAN CARPATHIAN SHEPHERD DOG"
+        value: "ROMANIAN CARPATHIAN SHEPHERD DOG", label: "ROMANIAN CARPATHIAN SHEPHERD DOG"
     }, {
-        value: "AUSTRALIAN STUMPY TAIL CATTLE DOG", "label": "AUSTRALIAN STUMPY TAIL CATTLE DOG"
-    }, {value: "RUSSIAN TOY", "label": "RUSSIAN TOY"}, {
-        value: "CIMARRÌÒN URUGUAYO", "label": "CIMARRÌÒN URUGUAYO"
+        value: "AUSTRALIAN STUMPY TAIL CATTLE DOG", label: "AUSTRALIAN STUMPY TAIL CATTLE DOG"
+    }, {value: "RUSSIAN TOY", label: "RUSSIAN TOY"}, {
+        value: "CIMARRÌÒN URUGUAYO", label: "CIMARRÌÒN URUGUAYO"
     }, {
-        value: "POLISH HUNTING DOG", "label": "POLISH HUNTING DOG"
+        value: "POLISH HUNTING DOG", label: "POLISH HUNTING DOG"
     }, {
         value: "BOSNIAN AND HERZEGOVINIAN - CROATIAN SHEPHERD DOG",
-        "label": "BOSNIAN AND HERZEGOVINIAN - CROATIAN SHEPHERD DOG"
-    }, {value: "DANISH-SWEDISH FARMDOG", "label": "DANISH-SWEDISH FARMDOG"}, {
-        value: "SOUTHEASTERN EUROPEAN SHEPHERD", "label": "SOUTHEASTERN EUROPEAN SHEPHERD"
-    }, {value: "THAI BANGKAEW DOG", "label": "THAI BANGKAEW DOG"}, {
-        value: "MINIATURE BULL TERRIER", "label": "MINIATURE BULL TERRIER"
-    }, {value: "LANCASHIRE HEELER", "label": "LANCASHIRE HEELER"}];
+        label: "BOSNIAN AND HERZEGOVINIAN - CROATIAN SHEPHERD DOG"
+    }, {value: "DANISH-SWEDISH FARMDOG", label: "DANISH-SWEDISH FARMDOG"}, {
+        value: "SOUTHEASTERN EUROPEAN SHEPHERD", label: "SOUTHEASTERN EUROPEAN SHEPHERD"
+    }, {value: "THAI BANGKAEW DOG", label: "THAI BANGKAEW DOG"}, {
+        value: "MINIATURE BULL TERRIER", label: "MINIATURE BULL TERRIER"
+    }, {value: "LANCASHIRE HEELER", label: "LANCASHIRE HEELER"}];
 
 export const breed_data = [
     "ENGLISH POINTER",
