@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import {
     getLocations, insertNewLocation, login, signup, updateProfilePic, verifyAuth, updateUser,
-    getUsers, getUserByUsername, loveDogById
+    getUsers, getUserByUsername, loveDogById, updateUserFilter, checkAuth
 } from "./routes/user";
 import {uploadGoogle} from './firebaseStorage';
 import {fakeDataUsertest, fakeUser} from "./routes/fakedata";
@@ -42,9 +42,10 @@ router.post('/user/profile_pic', verifyAuth, uploadGoogle.any(), updateProfilePi
 router.post('/login', login);
 router.get('/location', getLocations);
 router.post('/location', insertNewLocation);
-router.post('/dogs', getUsers);
+router.post('/dogs', checkAuth, getUsers);
 router.post('/dog', getUserByUsername);
 router.post('/dog-likes', verifyAuth, loveDogById);
+router.post('/filter', verifyAuth, updateUserFilter);
 router.get('/fake-user', fakeUser);
 router.get('/fake', fakeDataUsertest);
 

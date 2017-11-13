@@ -118,6 +118,7 @@ const login = (req, res) => {
         });
     });
 };
+
 const verifyAuth = (req, res, next) => {
     // Get the token from the header x-access-token
     const token = req.headers['x-access-token'];
@@ -154,22 +155,113 @@ const verifyAuth = (req, res, next) => {
         });
     }
 };
+const checkAuth = (req, res, next) => {
+    // Get the token from the header x-access-token
+    const token = req.headers['x-access-token'];
+    if (token) {
+        // Verifies the token and the expiration
+        jwt.verify(token, config.TOKEN_SECRET, function (err, payload) {
+
+            // If the verification fails it returns http status 403
+            if (err) {
+                next();
+            } else {
+                // Goes to the next route since there are no errors
+
+                User.findOne({token}, (err, user) => {
+
+                    if (err) {
+                        // res.json({
+                        //     success: false,
+                        //     errors: {},
+                        //     message: 'Something wen wrong try to login again'
+                        // })
+                    }
+                    req.user = user;
+                    next();
+
+                });
+                // next();
+            }
+
+
+        });
+    } else {
+        next();
+    }
+
+
+};
 const getUsers = ((req, res) => {
     // User.find({})
     const page = req.body.page || 1;
-    User.paginate({}, {page, populate: 'location images'}, function (err, results) {
-        if (err) {
-            res.json({
-                success: false,
-                message: 'Something went wrong in Routes/user.js'
-            })
-        } else {
-            res.send({
-                success: true,
-                data: results
-            })
+    let filter = {};
+
+    if (req.user) {
+        const user = req.user;
+        let {location = [], origin = [], breed = [], gender = []} = user.filters;
+        if (location === null) {
+            location = [];
         }
-    });
+        if (origin === null) {
+            origin = [];
+        }
+        if (breed === null) {
+            breed = [];
+        }
+        if (gender === null) {
+            gender = [];
+        }
+        let locationFilter = {}, originFilter = {}, breedFilter = {}, genderFilter = {};
+        const userFilter = {'_id': {$nin: [user._id]}};
+        if (location.length > 0) {
+            locationFilter = {'location': {$in: location}};
+
+        }
+        if (origin.length > 0) {
+            originFilter = {'origin': {$in: origin}};
+        }
+        if (breed.length > 0) {
+            breedFilter = {'breed': {$in: breed}};
+        }
+        if (gender.length > 0) {
+            genderFilter = {'gender': {$in: gender}};
+        }
+
+        filter = {...locationFilter, ...originFilter, ...breedFilter, ...genderFilter, ...userFilter};
+        User.paginate(filter, {page, populate: 'location images'}, function (err, results) {
+            if (err) {
+                res.send({
+                    success: false,
+                    message: 'some weird error'
+                })
+            } else {
+                res.send({
+                    success: true,
+                    data: results
+                })
+            }
+        });
+        // res.json({
+        //     success: false,
+        //     message: 'Something went wrong in Routes/user.js'
+        // })
+    } else {
+
+        User.paginate(filter, {page, populate: 'location images'}, function (err, results) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: 'Something went wrong in Routes/user.js'
+                })
+            } else {
+                res.send({
+                    success: true,
+                    data: results
+                })
+            }
+        });
+    }
 
 });
 const getUserByUsername = (req, res) => {
@@ -235,7 +327,6 @@ const updateUser = (req, res) => {
         user.gender = gender || user.gender;
         user.location = location || user.location;
         user.personalData = personalData || user.personalData;
-        console.log(dateOfBirth);
         user.dateOfBirth = dateOfBirth || user.dateOfBirth;
         user.save((err, user) => {
             if (err) {
@@ -294,7 +385,6 @@ const updateProfilePic = (req, res, next) => {
                 });
 
             } else {
-                console.log('Image not found')
                 res.json({
                     success: false,
                     errors: {},
@@ -349,6 +439,29 @@ const loveDogById = (req, res) => {
 
 
 }
+
+const updateUserFilter = (req, res) => {
+    const logidInUser = req.user;
+    const {location, origin, breed, gender} = req.body;
+    logidInUser.filters.location = location;
+    logidInUser.filters.origin = origin;
+    logidInUser.filters.breed = breed;
+    logidInUser.filters.gender = gender;
+    logidInUser.save((err, user) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: 'somthing went wrong'
+            })
+        }
+        else {
+            res.json({
+                success: true,
+                user,
+            });
+        }
+    })
+};
 export {
     signup,
     login,
@@ -359,5 +472,7 @@ export {
     updateProfilePic,
     getUsers,
     getUserByUsername,
-    loveDogById
+    loveDogById,
+    updateUserFilter,
+    checkAuth
 };

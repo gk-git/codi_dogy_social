@@ -37,8 +37,14 @@ class App extends React.Component {
             redirectRegister: false,
             userInfo: {},
             filter: {
-                show: true,
+                show: false,
                 query: {
+                    location: null,
+                    origin: null,
+                    breed: null,
+                    gender: null
+                },
+                inputs: {
                     location: null,
                     origin: null,
                     breed: null,
@@ -140,7 +146,10 @@ class App extends React.Component {
             'getDogsByPage',
             'loadUserInfo',
             'likeUser',
-            'handleFilterModalCancel'
+            'handleFilterModalCancel',
+            'showFilterModal',
+            'handleFilterOriginEdit',
+            'handleSubmitFilterModal'
 
         ])
     }
@@ -182,8 +191,18 @@ class App extends React.Component {
     }
 
     getDogsByPage(page = 1) {
-        superagent.post(websiteUrl + 'api/dogs').send({page}).then(results => {
-            console.log('results =>', results.body.data);
+        const {authenticated, user} = this.state;
+        const data = {
+            page
+        };
+        if (authenticated) {
+            data._id = user._id;
+        }
+        const req = superagent.post(websiteUrl + 'api/dogs');
+        if (user.token) {
+            req.set('x-access-token', user.token)
+        }
+        req.send(data).then(results => {
             const {success, data} = results.body;
             if (success) {
                 const oldState = this.state;
@@ -265,7 +284,6 @@ class App extends React.Component {
     }
 
     handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
         // TODO: move this to componentDidMount
         if (typeof window !== 'undefined') {
             window.scrollTo(0, 100)
@@ -317,7 +335,6 @@ class App extends React.Component {
 
     handleProfileEditSubmit() {
         const {profileEdit} = this.state;
-        console.log(profileEdit.inputs.year, profileEdit.inputs.month, profileEdit.inputs.day);
         const dateOfBirth = new Date(profileEdit.inputs.year, profileEdit.inputs.month, profileEdit.inputs.day);
         const dataToSend = {
             id: profileEdit.inputs._id,
@@ -329,10 +346,8 @@ class App extends React.Component {
             gender: profileEdit.inputs.gender,
             dateOfBirth: dateOfBirth.toISOString()
         };
-        console.log(dataToSend);
         superagent.put(websiteUrl + 'api/user').type('form').send(dataToSend).then(result => {
             const response = result.body;
-            console.log(response)
             const oldState = this.state;
             const date = new Date(response.data.user.dateOfBirth);
             const newState = {
@@ -609,6 +624,12 @@ class App extends React.Component {
                     month: date.getMonth()
                 },
 
+            },
+            filter: {
+                ...this.state.filter,
+                inputs: {
+                    ...user.filters
+                }
             }
         });
 
@@ -684,6 +705,17 @@ class App extends React.Component {
         this.setState(newState);
     }
 
+    showFilterModal() {
+        const oldState = this.state;
+        const newState = {
+            ...oldState,
+            filter: {
+                ...oldState.filter,
+                show: true
+            }
+        };
+        this.setState(newState);
+    }
 
     getBrowserCookie(cname) {
         const name = cname + "=";
@@ -720,7 +752,6 @@ class App extends React.Component {
                         ...user
                     }
                 };
-                console.log('newState', newState);
                 this.setState(newState);
             }
         })
@@ -738,10 +769,7 @@ class App extends React.Component {
                 superagent.post(websiteUrl + 'api/dog-likes').set('x-access-token', this.state.user.token).send({
                     _id
                 }).then(result => {
-                    console.log('result =>,', result.body);
-
                     const newDogsDoc = oldState.dogs.docs.map(dog => {
-
                         if (dog._id === _id) {
                             dog.likes.push(this.state.user._id);
                         }
@@ -753,15 +781,35 @@ class App extends React.Component {
                             ...oldState.dogs,
                             docs: newDogsDoc
                         }
-
                     };
                     this.setState(newState);
                 })
             }
-
-
         }
+    }
 
+    handleFilterOriginEdit(val, target) {
+        const oldState = this.state;
+        const newState = {
+            ...oldState,
+            filter: {
+                ...oldState.filter,
+                inputs: {
+                    ...oldState.filter.inputs,
+                    [target]: val
+                }
+            }
+        };
+        this.setState(newState);
+    }
+
+    handleSubmitFilterModal() {
+        const filters = this.state.filter.inputs;
+        superagent.post(websiteUrl + 'api/filter').set('x-access-token', this.state.user.token).send({
+            ...filters
+        }).then(result => {
+            this.getDogsByPage(1);
+        })
     }
 
     render() {
@@ -841,28 +889,8 @@ class App extends React.Component {
                         }
                         }/>
                     </Switch>
-                    <div className="filter-modal">
-                        <Modal
-                            show={this.state.filter.show}
-                            onHide={this.handleFilterModalCancel}
-                            container={this}
-                            aria-labelledby="contained-modal-title"
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem
-                                fuga id
-                                earum?
-                                Inventore et facilis obcaecati.
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button onClick={this.handleFilterModalCancel}>Close</Button>
-                                <Button bsStyle="primary">Save changes</Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </div>
+                    <FilterModal {...passedProps} container={this}/>
+
 
                 </div>
             )
