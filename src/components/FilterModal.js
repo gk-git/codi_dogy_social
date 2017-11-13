@@ -1,9 +1,11 @@
 import React from 'react';
 import {Button, Modal} from "react-bootstrap";
-import Select from "react-select";
+import MultiSelect from '@khanacademy/react-multi-select';
+
+import {gender_options, breed_options, origins_options} from '../utils/data'
 
 const FilterModal = (props) => {
-    const {filter, handleFilterModalCancel, container, locations} = props;
+    const {filter, handleSubmitFilterModal, handleFilterModalCancel, handleFilterOriginEdit, container, locations} = props;
     let locations_options = [];
     for (let key in locations) {
         // skip loop if the property is from prototype
@@ -21,6 +23,7 @@ const FilterModal = (props) => {
     });
     return (
         <div className="filter-modal">
+
             <Modal
                 show={filter.show}
                 onHide={handleFilterModalCancel}
@@ -34,26 +37,45 @@ const FilterModal = (props) => {
                     <div className="row">
                         <div className="col-sm-6">
                             <h4>Location: </h4>
-                            <Select
-                                name="location"
-                                value={filter.location}
+                            <MultiSelect
                                 options={locations_options}
-                                onChange={(val) => {
-                                    // handleProfileEditSelectChange(val, 'location')
-                                    console.log(val);
+                                onSelectedChanged={(val) => {
+                                    handleFilterOriginEdit(val, 'location')
                                 }}
+                                selected={filter.inputs.location || []}
                             />
                         </div>
                         <div className="col-sm-6">
                             <h4>Origin: </h4>
-                            <Select
-                                name="location"
-                                value={filter.location}
-                                options={locations_options}
-                                onChange={(val) => {
-                                    // handleProfileEditSelectChange(val, 'location')
-                                    console.log(val);
+
+                            <MultiSelect
+                                options={origins_options}
+                                onSelectedChanged={(val) => {
+                                    handleFilterOriginEdit(val, 'origin')
                                 }}
+                                selected={filter.inputs.origin || []}
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <h4>Gender: </h4>
+
+                            <MultiSelect
+                                options={gender_options}
+                                onSelectedChanged={(val) => {
+                                    handleFilterOriginEdit(val, 'gender')
+                                }}
+                                selected={filter.inputs.gender || []}
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <h4>Breed: </h4>
+
+                            <MultiSelect
+                                options={breed_options}
+                                onSelectedChanged={(val) => {
+                                    handleFilterOriginEdit(val, 'breed')
+                                }}
+                                selected={filter.inputs.breed || []}
                             />
                         </div>
                     </div>
@@ -61,7 +83,9 @@ const FilterModal = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleFilterModalCancel}>Close</Button>
-                    <Button bsStyle="primary">filter</Button>
+                    <Button bsStyle="primary" onClick={(event) => {
+                        handleSubmitFilterModal()
+                    }}>filter</Button>
                 </Modal.Footer>
             </Modal>
         </div>

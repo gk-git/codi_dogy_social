@@ -148,7 +148,7 @@ const ProfilePage = (props) => {
 
 
                 <div className="profile">
-                    <img src={userInfo.profileImage}/>
+                    <img src={userInfo.profileImage} alt={`${userInfo.username} dog profile` }/>
                     <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
                     <h2 className={'title profile-name'}>{userInfo.dogName}</h2>
                     {

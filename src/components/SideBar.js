@@ -5,7 +5,7 @@ import '../styles/Sidebar.css';
 import {websiteUrl} from "../utils/index";
 
 const SideBar = props => {
-    const {user, authenticated} = props;
+    const {user, authenticated, showFilterModal} = props;
 
     const UserProfileCard = () => (
         <div className="profile-card">
@@ -36,7 +36,10 @@ const SideBar = props => {
                 <li>
                     <i className="icon ion-ios-paper"/>
                     <div className="ffspan">
-                        <button className={'menu-item menu-modal'} data-toggle="modal" data-target="#filterbox">
+                        <button className={'menu-item menu-modal'} data-toggle="modal" data-target="#filterbox" onClick={event => {
+                            event.preventDefault();
+                            showFilterModal();
+                        }}>
                             <i className={'fa fa-filter'}/>
                             <span>Filter your matches!</span></button>
                     </div>

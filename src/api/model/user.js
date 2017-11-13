@@ -31,6 +31,12 @@ const userSchema = new Schema({
     images: [{type: Schema.Types.ObjectId, ref: 'ProfileImage'}],
     profileImage: {type: String, default: `${websiteUrl}default_profile.png`},
     likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    filters: {
+        location: [Schema.Types.Mixed],
+        origin: [Schema.Types.Mixed],
+        breed: [Schema.Types.Mixed],
+        gender: [Schema.Types.Mixed]
+    }
 });
 userSchema.pre('save', function (next) {
     let user = this;

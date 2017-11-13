@@ -4,11 +4,10 @@ import '../styles/PublicApp.css';
 import {SideBar} from "../components/SideBar";
 import {TopNavBar} from "../components/TopNavBar";
 import {Header} from "../components/Header";
-import {Button, Modal} from "react-bootstrap";
 
 const PublicApp = (props) => {
 
-    const {children, visited, handleFilterModalCancel,filter, sweetAlert, noBackground, hideRegisterAlert} = props;
+    const {children, visited,sweetAlert, noBackground, hideRegisterAlert} = props;
     if (!visited) {
         return (<Header {...props}/>)
     }
