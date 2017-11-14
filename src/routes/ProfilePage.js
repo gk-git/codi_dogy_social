@@ -135,8 +135,6 @@ const ProfilePage = (props) => {
     return [
         <div key={0} className={'profile-page'}>
             <div className="">
-
-
                 {
                     user.username === userInfo.username ? (
                         <Link to={'/u/profile/edit'}>
@@ -144,8 +142,6 @@ const ProfilePage = (props) => {
                         </Link>
                     ) : null
                 }
-
-
                 <div className="profile">
                     <img src={userInfo.profileImage} alt={`${userInfo.username} dog profile`}/>
                     <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>

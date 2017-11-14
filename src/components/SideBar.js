@@ -5,7 +5,7 @@ import '../styles/Sidebar.css';
 import {websiteUrl} from "../utils/index";
 
 const SideBar = props => {
-    const {user, authenticated, showFilterModal, randomUsers} = props;
+    const {user, authenticated, showFilterModal, randomUsers, loadUserInfo} = props;
 
     const UserProfileCard = () => (
         <div className="profile-card">
@@ -54,7 +54,9 @@ const SideBar = props => {
                         randomUsers.map(user => {
                             return (
                                 <li key={user._id} className={'random-list'}>
-                                    <Link to={`/dog/${user.username}`}>
+                                    <Link to={`/dog/${user.username}`} onClick={()=> {
+                                        loadUserInfo(user.username);
+                                    }}>
                                         <div className="image-profile">
                                             <img
                                                 src={user.profileImage}
@@ -88,7 +90,9 @@ const SideBar = props => {
                         randomUsers.map(user => {
                             return (
                                 <li key={user._id} className={'random-list'}>
-                                    <Link to={`/dog/${user.username}`}>
+                                    <Link to={`/dog/${user.username}`} onClick={() => {
+                                        loadUserInfo(user.username);
+                                    }}>
                                         <div className="image-profile">
                                             <img
                                                 src={user.profileImage}

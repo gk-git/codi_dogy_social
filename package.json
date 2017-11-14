@@ -44,6 +44,7 @@
     "react-select": "^1.0.0-rc.10",
     "react-slick": "^0.15.4",
     "slick-carousel": "^1.8.1",
+    "socket.io": "^2.0.4",
     "stylus-loader": "^3.0.1",
     "superagent": "^3.6.3",
     "util": "^0.10.3"
