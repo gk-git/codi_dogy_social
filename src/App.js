@@ -37,6 +37,7 @@ class App extends React.Component {
             haveDog: true,
             redirectRegister: false,
             userInfo: {},
+            currentPage: 1,
             randomUsers: [],
             filter: {
                 show: false,
@@ -189,7 +190,7 @@ class App extends React.Component {
                 ]
             }
         });
-        this.getDogsByPage(1);
+        this.getDogsByPage(this.state.currentPage);
         this.getRandomUser(8);
         this.loadLocations()
     }
@@ -287,13 +288,19 @@ class App extends React.Component {
         });
     }
 
+
     handlePageChange(pageNumber) {
         // TODO: move this to componentDidMount
         if (typeof window !== 'undefined') {
             window.scrollTo(0, 100)
         }
+        this.setState({
+            ...this.state,
+            currentPage: pageNumber
+        });
         this.getDogsByPage(pageNumber)
     }
+
 
     handleProfileEditSelectChange(val, target) {
         const oldProfileEdit = this.state.profileEdit;
@@ -638,6 +645,11 @@ class App extends React.Component {
         });
 
         this.loadUserInfo(user.username);
+        setTimeout(() => {
+            this.getDogsByPage(this.state.currentPage);
+
+        }, 50);
+
     }
 
     logout() {
@@ -782,27 +794,26 @@ class App extends React.Component {
             return dog._id === _id;
         });
         if (dog) {
-            if (!dog.likes.includes(this.state.user._id)) {
 
-                superagent.post(websiteUrl + 'api/dog-likes').set('x-access-token', this.state.user.token).send({
-                    _id
-                }).then(result => {
-                    const newDogsDoc = oldState.dogs.docs.map(dog => {
-                        if (dog._id === _id) {
-                            dog.likes.push(this.state.user._id);
-                        }
-                        return dog;
-                    });
-                    const newState = {
-                        ...oldState,
-                        dogs: {
-                            ...oldState.dogs,
-                            docs: newDogsDoc
-                        }
-                    };
-                    this.setState(newState);
-                })
-            }
+            superagent.post(websiteUrl + 'api/dog-likes').set('x-access-token', this.state.user.token).send({
+                _id
+            }).then(result => {
+                const newDogsDoc = oldState.dogs.docs.map(dog => {
+                    if (dog._id === _id) {
+                        dog.likes.push(this.state.user._id);
+                    }
+                    return dog;
+                });
+                const newState = {
+                    ...oldState,
+                    dogs: {
+                        ...oldState.dogs,
+                        docs: newDogsDoc
+                    }
+                };
+                this.getDogsByPage(this.state.currentPage);
+                this.setState(newState);
+            })
         }
     }
 
@@ -826,7 +837,10 @@ class App extends React.Component {
         superagent.post(websiteUrl + 'api/filter').set('x-access-token', this.state.user.token).send({
             ...filters
         }).then(result => {
+            this.handleFilterModalCancel();
             this.getDogsByPage(1);
+        }).catch(err => {
+            console.log(err);
         })
     }
 

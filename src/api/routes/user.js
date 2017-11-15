@@ -192,8 +192,8 @@ const checkAuth = (req, res, next) => {
 
 
 };
-const getUsers = ((req, res) => {
-    // User.find({})
+const getUsers = (req, res) => {
+    // Us`er.find({})
     const page = req.body.page || 1;
     let filter = {};
 
@@ -219,10 +219,16 @@ const getUsers = ((req, res) => {
 
         }
         if (origin.length > 0) {
-            originFilter = {'origin': {$in: origin}};
+            const newOrigin = origin.map(item => {
+                return item.toUpperCase();
+            });
+            originFilter = {'origin': {$in: [...origin, ...newOrigin]}};
         }
         if (breed.length > 0) {
-            breedFilter = {'breed': {$in: breed}};
+            const newBreed = breed.map(item => {
+                return item.toUpperCase();
+            });
+            breedFilter = {'breed': {$in: [...breed, ...newBreed]}};
         }
         if (gender.length > 0) {
             genderFilter = {'gender': {$in: gender}};
@@ -230,7 +236,6 @@ const getUsers = ((req, res) => {
 
         filter = {...locationFilter, ...originFilter, ...breedFilter, ...genderFilter, ...userFilter};
         User.paginate(filter, {page, populate: 'location images', sort: {createdAt: 'asc'}}).then((results) => {
-
                 res.send({
                     success: true,
                     data: results
@@ -260,7 +265,7 @@ const getUsers = ((req, res) => {
         });
     }
 
-});
+};
 const getUserByUsername = (req, res) => {
     const {username} = req.body;
     const populateQuery = [{path: 'location', select: 'label lat lang'}, {path: 'images', select: 'imageSrc user'}];
@@ -411,7 +416,19 @@ const loveDogById = (req, res) => {
             })
         } else {
             const oldLikes = user.likes;
-            oldLikes.push(logidInUser._id);
+            const isUserDidLikeBefore = oldLikes.find(item => {
+                return item.toString() === logidInUser._id.toString();
+            });
+            if (isUserDidLikeBefore) {
+                const index = oldLikes.indexOf(logidInUser._id);
+                if (index > -1) {
+                    oldLikes.splice(index, 1);
+                }
+
+            } else {
+                oldLikes.push(logidInUser._id);
+
+            }
             user.likes = oldLikes;
             user.save((err, user) => {
                 if (err) {
@@ -426,6 +443,7 @@ const loveDogById = (req, res) => {
                         success: true,
                         _id,
                         userSignId: req.user,
+                        isUserDidLikeBefore: isUserDidLikeBefore || '',
                         user
                     })
                 }

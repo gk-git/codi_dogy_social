@@ -11,7 +11,7 @@ const LoginNotice = (props) => {
             <h2>Login Notice</h2>
             <p>You need to login to view {match.params.user} profile</p>
             <div className="notice-img">
-                <img src={`${websiteUrl}trotter.jpg`} className={'img-responsive'}/>
+                <img src={`${websiteUrl}trotter.jpg`} className={'img-responsive'} alt={'login notice funny '}/>
             </div>
             <div className="login-container">
                 <LinkContainer key={'login'} to="/login" onClick={() => {

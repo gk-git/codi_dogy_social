@@ -122,11 +122,11 @@ class ChatRoom extends React.Component {
                     {
                         randomUsers.map((item, index) => {
                             return (
-                                <button className={`chat ${index === 0 ? 'active ' : ''}`}>
+                                <button className={`chat ${index === 0 ? 'active ' : ''}`} key={index}>
                                     <div className="img-block">
                                         <img src={item.profileImage} className={'profile-image'} alt=""/>
                                         <span
-                                            className={'message-count'}>{parseInt(randomUsers.length) % parseInt(index + 1)}</span>
+                                            className={'message-count'}>{parseInt(randomUsers.length, 10) % parseInt(index + 1, 10)}</span>
                                     </div>
                                     <span className={'dog-name'}>{item.username}</span>
                                 </button>
