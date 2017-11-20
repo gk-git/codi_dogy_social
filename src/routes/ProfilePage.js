@@ -98,8 +98,9 @@ const ProfilePage = (props) => {
                 </div>
                 <div className="dog-post">
                     <div className="cover-image">
-                        <img className={''} alt={''}
-                             src={'http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23252_dogue-de-bordeaux-dog-breed.jpg'}/>
+                        <div className="embed-responsive embed-responsive-16by9">
+                            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/q5chhdaNQ88?rel=0"/>
+                        </div>
                     </div>
                     <div className="post-content">
                         <p>gorgeous red,
@@ -147,9 +148,7 @@ const ProfilePage = (props) => {
                     <img className={'status'} src="http://branko83.com/vadoo111/img/online.png" alt="online status"/>
                     <h2 className={'title profile-name'}>{userInfo.dogName}</h2>
                     {
-                        user.username === userInfo.username ? (
-                            <h3>{`${completePercentage} % profile completed`}</h3>
-                        ) : null
+                        <h3>{`${completePercentage} % profile completed`}</h3>
                     }
                 </div>
 

@@ -15,7 +15,7 @@ const SideBar = props => {
                 className="profile-photo"
             />
             <span className={'profile-name'}>
-                    <NavLink to={`${websiteUrl}u/${user.username}`} className={''}>{user.name}</NavLink>
+                    <NavLink to={`/u/profile`} className={''}>{user.name}</NavLink>
             </span>
 
             {
@@ -54,7 +54,7 @@ const SideBar = props => {
                         randomUsers.map(user => {
                             return (
                                 <li key={user._id} className={'random-list'}>
-                                    <Link to={`/dog/${user.username}`} onClick={()=> {
+                                    <Link to={`/dog/${user.username}`} onClick={() => {
                                         loadUserInfo(user.username);
                                     }}>
                                         <div className="image-profile">

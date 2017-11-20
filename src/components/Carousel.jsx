@@ -42,6 +42,17 @@ const Carousel = (props) => {
 
                     </div>
                 </div>
+                <div>
+                    <div className="cover-image">
+                        <div className="img">
+                            <img className={'img'} src={`${websiteUrl}birth_certificate.jpg`} alt={'dog pic'}/>
+                            <div className={'img-action '}>
+                                <button><i className={'fa fa-plus'}/></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 {
                     images.map((image, index) => {
 
